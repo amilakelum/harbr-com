@@ -10,6 +10,7 @@ import logo from "../assets/harbr-logo3.svg";
 import { cn } from "../lib/utils";
 
 const navigation = [
+  { name: "Our Story", href: "#story" },
 ];
 
 export default function Header() {
@@ -29,6 +30,22 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      const headerOffset = 80; // Adjust this value based on your header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div
@@ -66,6 +83,7 @@ export default function Header() {
               <a
                 key={item.name}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="text-sm/6 text-zinc-600 hover:text-zinc-950"
               >
                 {item.name}
@@ -127,6 +145,7 @@ export default function Header() {
                             <a
                               key={item.name}
                               href={item.href}
+                              onClick={(e) => handleNavClick(e, item.href)}
                               className="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-zinc-900 hover:bg-zinc-50"
                             >
                               {item.name}

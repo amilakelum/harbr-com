@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import IntroVideo from "./components/IntroVideo";
 import Separator from "./components/Separator";
+import Story from "./components/Story";
 import ThreeColumn from "./components/ThreeColumn";
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
       <Hero />
       <IntroVideo />
       <Separator />
+      <Callout />
+      <Story />
+      <CalloutTwo />
       <Footer />
     </>
   );

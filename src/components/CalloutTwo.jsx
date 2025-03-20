@@ -8,11 +8,10 @@ export default function CalloutTwo() {
       <div className="mx-auto max-w-3xl">
         <Reveal delay={0.1} className="text-center">
           <h1 className="mx-auto max-w-2xl text-center text-4xl font-semibold text-pretty text-white sm:text-5xl">
-            Get your clinic on auto pilot today
+          The future of marina bookings
           </h1>
           <p className="mx-auto mt-8 max-w-xl text-pretty text-white sm:text-xl/7">
-            Join hundreds of clinics already maximizing their schedules and
-            improving patient satisfaction.
+          Join thousands of members already booking online at your marina.
           </p>
         </Reveal>
 

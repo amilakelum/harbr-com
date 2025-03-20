@@ -18,12 +18,12 @@ export default function Hero() {
         <div className="text-center">
           <Reveal delay={0.1}>
             <h1 className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-            #1 platform to search available slips & berths near you
+            #1 platform to search & book marina slips & berths near you
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-            All your boat information, registration & insurance documents in one place making booking at multiple marinas a breeze.
+            Search real-time marina availability, compare marina fees and book online immediately.
             </p>
           </Reveal>
           <Reveal
