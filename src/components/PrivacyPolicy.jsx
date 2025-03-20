@@ -10,8 +10,8 @@ export default function PrivacyPolicy() {
             className="mb-4 sm:mb-4 sm:flex sm:justify-center text-center"
           >
             <div className="inline-flex items-center">
-              <div className="rounded-xl w-[14px] h-2 mr-2 bg-blue-500"></div>
-              <p className="uppercase text-sm leading-[14px] text-blue-500">
+              <div className="rounded-xl w-[14px] h-2 mr-2 bg-[#5371FF]"></div>
+              <p className="uppercase text-sm leading-[14px] text-[#5371FF]">
                 Legal
               </p>
             </div>
@@ -252,14 +252,14 @@ export default function PrivacyPolicy() {
             <div className="space-y-4 text-zinc-600 mb-8">
               <p>Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualize and personalize the ads of its own advertising network.</p>
               <p>You can opt-out of having made your activity on the Service available to Google Analytics by installing the Google Analytics opt-out browser add-on. The add-on prevents the Google Analytics JavaScript (ga.js, analytics.js and dc.js) from sharing information with Google Analytics about visits activity.</p>
-              <p>You may opt-out of certain Google Analytics features through your mobile device settings, such as your device advertising settings or by following the instructions provided by Google in their Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://policies.google.com/privacy</a>. For more information on the privacy practices of Google, please visit the Google Privacy & Terms web page: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://policies.google.com/privacy</a></p>
+              <p>You may opt-out of certain Google Analytics features through your mobile device settings, such as your device advertising settings or by following the instructions provided by Google in their Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://policies.google.com/privacy</a>. For more information on the privacy practices of Google, please visit the Google Privacy & Terms web page: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://policies.google.com/privacy</a></p>
             </div>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Matomo</h4>
-            <p className="text-zinc-600 mb-8">Matomo is a web analytics service. You can visit their Privacy Policy page here: <a href="https://matomo.org/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://matomo.org/privacy-policy</a></p>
+            <p className="text-zinc-600 mb-8">Matomo is a web analytics service. You can visit their Privacy Policy page here: <a href="https://matomo.org/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://matomo.org/privacy-policy</a></p>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Fathom</h4>
-            <p className="text-zinc-600 mb-8">Fathom is a web analytics service. You can visit their Privacy Policy page here: <a href="https://www.fathomhq.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.fathomhq.com/privacy</a></p>
+            <p className="text-zinc-600 mb-8">Fathom is a web analytics service. You can visit their Privacy Policy page here: <a href="https://www.fathomhq.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.fathomhq.com/privacy</a></p>
 
             <h3 className="text-xl font-semibold text-zinc-800 mb-4">4.2 - Email Marketing</h3>
             <div className="space-y-4 text-zinc-600 mb-8">
@@ -268,7 +268,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Mailchimp</h4>
-            <p className="text-zinc-600 mb-8">Mailchimp is an email marketing sending service provided by The Rocket Science Group LLC. For more information on the privacy practices of Mailchimp, please visit their Privacy policy: <a href="https://mailchimp.com/legal/privacy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://mailchimp.com/legal/privacy/</a></p>
+            <p className="text-zinc-600 mb-8">Mailchimp is an email marketing sending service provided by The Rocket Science Group LLC. For more information on the privacy practices of Mailchimp, please visit their Privacy policy: <a href="https://mailchimp.com/legal/privacy/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://mailchimp.com/legal/privacy/</a></p>
 
             <h3 className="text-xl font-semibold text-zinc-800 mb-4">4.3 - Payments</h3>
             <div className="space-y-4 text-zinc-600 mb-8">
@@ -277,10 +277,10 @@ export default function PrivacyPolicy() {
             </div>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Stripe</h4>
-            <p className="text-zinc-600 mb-8">Their Privacy Policy can be viewed at <a href="https://stripe.com/us/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://stripe.com/us/privacy</a></p>
+            <p className="text-zinc-600 mb-8">Their Privacy Policy can be viewed at <a href="https://stripe.com/us/privacy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://stripe.com/us/privacy</a></p>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">PayPal</h4>
-            <p className="text-zinc-600 mb-8">Their Privacy Policy can be viewed at <a href="https://www.paypal.com/us/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.paypal.com/us/webapps/mpp/ua/privacy-full</a></p>
+            <p className="text-zinc-600 mb-8">Their Privacy Policy can be viewed at <a href="https://www.paypal.com/us/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.paypal.com/us/webapps/mpp/ua/privacy-full</a></p>
 
             <h3 className="text-xl font-semibold text-zinc-800 mb-4">4.4 - Behavioral Remarketing</h3>
             <div className="space-y-4 text-zinc-600 mb-8">
@@ -295,9 +295,9 @@ export default function PrivacyPolicy() {
 
             <p className="text-zinc-600 mb-4">Some of these third-party vendors may use non-cookie technologies that may not be impacted by browser settings that block cookies. Your browser may not permit You to block such technologies. You can use the following third-party tools to decline the collection and use of information for the purpose of serving You interest-based advertising:</p>
             <ul className="list-disc pl-6 space-y-2 text-zinc-600 mb-8">
-              <li>The NAI's opt-out platform: <a href="http://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://www.networkadvertising.org/choices/</a></li>
-              <li>The EDAA's opt-out platform: <a href="http://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://www.youronlinechoices.com/</a></li>
-              <li>The DAA's opt-out platform: <a href="http://optout.aboutads.info/?c=2&lang=EN" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://optout.aboutads.info/?c=2&lang=EN</a></li>
+              <li>The NAI's opt-out platform: <a href="http://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://www.networkadvertising.org/choices/</a></li>
+              <li>The EDAA's opt-out platform: <a href="http://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://www.youronlinechoices.com/</a></li>
+              <li>The DAA's opt-out platform: <a href="http://optout.aboutads.info/?c=2&lang=EN" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://optout.aboutads.info/?c=2&lang=EN</a></li>
             </ul>
 
             <p className="text-zinc-600 mb-4">You may opt-out of all personalized advertising by enabling privacy features on Your mobile device such as Limit Ad Tracking (iOS) and Opt Out of Ads Personalization (Android). See Your mobile device Help system for more information.</p>
@@ -306,36 +306,36 @@ export default function PrivacyPolicy() {
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Google Ads (AdWords)</h4>
             <div className="space-y-4 text-zinc-600 mb-8">
               <p>Google Ads (AdWords) remarketing service is provided by Google Inc.</p>
-              <p>You can opt-out of Google Analytics for Display Advertising and customise the Google Display Network ads by visiting the Google Ads Settings page: <a href="http://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://www.google.com/settings/ads</a>. Google also recommends installing the Google Analytics Opt-out Browser Add-on (<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://tools.google.com/dlpage/gaoptout</a>) for your web browser. Google Analytics Opt-out Browser Add-on provides visitors with the ability to prevent their data from being collected and used by Google Analytics.</p>
-              <p>For more information on the privacy practices of Google, please visit the Google Privacy & Terms web page: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://policies.google.com/privacy</a></p>
+              <p>You can opt-out of Google Analytics for Display Advertising and customise the Google Display Network ads by visiting the Google Ads Settings page: <a href="http://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://www.google.com/settings/ads</a>. Google also recommends installing the Google Analytics Opt-out Browser Add-on (<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://tools.google.com/dlpage/gaoptout</a>) for your web browser. Google Analytics Opt-out Browser Add-on provides visitors with the ability to prevent their data from being collected and used by Google Analytics.</p>
+              <p>For more information on the privacy practices of Google, please visit the Google Privacy & Terms web page: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://policies.google.com/privacy</a></p>
             </div>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Twitter</h4>
             <div className="space-y-4 text-zinc-600 mb-8">
               <p>Twitter remarketing service is provided by Twitter Inc.</p>
-              <p>You can opt-out from Twitter's interest-based ads by following their instructions: <a href="https://support.twitter.com/articles/20170405" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://support.twitter.com/articles/20170405</a>. You can learn more about the privacy practices and policies of Twitter by visiting their Privacy Policy page: <a href="https://twitter.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://twitter.com/privacy</a></p>
+              <p>You can opt-out from Twitter's interest-based ads by following their instructions: <a href="https://support.twitter.com/articles/20170405" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://support.twitter.com/articles/20170405</a>. You can learn more about the privacy practices and policies of Twitter by visiting their Privacy Policy page: <a href="https://twitter.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://twitter.com/privacy</a></p>
             </div>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Facebook / Meta</h4>
             <div className="space-y-4 text-zinc-600 mb-8">
               <p>Facebook or Meta remarketing service is provided by Facebook Inc. and Meta Inc.</p>
-              <p>You can learn more about interest-based advertising from Facebook by visiting this page: <a href="https://www.facebook.com/help/516147308587266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.facebook.com/help/516147308587266</a>. To opt-out from Facebook's interest-based ads, follow these instructions from Facebook: <a href="https://www.facebook.com/help/568137493302217" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.facebook.com/help/568137493302217</a>. Facebook adheres to the Self-Regulatory Principles for Online Behavioural Advertising established by the Digital Advertising Alliance. You can also opt-out from Facebook and other participating companies through the Digital Advertising Alliance in the USA <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://www.aboutads.info/choices/</a>, the Digital Advertising Alliance of Canada in Canada <a href="http://youradchoices.ca/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://youradchoices.ca/</a> or the European Interactive Digital Advertising Alliance in Europe <a href="http://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://www.youronlinechoices.eu/</a>, or opt-out using your mobile device settings.</p>
-              <p>For more information on the privacy practices of Facebook, please visit Facebook's Data Policy: <a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.facebook.com/privacy/explanation</a></p>
+              <p>You can learn more about interest-based advertising from Facebook by visiting this page: <a href="https://www.facebook.com/help/516147308587266" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.facebook.com/help/516147308587266</a>. To opt-out from Facebook's interest-based ads, follow these instructions from Facebook: <a href="https://www.facebook.com/help/568137493302217" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.facebook.com/help/568137493302217</a>. Facebook adheres to the Self-Regulatory Principles for Online Behavioural Advertising established by the Digital Advertising Alliance. You can also opt-out from Facebook and other participating companies through the Digital Advertising Alliance in the USA <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://www.aboutads.info/choices/</a>, the Digital Advertising Alliance of Canada in Canada <a href="http://youradchoices.ca/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://youradchoices.ca/</a> or the European Interactive Digital Advertising Alliance in Europe <a href="http://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://www.youronlinechoices.eu/</a>, or opt-out using your mobile device settings.</p>
+              <p>For more information on the privacy practices of Facebook, please visit Facebook's Data Policy: <a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.facebook.com/privacy/explanation</a></p>
             </div>
 
             <h4 className="text-lg font-semibold text-zinc-800 mb-4">Pinterest</h4>
             <div className="space-y-4 text-zinc-600 mb-8">
               <p>Pinterest remarketing service is provided by Pinterest Inc.</p>
-              <p>You can opt-out from Pinterest's interest-based ads by enabling the "Do Not Track" functionality of your web browser or by following Pinterest instructions: <a href="http://help.pinterest.com/en/articles/personalization-and-data" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://help.pinterest.com/en/articles/personalization-and-data</a>. You can learn more about the privacy practices and policies of Pinterest by visiting their Privacy Policy page: <a href="https://about.pinterest.com/en/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://about.pinterest.com/en/privacy-policy</a></p>
+              <p>You can opt-out from Pinterest's interest-based ads by enabling the "Do Not Track" functionality of your web browser or by following Pinterest instructions: <a href="http://help.pinterest.com/en/articles/personalization-and-data" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://help.pinterest.com/en/articles/personalization-and-data</a>. You can learn more about the privacy practices and policies of Pinterest by visiting their Privacy Policy page: <a href="https://about.pinterest.com/en/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://about.pinterest.com/en/privacy-policy</a></p>
             </div>
 
             <h3 className="text-xl font-semibold text-zinc-800 mb-4">4.5 - Usage, Performance and Miscellaneous</h3>
             <p className="text-zinc-600 mb-4">We may use third-party Service Providers to provide better improvement of our Service. They may include, but are not limited to:</p>
             <ul className="list-disc pl-6 space-y-2 text-zinc-600 mb-8">
-              <li>Intercom - Their Privacy Policy can be viewed at <a href="https://www.intercom.com/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.intercom.com/legal/privacy</a></li>
-              <li>Facebook Messenger - Their Privacy Policy can be viewed at <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.facebook.com/privacy/policy</a></li>
-              <li>Zendesk - Their Privacy Policy can be viewed at <a href="https://www.zendesk.com/company/agreements-and-terms/privacy-notice/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.zendesk.com/company/agreements-and-terms/privacy-notice/</a></li>
-              <li>Tawk - Their Privacy Policy can be viewed at <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">https://www.tawk.to/privacy-policy/</a></li>
+              <li>Intercom - Their Privacy Policy can be viewed at <a href="https://www.intercom.com/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.intercom.com/legal/privacy</a></li>
+              <li>Facebook Messenger - Their Privacy Policy can be viewed at <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.facebook.com/privacy/policy</a></li>
+              <li>Zendesk - Their Privacy Policy can be viewed at <a href="https://www.zendesk.com/company/agreements-and-terms/privacy-notice/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.zendesk.com/company/agreements-and-terms/privacy-notice/</a></li>
+              <li>Tawk - Their Privacy Policy can be viewed at <a href="https://www.tawk.to/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">https://www.tawk.to/privacy-policy/</a></li>
             </ul>
           </section>
 
@@ -624,9 +624,9 @@ export default function PrivacyPolicy() {
             <div className="space-y-4 text-zinc-600 mb-8">
               <p>You can opt out of receiving ads that are personalized as served by our Service Providers by following our instructions presented on the Service:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>The NAI's opt-out platform: <a href="http://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://www.networkadvertising.org/choices/</a></li>
-                <li>The EDAA's opt-out platform: <a href="http://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://www.youronlinechoices.com/</a></li>
-                <li>The DAA's opt-out platform: <a href="http://optout.aboutads.info/?c=2&lang=EN" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">http://optout.aboutads.info/?c=2&lang=EN</a></li>
+                <li>The NAI's opt-out platform: <a href="http://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://www.networkadvertising.org/choices/</a></li>
+                <li>The EDAA's opt-out platform: <a href="http://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://www.youronlinechoices.com/</a></li>
+                <li>The DAA's opt-out platform: <a href="http://optout.aboutads.info/?c=2&lang=EN" target="_blank" rel="noopener noreferrer" className="text-[#5371FF] hover:text-[#4460E6]">http://optout.aboutads.info/?c=2&lang=EN</a></li>
               </ul>
               <p>The opt out will place a cookie on Your computer that is unique to the browser You use to opt out. If you change browsers or delete the cookies saved by your browser, You will need to opt out again.</p>
             </div>

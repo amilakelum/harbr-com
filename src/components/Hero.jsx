@@ -32,7 +32,7 @@ export default function Hero() {
           >
             <a
               href="#"
-              className="rounded-2xl bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-xs hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 hover:scale-[1.02] transition-all duration-200 ease-in-out"
+              className="rounded-2xl bg-[#5371FF] px-6 py-3 text-base font-semibold text-white shadow-xs hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out"
             >
               Start for Free
             </a>

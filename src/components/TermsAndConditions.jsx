@@ -10,8 +10,8 @@ export default function TermsAndConditions() {
             className="mb-4 sm:mb-4 sm:flex sm:justify-center text-center"
           >
             <div className="inline-flex items-center">
-              <div className="rounded-xl w-[14px] h-2 mr-2 bg-blue-500"></div>
-              <p className="uppercase text-sm leading-[14px] text-blue-500">
+              <div className="rounded-xl w-[14px] h-2 mr-2 bg-[#5371FF]"></div>
+              <p className="uppercase text-sm leading-[14px] text-[#5371FF]">
                 Legal
               </p>
             </div>

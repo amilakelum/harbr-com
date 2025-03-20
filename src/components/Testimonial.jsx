@@ -5,7 +5,7 @@ export default function Testimonial({ quote, author, role }) {
   return (
     <div className="bg-whiste rounded-lg sm:rounded-2xl rinsg ring-zinc-100 shadsow-lg lg:shadsow-xl p-8 md:p-10">
       <div className="flex flex-col items-center">
-        <span className="text-blue-500 mb-4">
+        <span className="text-[#5371FF] mb-4">
           <MessageSquareQuote size={36} />
         </span>
 
