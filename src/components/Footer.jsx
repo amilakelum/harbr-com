@@ -29,7 +29,7 @@ export default function Footer() {
                 
                 <li>
                   <a
-                    href="#"
+                    href="/terms"
                     className="hover:text-zinc-500  transition-colors duration-200"
                   >
                     Terms & Conditions
@@ -37,7 +37,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/privacy"
                     className="hover:text-zinc-500  transition-colors duration-200"
                   >
                     Privacy Policy
@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 py-8 border-t border-zinc-100 text-center text-xs text-zinc-400">
           <p>
-            &copy; {new Date().getFullYear()} Harbr. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Harbr Pty Ltd (ABN: 15 685 512 154). All Rights Reserved.
           </p>
         </div>
       </div>

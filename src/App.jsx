@@ -1,3 +1,8 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import TermsAndConditions from "./components/TermsAndConditions";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import Callout from "./components/Callout";
 import CalloutTwo from "./components/CalloutTwo";
 import Faq from "./components/Faq";
@@ -11,16 +16,15 @@ import ThreeColumn from "./components/ThreeColumn";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Hero />
-      <IntroVideo />
-      <Separator />
-      <Callout />
-      <Story />
-      <CalloutTwo />
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="terms" element={<TermsAndConditions />} />
+          <Route path="privacy" element={<PrivacyPolicy />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

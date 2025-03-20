@@ -6,16 +6,18 @@ import {
 } from "@headlessui/react";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/harbr-logo3.svg";
 import { cn } from "../lib/utils";
 
 const navigation = [
-  { name: "Our Story", href: "#story" },
+
 ];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,19 +34,21 @@ export default function Header() {
   }, []);
 
   const handleNavClick = (e, href) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      const headerOffset = 80; // Adjust this value based on your header height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      const element = document.querySelector(href.substring(1));
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+      setMobileMenuOpen(false);
     }
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -62,11 +66,11 @@ export default function Header() {
           className="container mx-auto flex items-center justify-between p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5 flex items-center gap-x-2">
+            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-x-2">
               <span className="sr-only">Your Company</span>
               <img alt="" src={logo} className="h-6 w-auto" />
               <span className="font-semibold text-lg">Harbr</span>
-            </a>
+            </Link>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -80,14 +84,14 @@ export default function Header() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
                 className="text-sm/6 text-zinc-600 hover:text-zinc-950"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </nav>
@@ -121,14 +125,14 @@ export default function Header() {
                 >
                   <DialogPanel className="relative transform overflow-y-auto bg-white px-6 py-6 text-left shadow-xl transition-all w-full h-screen sm:h-auto sm:max-w-sm sm:ring-1 sm:ring-zinc-900/10">
                     <div className="flex items-center justify-between">
-                      <a
-                        href="#"
+                      <Link
+                        to="/"
                         className="-m-1.5 p-1.5 flex items-center gap-x-2"
                       >
                         <span className="sr-only">Your Company</span>
                         <img alt="" src={logo} className="h-6 w-auto" />
                         <span className="font-semibold text-lg">Harbr</span>
-                      </a>
+                      </Link>
                       <button
                         type="button"
                         onClick={() => setMobileMenuOpen(false)}
@@ -142,14 +146,14 @@ export default function Header() {
                       <div className="-my-6 divide-y divide-zinc-500/10">
                         <div className="space-y-2 py-6">
                           {navigation.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
-                              href={item.href}
+                              to={item.href}
                               onClick={(e) => handleNavClick(e, item.href)}
                               className="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-zinc-900 hover:bg-zinc-50"
                             >
                               {item.name}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
