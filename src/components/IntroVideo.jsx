@@ -1,4 +1,4 @@
-import screenshot from "../assets/screenshot-24.png";
+import screenshot from "../assets/Screenshot-24.png";
 import Reveal from "./animations/Reveal";
 import { motion } from "motion/react";
 
