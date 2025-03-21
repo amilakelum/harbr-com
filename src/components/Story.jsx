@@ -1,7 +1,16 @@
 import Reveal from "./animations/Reveal";
-import teamImage from "../assets/our-story.JPG";
+import { useState, useEffect } from "react";
 
 export default function Story() {
+  const [imagePath, setImagePath] = useState("");
+
+  useEffect(() => {
+    // Dynamically import the image during runtime to avoid build issues
+    import.meta.env.PROD ? 
+      setImagePath("/assets/our-story.JPG") : 
+      setImagePath("/src/assets/our-story.JPG");
+  }, []);
+
   return (
     <div id="story" className="relative isolate px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-7xl px-1">
@@ -9,7 +18,7 @@ export default function Story() {
           <Reveal delay={0.25}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src={teamImage}
+                src={imagePath}
                 alt="Harbr team on a boat"
                 className="w-full object-cover"
               />
