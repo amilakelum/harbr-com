@@ -4,7 +4,7 @@ import Testimonial from "./Testimonial";
 export default function Callout() {
   return (
     <div className="relative isolate px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
           <Reveal delay={0.25} className="text-center">
             <h1 className="mx-auto max-w-2xl text-center text-4xl font-semibold text-pretty text-zinc-900 sm:text-5xl">
