@@ -41,7 +41,7 @@ export default function StartForm() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-2xl p-12 shadow-xl ring-1 ring-zinc-900/10 text-center relative overflow-hidden"
+            className="bg-white rounded-2xl p-6 sm:p-12 shadow-xl ring-1 ring-zinc-900/10 text-center relative overflow-hidden"
           >
             {/* Decorative elements */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-[#5371FF] to-purple-500"></div>
@@ -53,16 +53,16 @@ export default function StartForm() {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-8"
+                className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-100 mb-6 sm:mb-8"
               >
-                <Check className="w-10 h-10 text-green-600" />
+                <Check className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" />
               </motion.div>
               
               <motion.h2 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-3xl font-bold text-zinc-900 mb-4"
+                className="text-2xl sm:text-3xl font-bold text-zinc-900 mb-3 sm:mb-4"
               >
                 Thank you for registering!
               </motion.h2>
@@ -71,7 +71,7 @@ export default function StartForm() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-lg text-zinc-600 mb-3"
+                className="text-base sm:text-lg text-zinc-600 mb-3"
               >
                 We're excited to have you join the marina revolution. Stay tuned for updates!
               </motion.p>
@@ -80,22 +80,22 @@ export default function StartForm() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl mb-8 mt-8"
+                className="p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl mb-4 sm:mb-8 mt-6 sm:mt-8"
               >
-                <p className="text-lg text-zinc-700 font-medium">
+                <p className="text-base sm:text-lg text-zinc-700 font-medium">
                   Based in Australia or New Zealand?
                 </p>
-                <p className="mb-4 text-zinc-600">
+                <p className="mb-3 sm:mb-4 text-sm sm:text-base text-zinc-600">
                   Check out our regional platform:
                 </p>
                 <a 
                   href="https://www.harbourhound.com.au" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white border border-zinc-200 text-[#5371FF] font-medium hover:bg-[#5371FF] hover:text-white transition-colors duration-200"
+                  className="inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white border border-zinc-200 text-[#5371FF] text-sm sm:text-base font-medium hover:bg-[#5371FF] hover:text-white transition-colors duration-200 max-w-full break-words"
                 >
-                  www.harbourhound.com.au
-                  <ExternalLink className="w-4 h-4 ml-2" />
+                  <span className="truncate">www.harbourhound.com.au</span>
+                  <ExternalLink className="w-4 h-4 ml-2 flex-shrink-0" />
                 </a>
               </motion.div>
             </div>
@@ -121,16 +121,16 @@ export default function StartForm() {
             We are revolutionizing how boat owners and members book & interact with marinas.
           </p>
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
+          <div className="flex flex-col sm:grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
             <div className="flex items-center gap-3 justify-center">
               <Anchor className="w-5 h-5 text-[#5371FF]" />
               <span className="text-sm text-zinc-600">500+ Marinas</span>
             </div>
-            <div className="flex items-center gap-3 justify-center">
+            <div className="hidden sm:flex items-center gap-3 justify-center">
               <ShieldCheck className="w-5 h-5 text-[#5371FF]" />
               <span className="text-sm text-zinc-600">Secure Booking</span>
             </div>
-            <div className="flex items-center gap-3 justify-center">
+            <div className="hidden sm:flex items-center gap-3 justify-center">
               <Clock className="w-5 h-5 text-[#5371FF]" />
               <span className="text-sm text-zinc-600">24/7 Support</span>
             </div>
@@ -254,100 +254,99 @@ export default function StartForm() {
 
                 <div className="space-y-6">
                   <h2 className="text-lg font-semibold text-zinc-900">Your Information</h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-zinc-900 mb-2">
-                          <div className="flex items-center gap-2">
-                            <span>Name</span>
-                            <span className="text-[#5371FF]">*</span>
-                          </div>
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
-                            placeholder="Enter your name"
-                          />
-                        </div>
+                  
+                  {/* Name field - moved to top for all screen sizes */}
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-zinc-900 mb-2">
+                      <div className="flex items-center gap-2">
+                        <span>Name</span>
+                        <span className="text-[#5371FF]">*</span>
                       </div>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                        placeholder="Enter your name"
+                      />
+                    </div>
+                  </div>
 
-                      <div>
-                        <label htmlFor="preferredMarinas" className="block text-sm font-medium text-zinc-900 mb-2">
-                          <div className="flex items-center gap-2">
-                            <Anchor className="w-4 h-4 text-[#5371FF]" />
-                            <span>Preferred marina(s)</span>
-                            <span className="text-xs text-zinc-500">(Optional)</span>
-                          </div>
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            id="preferredMarinas"
-                            name="preferredMarinas"
-                            value={formData.preferredMarinas}
-                            onChange={handleChange}
-                            className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
-                            placeholder="Enter marina names"
-                          />
+                  {/* Home marina field - moved up for all screen sizes */}
+                  <div>
+                    <label htmlFor="region" className="block text-sm font-medium text-zinc-900 mb-2">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-[#5371FF]" />
+                        <span>Home marina</span>
+                        <span className="text-[#5371FF]">*</span>
+                      </div>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="region"
+                        name="region"
+                        value={formData.region}
+                        onChange={handleChange}
+                        required
+                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                        placeholder="Enter marina address"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="preferredMarinas" className="block text-sm font-medium text-zinc-900 mb-2">
+                        <div className="flex items-center gap-2">
+                          <Anchor className="w-4 h-4 text-[#5371FF]" />
+                          <span>Preferred marina(s)</span>
+                          <span className="text-xs text-zinc-500">(Optional)</span>
                         </div>
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          id="preferredMarinas"
+                          name="preferredMarinas"
+                          value={formData.preferredMarinas}
+                          onChange={handleChange}
+                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                          placeholder="Enter marina names"
+                        />
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="region" className="block text-sm font-medium text-zinc-900 mb-2">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-[#5371FF]" />
-                            <span>Home marina</span>
-                            <span className="text-[#5371FF]">*</span>
-                          </div>
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            id="region"
-                            name="region"
-                            value={formData.region}
-                            onChange={handleChange}
-                            required
-                            className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
-                            placeholder="Enter marina address"
-                          />
+                    <div>
+                      <label htmlFor="startDate" className="block text-sm font-medium text-zinc-900 mb-2">
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-[#5371FF]" />
+                          <span>Booking start date</span>
+                          <span className="text-xs text-zinc-500">(Optional)</span>
                         </div>
-                      </div>
-
-                      <div>
-                        <label htmlFor="startDate" className="block text-sm font-medium text-zinc-900 mb-2">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-[#5371FF]" />
-                            <span>Booking start date</span>
-                            <span className="text-xs text-zinc-500">(Optional)</span>
-                          </div>
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            onFocus={(e) => e.target.type = 'date'}
-                            onBlur={(e) => {
-                              if (!e.target.value) {
-                                e.target.type = 'text'
-                              }
-                            }}
-                            id="startDate"
-                            name="startDate"
-                            value={formData.startDate}
-                            onChange={handleChange}
-                            className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm appearance-none"
-                            placeholder="dd/mm/yyyy"
-                          />
-                          <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 pointer-events-none" />
-                        </div>
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          onFocus={(e) => e.target.type = 'date'}
+                          onBlur={(e) => {
+                            if (!e.target.value) {
+                              e.target.type = 'text'
+                            }
+                          }}
+                          id="startDate"
+                          name="startDate"
+                          value={formData.startDate}
+                          onChange={handleChange}
+                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm appearance-none"
+                          placeholder="dd/mm/yyyy"
+                        />
+                        <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 pointer-events-none" />
                       </div>
                     </div>
                   </div>
