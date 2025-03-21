@@ -1,9 +1,10 @@
 import { motion } from "motion/react";
 import { useState } from "react";
-import { Check, Calendar, Anchor, ShieldCheck, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Check, Calendar, Anchor, ShieldCheck, Clock, MapPin, ArrowRight, ExternalLink } from "lucide-react";
 
 export default function StartForm() {
   const [step, setStep] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     region: "",
@@ -20,6 +21,7 @@ export default function StartForm() {
       setStep(2);
     } else {
       console.log(formData);
+      setSubmitted(true);
     }
   };
 
@@ -30,6 +32,78 @@ export default function StartForm() {
       [name]: value
     }));
   };
+
+  if (submitted) {
+    return (
+      <div className="relative isolate px-6 lg:px-8 py-24 sm:py-32">
+        <div className="mx-auto max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-white rounded-2xl p-12 shadow-xl ring-1 ring-zinc-900/10 text-center relative overflow-hidden"
+          >
+            {/* Decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-[#5371FF] to-purple-500"></div>
+            <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-[#EEF1FF] opacity-40 blur-xl"></div>
+            <div className="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-[#EEF1FF] opacity-40 blur-xl"></div>
+            
+            <div className="relative">
+              <motion.div 
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-8"
+              >
+                <Check className="w-10 h-10 text-green-600" />
+              </motion.div>
+              
+              <motion.h2 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="text-3xl font-bold text-zinc-900 mb-4"
+              >
+                Thank you for registering!
+              </motion.h2>
+              
+              <motion.p 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="text-lg text-zinc-600 mb-3"
+              >
+                We're excited to have you join the marina revolution. Stay tuned for updates!
+              </motion.p>
+              
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl mb-8 mt-8"
+              >
+                <p className="text-lg text-zinc-700 font-medium">
+                  Based in Australia or New Zealand?
+                </p>
+                <p className="mb-4 text-zinc-600">
+                  Check out our regional platform:
+                </p>
+                <a 
+                  href="https://www.harbourhound.com.au" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white border border-zinc-200 text-[#5371FF] font-medium hover:bg-[#5371FF] hover:text-white transition-colors duration-200"
+                >
+                  www.harbourhound.com.au
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </a>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative isolate px-6 lg:px-8 py-24 sm:py-32">

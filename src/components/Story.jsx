@@ -3,8 +3,8 @@ import Reveal from "./animations/Reveal";
 export default function Story() {
   return (
     <div id="story" className="relative isolate px-6 py-24 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2 lg:items-center px-6">
+      <div className="mx-auto max-w-7xl px-1">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2 lg:items-center">
           <Reveal delay={0.25}>
             <div className="relative overflow-hidden rounded-2xl">
               <img

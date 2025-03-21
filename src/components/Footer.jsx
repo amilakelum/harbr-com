@@ -50,7 +50,7 @@ export default function Footer() {
           <div className="sm:text-right">
             <h3 className=" text-zinc-400 mb-2">Follow Us</h3>
             <div className="flex sm:justify-end space-x-4">
-              <a href="#" className="text-zinc-400">
+              <a href="https://www.instagram.com/harbr_" className="text-zinc-400">
                 <InstagramIcon className="text-2xl fill-zinc-500 hover:fill-zinc-700 transition-colors duration-200" />
               </a>
             </div>
