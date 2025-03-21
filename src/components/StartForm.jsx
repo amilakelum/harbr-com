@@ -112,12 +112,12 @@ export default function StartForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
-          <h1 className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-5xl mb-6">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-5xl mb-4 sm:mb-6">
             Join the Marina Revolution
           </h1>
-          <p className="text-lg text-zinc-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-zinc-600 mb-6 sm:mb-8 max-w-2xl mx-auto">
             We are revolutionizing how boat owners and members book & interact with marinas.
           </p>
           
@@ -142,7 +142,7 @@ export default function StartForm() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           onSubmit={handleSubmit}
-          className="space-y-12 bg-white rounded-2xl p-8 shadow-lg ring-1 ring-zinc-900/5"
+          className="space-y-8 sm:space-y-12 bg-white rounded-2xl p-6 sm:p-8 shadow-lg ring-1 ring-zinc-900/5"
         >
           {step === 1 ? (
             <div className="space-y-8">
@@ -166,7 +166,7 @@ export default function StartForm() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                    className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
                     placeholder="you@example.com"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -179,7 +179,7 @@ export default function StartForm() {
               <div className="flex flex-col items-center gap-6">
                 <motion.button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -271,7 +271,7 @@ export default function StartForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
                         placeholder="Enter your name"
                       />
                     </div>
@@ -294,7 +294,7 @@ export default function StartForm() {
                         value={formData.region}
                         onChange={handleChange}
                         required
-                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
                         placeholder="Enter marina address"
                       />
                     </div>
@@ -316,7 +316,7 @@ export default function StartForm() {
                           name="preferredMarinas"
                           value={formData.preferredMarinas}
                           onChange={handleChange}
-                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
                           placeholder="Enter marina names"
                         />
                       </div>
@@ -343,7 +343,7 @@ export default function StartForm() {
                           name="startDate"
                           value={formData.startDate}
                           onChange={handleChange}
-                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm appearance-none"
+                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm appearance-none"
                           placeholder="dd/mm/yyyy"
                         />
                         <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 pointer-events-none" />
@@ -366,7 +366,7 @@ export default function StartForm() {
                         name="stayLength"
                         value={formData.stayLength}
                         onChange={handleChange}
-                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 sm:text-sm"
+                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
                         placeholder="e.g., 1 week, 2 months"
                       />
                     </div>
@@ -378,7 +378,7 @@ export default function StartForm() {
                 <div className="flex flex-col items-center gap-6">
                   <motion.button
                     type="submit"
-                    className="inline-flex items-center justify-center w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200"
+                    className="inline-flex items-center justify-center w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
