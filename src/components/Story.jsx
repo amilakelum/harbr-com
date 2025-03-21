@@ -1,4 +1,5 @@
 import Reveal from "./animations/Reveal";
+import teamImage from "../assets/our-story.JPG";
 
 export default function Story() {
   return (
@@ -8,7 +9,7 @@ export default function Story() {
           <Reveal delay={0.25}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="src\assets\our-story.JPG"
+                src={teamImage}
                 alt="Harbr team on a boat"
                 className="w-full object-cover"
               />
