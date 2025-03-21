@@ -1,8 +1,25 @@
 import Reveal from "./animations/Reveal";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
+  const [termIndex, setTermIndex] = useState(0);
+  const terms = [
+    "berths",
+    "slips",
+    "moorings",
+    "jetties",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTermIndex((prevIndex) => (prevIndex + 1) % terms.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
       <div className="mx-auto max-w-2xl py-24 sm:py-24 lg:py-32 pb-16 sm:pb-16 lg:pb-16">
@@ -19,19 +36,20 @@ export default function Hero() {
         </Reveal> */}
         <div className="text-center">
           <Reveal delay={0.1}>
-            <motion.h1 
-              className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl"
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              #1 platform to book marina berths & slips near you
-            </motion.h1>
+            <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
+              #1 platform to book marina{" "}
+              <motion.span
+                key={termIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="inline-block text-[#5371FF]"
+              >
+                {terms[termIndex]}
+              </motion.span>{" "}
+              <span className="block sm:inline mt-1 sm:mt-0">near you</span>
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
