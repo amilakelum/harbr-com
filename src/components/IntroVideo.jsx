@@ -1,4 +1,4 @@
-import screenshot from "../assets/screenshot-2.webp";
+import screenshot from "../assets/screenshot-23.png";
 import Reveal from "./animations/Reveal";
 import { HeroVideoDialog } from "./VideoDialog";
 

@@ -8,7 +8,7 @@ export default function Callout() {
         <div className="text-center">
           <Reveal delay={0.25} className="text-center">
             <h1 className="mx-auto max-w-2xl text-center text-4xl font-semibold text-pretty text-zinc-900 sm:text-5xl">
-            All your boat information in one place making booking at multiple marinas a breeze
+            All your information in one place, making booking at marinas a breeze
             </h1>
           </Reveal>
           {/* <Reveal delay={0.4} className="text-center">
@@ -26,17 +26,17 @@ export default function Callout() {
             />
             <Testimonial
               quote="Finding and booking a berth for my boat couldn't be easier"
-              author="Ryan, QLD"
+              author="Ryan"
               role="Boat Owner"
             />
             <Testimonial
               quote="No more lengthy calls or emails. Great service"
-              author="Fraser, QLD"
+              author="Fraser"
               role="Boat Owner"
             />
             <Testimonial
               quote="Couldn't recommend a better way to rent out my vacant berth"
-              author="Curtis, QLD"
+              author="Curtis"
               role="Berth & Boat Owner"
             />
           </div>

@@ -1,4 +1,6 @@
 import Reveal from "./animations/Reveal";
+import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -17,25 +19,40 @@ export default function Hero() {
         </Reveal> */}
         <div className="text-center">
           <Reveal delay={0.1}>
-            <h1 className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-            #1 platform to search & book marina slips & berths near you
-            </h1>
+            <motion.h1 
+              className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl"
+              animate={{
+                y: [0, -10, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              #1 platform to book marina berths & slips near you
+            </motion.h1>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-            Search real-time marina availability, compare marina fees and book online immediately.
+              Search real-time marina availability, compare marina fees and book online immediately.
             </p>
           </Reveal>
           <Reveal
             delay={0.1}
             className="mt-10 flex items-center justify-center gap-x-6"
           >
-            <a
-              href="#"
-              className="rounded-2xl bg-[#5371FF] px-6 py-3 text-base font-semibold text-white shadow-xs hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Start for Free
-            </a>
+              <Link
+                to="/start"
+                className="rounded-2xl bg-[#5371FF] px-6 py-3 text-base font-semibold text-white shadow-xs hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out"
+              >
+                Book Now
+              </Link>
+            </motion.div>
           </Reveal>
         </div>
       </div>

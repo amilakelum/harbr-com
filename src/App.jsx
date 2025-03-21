@@ -13,6 +13,7 @@ import IntroVideo from "./components/IntroVideo";
 import Separator from "./components/Separator";
 import Story from "./components/Story";
 import ThreeColumn from "./components/ThreeColumn";
+import StartForm from "./components/StartForm";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="terms" element={<TermsAndConditions />} />
           <Route path="privacy" element={<PrivacyPolicy />} />
+          <Route path="start" element={<StartForm />} />
         </Route>
       </Routes>
     </Router>
