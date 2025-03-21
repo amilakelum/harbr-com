@@ -7,8 +7,8 @@ export default function Story() {
   useEffect(() => {
     // Dynamically import the image during runtime to avoid build issues
     import.meta.env.PROD ? 
-      setImagePath("/assets/our-story2.jpg") : 
-      setImagePath("/src/assets/our-story2.jpg");
+      setImagePath("/assets/our-story3.png") : 
+      setImagePath("/src/assets/our-story3.png");
   }, []);
 
   return (
