@@ -2,9 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <!-- Standard favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <!-- SVG favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <!-- iOS and other mobile devices -->
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <!-- For Windows 8/10 -->
+    <meta name="msapplication-TileImage" content="/favicon.svg" />
+    <meta name="msapplication-TileColor" content="#5371FF" />
+    <!-- Safari pinned tab -->
+    <link rel="mask-icon" href="/favicon.svg" color="#5371FF">
+    <!-- Theme color for browser address bar -->
+    <meta name="theme-color" content="#5371FF">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
