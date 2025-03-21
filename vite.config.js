@@ -5,9 +5,7 @@ import { defineConfig } from "vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  assetsInclude: ['**/*.JPG', '**/*.jpg', '**/*.png', '**/*.svg'],
   build: {
     cssMinify: "esbuild",
-    outDir: 'dist',
   },
 });
