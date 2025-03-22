@@ -42,7 +42,7 @@ export default function CalloutTwo() {
               to="/start"
               className="inline-flex items-center justify-center rounded-2xl bg-[#5371FF] px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
             >
-              Book Now — It's Free
+              Book Now
             </Link>
           </motion.div>
         </Reveal>

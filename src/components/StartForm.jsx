@@ -121,7 +121,7 @@ export default function StartForm() {
             We are revolutionizing how boat owners and members book & interact with marinas.
           </p>
           
-          <div className="flex flex-col sm:grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
+          {/* <div className="flex flex-col sm:grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
             <div className="flex items-center gap-3 justify-center">
               <Anchor className="w-5 h-5 text-[#5371FF]" />
               <span className="text-sm text-zinc-600">500+ Marinas</span>
@@ -134,7 +134,7 @@ export default function StartForm() {
               <Clock className="w-5 h-5 text-[#5371FF]" />
               <span className="text-sm text-zinc-600">24/7 Support</span>
             </div>
-          </div>
+          </div> */}
         </motion.div>
 
         <motion.form
