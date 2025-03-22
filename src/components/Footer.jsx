@@ -3,16 +3,28 @@ import InstagramIcon from "./icons/Instagram";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
   return (
     <footer className="bg-zinc-50 pt-8 sm:pt-16">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {/* Logo Section */}
           <div>
-            <div className="flex items-center gap-x-2 text-zinc-900 mb-4">
+            <Link 
+              to="/" 
+              className="flex items-center gap-x-2 text-zinc-900 mb-4 cursor-pointer"
+              onClick={scrollToTop}
+            >
               <img alt="Harbr logo" src={logo} className="h-8 w-auto" />
               <span className="font-semibold text-xl">Harbr</span>
-            </div>
+            </Link>
           </div>
 
           {/* Legal Section */}

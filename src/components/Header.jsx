@@ -51,6 +51,15 @@ export default function Header() {
     }
   };
 
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div
       className={cn(
@@ -66,7 +75,7 @@ export default function Header() {
           className="container mx-auto flex items-center justify-between p-4 sm:p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-x-2">
+            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-x-2" onClick={scrollToTop}>
               <span className="sr-only">Harbr</span>
               <img alt="Harbr Logo" src={logo} className="h-7 sm:h-6 w-auto" />
               <span className="font-semibold text-lg">Harbr</span>
@@ -133,6 +142,7 @@ export default function Header() {
                         <Link
                           to="/"
                           className="-m-1.5 p-1.5 flex items-center gap-x-2"
+                          onClick={scrollToTop}
                         >
                           <span className="sr-only">Harbr</span>
                           <img alt="Harbr Logo" src={logo} className="h-7 sm:h-6 w-auto" />
