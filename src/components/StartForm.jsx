@@ -1,10 +1,13 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { Check, Calendar, Anchor, ShieldCheck, Clock, MapPin, ArrowRight, ExternalLink } from "lucide-react";
+import { addRegistration } from "../lib/supabase";
 
 export default function StartForm() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     region: "",
@@ -15,13 +18,33 @@ export default function StartForm() {
     interest: "book"
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (step === 1) {
       setStep(2);
     } else {
-      console.log(formData);
-      setSubmitted(true);
+      setLoading(true);
+      setError(null);
+      
+      try {
+        // Add timestamp to the data
+        const userData = {
+          ...formData,
+          created_at: new Date().toISOString()
+        };
+        
+        const { error } = await addRegistration(userData);
+        
+        if (error) throw error;
+        
+        setSubmitted(true);
+      } catch (err) {
+        console.error("Form submission error:", err);
+        setError("There was an error submitting your registration. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -179,13 +202,41 @@ export default function StartForm() {
               <div className="flex flex-col items-center gap-6">
                 <motion.button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={loading}
+                  className={`inline-flex items-center justify-center w-full sm:w-auto min-w-[240px] rounded-xl ${
+                    loading ? 'bg-[#9BADF8]' : 'bg-[#5371FF] hover:bg-[#4460E6]'
+                  } px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200`}
+                  whileHover={{ scale: loading ? 1 : 1.02 }}
+                  whileTap={{ scale: loading ? 1 : 0.98 }}
                 >
-                  Continue
-                  <ArrowRight className="w-5 h-5" />
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      Continue
+                      <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
                 </motion.button>
+
+                {error && (
+                  <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg">
+                    {error}
+                  </div>
+                )}
+
+                <div className="flex items-center gap-4 text-center text-sm text-zinc-500">
+                  <div className="space-y-1">
+                    {/* <p className="font-medium">Your information is secure</p>
+                    <p>We value your privacy. No spam, promised.</p> */}
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
@@ -237,159 +288,53 @@ export default function StartForm() {
                             formData.interest === option.value 
                               ? 'ring-[#5371FF] bg-[#5371FF]' 
                               : 'ring-zinc-300 bg-white'
-                          }`}>
-                            {formData.interest === option.value && (
-                              <Check className="w-3 h-3 text-white m-1" strokeWidth={3} />
-                            )}
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-sm font-medium text-zinc-900">{option.label}</span>
-                            <span className="text-xs text-zinc-500 mt-1">{option.description}</span>
+                          }`}></div>
+                          <div className="flex-1">
+                            <p className="text-base sm:text-lg text-zinc-900 font-medium">{option.label}</p>
+                            <p className="text-sm sm:text-base text-zinc-600">{option.description}</p>
                           </div>
                         </div>
                       </label>
                     ))}
                   </div>
                 </div>
-
-                <div className="space-y-6">
-                  <h2 className="text-lg font-semibold text-zinc-900">Your Information</h2>
-                  
-                  {/* Name field - moved to top for all screen sizes */}
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-zinc-900 mb-2">
-                      <div className="flex items-center gap-2">
-                        <span>Name</span>
-                        <span className="text-[#5371FF]">*</span>
-                      </div>
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
-                        placeholder="Enter your name"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Home marina field - moved up for all screen sizes */}
-                  <div>
-                    <label htmlFor="region" className="block text-sm font-medium text-zinc-900 mb-2">
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-[#5371FF]" />
-                        <span>Home marina</span>
-                        <span className="text-[#5371FF]">*</span>
-                      </div>
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        id="region"
-                        name="region"
-                        value={formData.region}
-                        onChange={handleChange}
-                        required
-                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
-                        placeholder="Enter marina address"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="preferredMarinas" className="block text-sm font-medium text-zinc-900 mb-2">
-                        <div className="flex items-center gap-2">
-                          <Anchor className="w-4 h-4 text-[#5371FF]" />
-                          <span>Preferred marina(s)</span>
-                          <span className="text-xs text-zinc-500">(Optional)</span>
-                        </div>
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          id="preferredMarinas"
-                          name="preferredMarinas"
-                          value={formData.preferredMarinas}
-                          onChange={handleChange}
-                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
-                          placeholder="Enter marina names"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="startDate" className="block text-sm font-medium text-zinc-900 mb-2">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-[#5371FF]" />
-                          <span>Booking start date</span>
-                          <span className="text-xs text-zinc-500">(Optional)</span>
-                        </div>
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          onFocus={(e) => e.target.type = 'date'}
-                          onBlur={(e) => {
-                            if (!e.target.value) {
-                              e.target.type = 'text'
-                            }
-                          }}
-                          id="startDate"
-                          name="startDate"
-                          value={formData.startDate}
-                          onChange={handleChange}
-                          className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm appearance-none"
-                          placeholder="dd/mm/yyyy"
-                        />
-                        <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 pointer-events-none" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="stayLength" className="block text-sm font-medium text-zinc-900 mb-2">
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-[#5371FF]" />
-                        <span>Length of stay</span>
-                        <span className="text-xs text-zinc-500">(Optional)</span>
-                      </div>
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        id="stayLength"
-                        name="stayLength"
-                        value={formData.stayLength}
-                        onChange={handleChange}
-                        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
-                        placeholder="e.g., 1 week, 2 months"
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
 
-              <div className="pt-6">
-                <div className="flex flex-col items-center gap-6">
-                  <motion.button
-                    type="submit"
-                    className="inline-flex items-center justify-center w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Join Now — It's Free
-                  </motion.button>
+              <div className="flex flex-col items-center gap-6">
+                <motion.button
+                  type="submit"
+                  disabled={loading}
+                  className={`inline-flex items-center justify-center w-full sm:w-auto min-w-[240px] rounded-xl ${
+                    loading ? 'bg-[#9BADF8]' : 'bg-[#5371FF] hover:bg-[#4460E6]'
+                  } px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200`}
+                  whileHover={{ scale: loading ? 1 : 1.02 }}
+                  whileTap={{ scale: loading ? 1 : 0.98 }}
+                >
+                  {loading ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      Join Now — It's Free
+                    </>
+                  )}
+                </motion.button>
 
-                  <div className="flex items-center gap-4 text-center text-sm text-zinc-500">
-                    <div className="space-y-1">
-                      {/* <p className="font-medium">Your information is secure</p>
-                      <p>We value your privacy. No spam, promised.</p> */}
-                    </div>
+                {error && (
+                  <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg">
+                    {error}
+                  </div>
+                )}
+
+                <div className="flex items-center gap-4 text-center text-sm text-zinc-500">
+                  <div className="space-y-1">
+                    {/* <p className="font-medium">Your information is secure</p>
+                    <p>We value your privacy. No spam, promised.</p> */}
                   </div>
                 </div>
               </div>
@@ -399,4 +344,4 @@ export default function StartForm() {
       </div>
     </div>
   );
-} 
+}
