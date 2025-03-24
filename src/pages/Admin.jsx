@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase, supabaseAdmin } from "../lib/supabase";
 import { Loader2, RefreshCw, Search, Download, ChevronLeft, ChevronRight, Eye, Lock, FileSpreadsheet, Users, X, Info } from "lucide-react";
 import SubmissionDetail from "../components/SubmissionDetail";
+import { trackEvent, trackPageView } from "../lib/analytics";
 
 export default function Admin() {
   const [submissions, setSubmissions] = useState([]);
@@ -29,6 +30,13 @@ export default function Admin() {
   if (!ADMIN_PASSWORD) {
     console.warn("Admin password not set in environment variables. Set VITE_ADMIN_PASSWORD in your .env file.");
   }
+
+  // Track page view when component mounts
+  useEffect(() => {
+    trackPageView('Admin Dashboard', { 
+      is_authenticated: authenticated
+    });
+  }, [authenticated]);
 
   // Function to fetch submissions from Supabase using admin client
   const fetchSubmissions = async () => {
@@ -91,7 +99,7 @@ export default function Admin() {
     }
   }, []);
 
-  // Handle authentication
+  // Handle authentication with analytics
   const handleAuthentication = (e) => {
     e.preventDefault();
     
@@ -99,23 +107,39 @@ export default function Admin() {
       setAuthenticated(true);
       setAuthError("");
       localStorage.setItem('harbr-admin-auth', 'true');
+      
+      trackEvent('admin_login_success');
     } else {
       setAuthError("Invalid password. Please try again.");
+      
+      trackEvent('admin_login_failed', {
+        reason: 'incorrect_password'
+      });
     }
   };
 
-  // Handle logout
+  // Handle logout with analytics
   const handleLogout = () => {
     setAuthenticated(false);
     localStorage.removeItem('harbr-admin-auth');
+    
+    trackEvent('admin_logout');
   };
 
-  // Handle card filter click
+  // Handle card filter click with analytics
   const handleCardFilterClick = (filterType) => {
     // If clicking the same filter, turn it off
     if (activeFilter === filterType) {
+      trackEvent('admin_filter_removed', { 
+        filter_type: activeFilter,
+        previous_filter: activeFilter
+      });
       setActiveFilter(null);
     } else {
+      trackEvent('admin_filter_applied', { 
+        filter_type: filterType,
+        previous_filter: activeFilter
+      });
       setActiveFilter(filterType);
     }
     
@@ -164,7 +188,7 @@ export default function Admin() {
     return new Date(dateString).toLocaleString();
   };
 
-  // Export data to CSV
+  // Export data to CSV with analytics
   const exportToCSV = () => {
     if (!filteredSubmissions.length) return;
     
@@ -205,11 +229,25 @@ export default function Admin() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    
+    // Track the export action
+    trackEvent('admin_export_csv', {
+      record_count: filteredSubmissions.length,
+      filtered: activeFilter !== null || searchTerm !== '',
+      filter_type: activeFilter,
+      has_search: !!searchTerm
+    });
   };
 
-  // Function to view submission details
+  // Function to view submission details with analytics
   const viewSubmissionDetails = (submission) => {
     setSelectedSubmission(submission);
+    trackEvent('admin_view_submission_details', {
+      submission_id: submission.id,
+      submission_email: submission.email,
+      submission_step: submission.current_step,
+      submission_complete: submission.is_complete
+    });
   };
 
   // Close the submission detail modal

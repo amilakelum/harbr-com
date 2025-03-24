@@ -4,6 +4,7 @@ import { Check, Calendar, Anchor, ShieldCheck, Clock, MapPin, ArrowRight, Extern
 import { supabase } from "../lib/supabase";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import posthog from "posthog-js";
 
 export default function StartForm() {
   const [step, setStep] = useState(1);
@@ -47,7 +48,24 @@ export default function StartForm() {
       console.log('Generated new session ID:', newSessionId);
       setSessionId(newSessionId);
     }
+
+    // Track form view in PostHog
+    posthog.capture('form_viewed', {
+      form_name: 'harbr_signup',
+      initial_step: 1
+    });
   }, []);
+
+  // Track step changes for funnel analysis
+  useEffect(() => {
+    if (step > 1) {
+      posthog.capture('form_step_changed', {
+        form_name: 'harbr_signup',
+        step_number: step,
+        previous_step: step - 1
+      });
+    }
+  }, [step]);
 
   // Function to save form data to Supabase
   const saveFormData = async (isComplete = false) => {
@@ -124,13 +142,38 @@ export default function StartForm() {
 
       if (result?.error) {
         console.error('Operation error:', result.error);
+        
+        // Track error in PostHog
+        posthog.capture('form_error', {
+          form_name: 'harbr_signup',
+          step_number: step,
+          error_type: 'supabase_error',
+          error_message: result.error.message
+        });
+        
         throw result.error;
       }
       
       console.log('Successfully saved data for step', step, result);
+      
+      // Track successful save in PostHog
+      posthog.capture('form_step_saved', {
+        form_name: 'harbr_signup',
+        step_number: step,
+        is_complete: isComplete
+      });
+      
       return true;
     } catch (error) {
       console.error('Error saving form data:', error);
+      
+      // Track error in PostHog
+      posthog.capture('form_error', {
+        form_name: 'harbr_signup',
+        step_number: step,
+        error_type: 'save_error',
+        error_message: error.message
+      });
       
       // Check if localStorage has the backup
       const localBackup = localStorage.getItem('formData');
@@ -152,11 +195,29 @@ export default function StartForm() {
     // Basic validation before submission
     if (step === 1 && !formData.email) {
       setFormError('Please enter your email address.');
+      
+      // Track validation error in PostHog
+      posthog.capture('form_validation_error', {
+        form_name: 'harbr_signup',
+        step_number: step,
+        field: 'email',
+        error_message: 'Email is required'
+      });
+      
       return;
     }
     
     if (step === 3 && (!formData.name || !formData.region)) {
       setFormError('Please fill in all required fields.');
+      
+      // Track validation error in PostHog
+      posthog.capture('form_validation_error', {
+        form_name: 'harbr_signup',
+        step_number: step,
+        field: (!formData.name) ? 'name' : 'region',
+        error_message: 'Required fields are missing'
+      });
+      
       return;
     }
     
@@ -202,11 +263,39 @@ export default function StartForm() {
         setStep(step + 1);
       } else {
         console.log('Form submission complete!');
+        
+        // Track form completion in PostHog
+        posthog.capture('form_completed', {
+          form_name: 'harbr_signup',
+          user_type: formData.interest,
+          has_start_date: !!formData.startDate,
+          has_marina_preference: !!formData.preferredMarinas,
+        });
+        
+        // Send identify call to associate user with their email
+        if (formData.email) {
+          posthog.identify(formData.email, {
+            email: formData.email,
+            name: formData.name,
+            region: formData.region,
+            user_type: formData.interest,
+            $set_once: { first_signup_date: new Date().toISOString() }
+          });
+        }
+        
         setSubmitted(true);
       }
     } catch (error) {
       console.error('General form submission error:', error);
       setFormError('Something went wrong. Please try again later.');
+      
+      // Track error in PostHog
+      posthog.capture('form_error', {
+        form_name: 'harbr_signup',
+        step_number: step,
+        error_type: 'general_error',
+        error_message: error.message
+      });
     }
   };
 
@@ -216,6 +305,16 @@ export default function StartForm() {
       ...prev,
       [name]: value
     }));
+    
+    // Track field interactions for key fields
+    if (['email', 'interest', 'name', 'region'].includes(name)) {
+      posthog.capture('form_field_interaction', {
+        form_name: 'harbr_signup',
+        field_name: name,
+        step_number: step,
+        has_value: !!value
+      });
+    }
   };
 
   // Custom input component for DatePicker
