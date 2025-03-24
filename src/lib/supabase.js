@@ -1,45 +1,66 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client
-// Replace with your Supabase URL and anon key from your project settings
-// Important: In a production environment, these should be stored in environment variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+// Get Supabase credentials from environment variables
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase URL or Anonymous Key. Please set environment variables.');
+// Log a clear error message if credentials are missing
+if (!supabaseUrl || !supabaseKey) {
+  console.error(
+    'Missing Supabase credentials. Make sure to set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file'
+  );
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Create and export the Supabase client with improved options
+const options = {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+  },
+  global: {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  },
+};
 
-// Helper function to add a new registration
-export async function addRegistration(userData) {
-  try {
-    const { data, error } = await supabase
-      .from('registrations')
-      .insert([userData])
-      .select();
-    
-    if (error) throw error;
-    return { data, error: null };
-  } catch (error) {
-    console.error('Error adding registration:', error);
-    return { data: null, error };
-  }
+let supabase;
+
+try {
+  // Create client with improved options
+  supabase = createClient(supabaseUrl || '', supabaseKey || '', options);
+} catch (error) {
+  console.error('Error initializing Supabase client:', error);
+  
+  // Provide a dummy client that logs errors instead of crashing
+  supabase = {
+    from: () => ({
+      select: () => {
+        console.error('Using fallback Supabase client - real client failed to initialize');
+        return Promise.reject(new Error('Supabase client initialization failed'));
+      },
+      insert: () => {
+        console.error('Using fallback Supabase client - real client failed to initialize');
+        return Promise.reject(new Error('Supabase client initialization failed'));
+      },
+      update: () => {
+        console.error('Using fallback Supabase client - real client failed to initialize');
+        return Promise.reject(new Error('Supabase client initialization failed'));
+      },
+      headers: () => ({
+        select: () => ({
+          eq: () => ({
+            maybeSingle: () => Promise.reject(new Error('Supabase client initialization failed'))
+          })
+        }),
+        insert: () => Promise.reject(new Error('Supabase client initialization failed')),
+        update: () => ({
+          eq: () => Promise.reject(new Error('Supabase client initialization failed'))
+        }),
+      }),
+    }),
+  };
 }
 
-// Helper function to get all registrations (for admin purposes)
-export async function getRegistrations() {
-  try {
-    const { data, error } = await supabase
-      .from('registrations')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    if (error) throw error;
-    return { data, error: null };
-  } catch (error) {
-    console.error('Error fetching registrations:', error);
-    return { data: null, error };
-  }
-} 
+// Export the client (either real or fallback)
+export { supabase }; 
