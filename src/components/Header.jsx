@@ -6,9 +6,10 @@ import {
 } from "@headlessui/react";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/harbr-logo3.svg";
 import { cn } from "../lib/utils";
+import { trackEvent } from "../lib/analytics";
 
 const navigation = [
 
@@ -18,6 +19,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,13 +54,30 @@ export default function Header() {
     }
   };
 
-  const scrollToTop = (e) => {
-    e.preventDefault();
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
     setMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    
+    // Track the logo click event
+    trackEvent('navigation_logo_click', {
+      location: location.pathname,
+      destination: isHomePage ? 'scroll_top' : 'home'
+    });
+    
+    if (isHomePage) {
+      // If already on home page, just scroll to top
+      scrollToTop();
+    } else {
+      // If on another page, navigate to home
+      navigate('/');
+    }
   };
 
   return (
@@ -75,11 +95,11 @@ export default function Header() {
           className="container mx-auto flex items-center justify-between p-4 sm:p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-x-2" onClick={scrollToTop}>
+            <a href="/" className="-m-1.5 p-1.5 flex items-center gap-x-2" onClick={handleLogoClick}>
               <span className="sr-only">Harbr</span>
               <img alt="Harbr Logo" src={logo} className="h-7 sm:h-6 w-auto" />
               <span className="font-semibold text-lg">Harbr</span>
-            </Link>
+            </a>
           </div>
           {navigation.length > 0 && (
             <div className="flex lg:hidden">
@@ -139,15 +159,15 @@ export default function Header() {
                   >
                     <DialogPanel className="relative transform overflow-y-auto bg-white px-6 py-6 text-left shadow-xl transition-all w-full h-screen sm:h-auto sm:max-w-sm sm:ring-1 sm:ring-zinc-900/10">
                       <div className="flex items-center justify-between">
-                        <Link
-                          to="/"
+                        <a
+                          href="/"
                           className="-m-1.5 p-1.5 flex items-center gap-x-2"
-                          onClick={scrollToTop}
+                          onClick={handleLogoClick}
                         >
                           <span className="sr-only">Harbr</span>
                           <img alt="Harbr Logo" src={logo} className="h-7 sm:h-6 w-auto" />
                           <span className="font-semibold text-lg">Harbr</span>
-                        </Link>
+                        </a>
                         <button
                           type="button"
                           onClick={() => setMobileMenuOpen(false)}

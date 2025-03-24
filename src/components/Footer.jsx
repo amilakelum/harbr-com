@@ -1,14 +1,36 @@
 import logo from "../assets/harbr-logo3.svg";
 import InstagramIcon from "./icons/Instagram";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { trackEvent } from "../lib/analytics";
 
 export default function Footer() {
-  const scrollToTop = (e) => {
-    e.preventDefault();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
+
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    
+    // Track the logo click event
+    trackEvent('footer_logo_click', {
+      location: location.pathname,
+      destination: isHomePage ? 'scroll_top' : 'home'
+    });
+    
+    if (isHomePage) {
+      // If already on home page, just scroll to top
+      scrollToTop();
+    } else {
+      // If on another page, navigate to home
+      navigate('/');
+    }
   };
 
   return (
@@ -17,14 +39,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {/* Logo Section */}
           <div>
-            <Link 
-              to="/" 
+            <a 
+              href="/" 
               className="flex items-center gap-x-2 text-zinc-900 mb-4 cursor-pointer"
-              onClick={scrollToTop}
+              onClick={handleLogoClick}
             >
               <img alt="Harbr logo" src={logo} className="h-8 w-auto" />
               <span className="font-semibold text-xl">Harbr</span>
-            </Link>
+            </a>
           </div>
 
           {/* Legal Section */}
