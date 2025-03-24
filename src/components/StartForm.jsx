@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { Check, Calendar, Anchor, ShieldCheck, Clock, MapPin, ArrowRight, ExternalLink } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function StartForm() {
   const [step, setStep] = useState(1);
@@ -215,6 +217,24 @@ export default function StartForm() {
       [name]: value
     }));
   };
+
+  // Custom input component for DatePicker
+  const CustomDatePickerInput = forwardRef(({ value, onClick, placeholder }, ref) => (
+    <div className="relative w-full">
+      <input
+        ref={ref}
+        className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm"
+        value={value}
+        onClick={onClick}
+        placeholder={placeholder}
+        readOnly
+        style={{ width: '100%', boxSizing: 'border-box' }}
+      />
+      <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 pointer-events-none" />
+    </div>
+  ));
+  
+  CustomDatePickerInput.displayName = "CustomDatePickerInput";
 
   if (submitted) {
     return (
@@ -532,23 +552,94 @@ export default function StartForm() {
                       <span className="text-xs text-zinc-500">(Optional)</span>
                     </div>
                   </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      onFocus={(e) => e.target.type = 'date'}
-                      onBlur={(e) => {
-                        if (!e.target.value) {
-                          e.target.type = 'text'
-                        }
-                      }}
+                  <div className="w-full">
+                    <style jsx global>{`
+                      /* Reset the DatePicker container styles for consistent sizing */
+                      .react-datepicker-wrapper {
+                        display: block !important;
+                        width: 100% !important;
+                      }
+                      .react-datepicker__input-container {
+                        display: block !important;
+                        width: 100% !important;
+                      }
+                      .react-datepicker-popper {
+                        z-index: 100 !important;
+                      }
+                      
+                      /* Custom styles for React DatePicker to match Uber-like design */
+                      .react-datepicker {
+                        font-family: inherit;
+                        border-radius: 0.75rem;
+                        border: 1px solid #e2e8f0;
+                        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                        overflow: hidden;
+                      }
+                      .react-datepicker__header {
+                        background-color: #EEF1FF;
+                        border-bottom: 1px solid #e2e8f0;
+                        padding: 0.75rem 0;
+                      }
+                      .react-datepicker__current-month {
+                        font-weight: 600;
+                        font-size: 0.95rem;
+                        color: #1F2937;
+                        margin-bottom: 0.5rem;
+                      }
+                      .react-datepicker__day-name {
+                        color: #6B7280;
+                        font-weight: 500;
+                        width: 2rem;
+                        margin: 0.15rem;
+                      }
+                      .react-datepicker__day {
+                        width: 2rem;
+                        height: 2rem;
+                        line-height: 2rem;
+                        margin: 0.15rem;
+                        border-radius: 9999px;
+                        color: #1F2937;
+                        transition: all 200ms;
+                      }
+                      .react-datepicker__day:hover {
+                        background-color: #EEF1FF;
+                      }
+                      .react-datepicker__day--selected {
+                        background-color: #5371FF !important;
+                        color: white !important;
+                        font-weight: 600;
+                      }
+                      .react-datepicker__day--today {
+                        font-weight: 600;
+                      }
+                      .react-datepicker__triangle {
+                        display: none;
+                      }
+                      .react-datepicker__navigation {
+                        top: 0.8rem;
+                      }
+                      .react-datepicker__navigation--previous {
+                        left: 1rem;
+                      }
+                      .react-datepicker__navigation--next {
+                        right: 1rem;
+                      }
+                    `}</style>
+                    <DatePicker
                       id="startDate"
                       name="startDate"
-                      value={formData.startDate}
-                      onChange={handleChange}
-                      className="block w-full rounded-xl border-2 border-zinc-200 px-4 py-3.5 text-zinc-600 shadow-sm placeholder:text-zinc-400 focus:border-[#5371FF] focus:ring-2 focus:ring-[#5371FF]/20 focus:outline-none transition-all duration-200 text-base sm:text-sm appearance-none"
-                      placeholder="dd/mm/yyyy"
+                      selected={formData.startDate ? new Date(formData.startDate) : null}
+                      onChange={(date) => setFormData({...formData, startDate: date ? date.toISOString().split('T')[0] : ''})}
+                      dateFormat="dd/MM/yyyy"
+                      placeholderText="dd/mm/yyyy"
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      minDate={new Date()}
+                      calendarClassName="uber-calendar"
+                      customInput={<CustomDatePickerInput />}
+                      wrapperClassName="w-full"
                     />
-                    <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400 pointer-events-none" />
                   </div>
                 </div>
               </div>
