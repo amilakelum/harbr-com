@@ -49,23 +49,12 @@ export default function StartForm() {
       setSessionId(newSessionId);
     }
 
-    // Track form view in PostHog
+    // Track initial form view - this is the first step in the funnel
     posthog.capture('form_viewed', {
-      form_name: 'harbr_signup',
-      initial_step: 1
+      distinct_id: sessionId || 'unknown',
+      form_name: 'harbr_signup'
     });
   }, []);
-
-  // Track step changes for funnel analysis
-  useEffect(() => {
-    if (step > 1) {
-      posthog.capture('form_step_changed', {
-        form_name: 'harbr_signup',
-        step_number: step,
-        previous_step: step - 1
-      });
-    }
-  }, [step]);
 
   // Function to save form data to Supabase
   const saveFormData = async (isComplete = false) => {
@@ -260,16 +249,29 @@ export default function StartForm() {
   
       // Progress to next step or complete the submission
       if (step < 3) {
-        setStep(step + 1);
+        // Update the step value
+        const nextStep = step + 1;
+        
+        // Track step change with the exact event name and properties from the funnel screenshot
+        // This matches the step_number property seen in the PostHog dashboard (2.0, 3.0)
+        posthog.capture('form_step_changed', {
+          distinct_id: sessionId || 'unknown',
+          step_number: nextStep === 2 ? 2.0 : 3.0,  // Match exactly what's in the PostHog dashboard
+          form_name: 'harbr_signup'
+        });
+        
+        // Now update the UI to show the next step
+        setStep(nextStep);
       } else {
         console.log('Form submission complete!');
         
-        // Track form completion in PostHog
+        // Track form completion - this is the final step in the funnel
         posthog.capture('form_completed', {
+          distinct_id: sessionId || 'unknown',
           form_name: 'harbr_signup',
           user_type: formData.interest,
           has_start_date: !!formData.startDate,
-          has_marina_preference: !!formData.preferredMarinas,
+          has_marina_preference: !!formData.preferredMarinas
         });
         
         // Send identify call to associate user with their email
