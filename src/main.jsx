@@ -29,6 +29,24 @@ posthog.init(import.meta.env.VITE_POSTHOG_API_KEY, {
   }
 });
 
+// Configure Google Analytics with environment variable
+if (window.gtag) {
+  // Re-configure with the environment variable (override the hardcoded one)
+  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+  if (measurementId) {
+    window.gtag('config', measurementId);
+    console.log(`🔍 Google Analytics initialized with Measurement ID: ${measurementId}`);
+    
+    // Set development environment flag in GA4 if in dev mode
+    if (import.meta.env.DEV) {
+      window.gtag('set', 'debug_mode', true);
+      window.gtag('set', 'user_properties', {
+        environment: 'development'
+      });
+    }
+  }
+}
+
 // Setup scroll depth tracking for growth analysis
 const setupScrollDepthTracking = () => {
   let maxScrollDepth = 0;

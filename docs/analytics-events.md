@@ -2,7 +2,33 @@
 
 ## Overview
 
-This document outlines the comprehensive event tracking system implemented for Harbr using PostHog. The tracking system is designed to provide detailed insights into user behavior, form conversions, content engagement, and overall website performance to drive growth and optimize the user experience.
+This document outlines the comprehensive event tracking system implemented for Harbr using both PostHog and Google Analytics 4 (GA4). The dual-platform approach provides redundancy, cross-validation, and leverages the strengths of each analytics platform to provide detailed insights into user behavior, form conversions, content engagement, and overall website performance.
+
+## Dual-Platform Tracking Architecture
+
+All events are sent to both PostHog and Google Analytics 4, with property mapping to accommodate the specific requirements and conventions of each platform:
+
+```javascript
+// Example of dual-platform tracking
+export const trackConversion = (conversionType, properties = {}) => {
+  // Track in PostHog with PostHog-specific format
+  posthog.capture(`conversion_${conversionType}`, {...properties});
+  
+  // Track in Google Analytics with GA4-specific format
+  GA.trackEvent('conversion', {
+    conversion_type: conversionType,
+    ...properties
+  });
+  
+  // For signup events, use GA4's recommended event name
+  if (conversionType === 'signup_completed') {
+    GA.trackEvent('sign_up', {
+      method: properties.method || 'form',
+      ...properties
+    });
+  }
+};
+```
 
 ## Core Events Structure
 
@@ -33,11 +59,38 @@ All events follow a standardized schema with these base properties:
 }
 ```
 
+## Platform-Specific Implementations
+
+### PostHog
+
+PostHog is used as the primary event tracking system, providing detailed analytics and funnel visualization capabilities. It captures all events with rich context for deep analysis.
+
+### Google Analytics 4 (GA4)
+
+Google Analytics 4 is implemented as a complementary system, with events mapped to GA4's recommended event names where applicable. GA4 provides:
+
+- Advanced audience segmentation
+- Integration with Google Ads
+- Predictive metrics and insights
+- Real-time monitoring
+
+#### GA4 Event Naming Conventions
+
+We map custom events to GA4's recommended event names where possible:
+
+| PostHog Event | GA4 Event | Notes |
+|---------------|-----------|-------|
+| `page_viewed` | `page_view` | Standard GA4 page view tracking |
+| `form_completed` | `sign_up` | For registration forms |
+| `content_view` | `view_item` | Using GA4's recommended item viewing event |
+| `error_occurred` | `exception` | Using GA4's error tracking format |
+| `cta_clicked` | `click` | Using GA4's interaction tracking |
+
 ## Event Categories
 
 ### 1. Page View Tracking
 
-**Event**: `page_viewed`
+**Event**: `page_viewed` (PostHog) / `page_view` (GA4)
 
 Fired when a user loads a page. Includes additional context:
 
@@ -55,16 +108,16 @@ Fired when a user loads a page. Includes additional context:
 
 The signup form funnel is tracked using these events:
 
-**Event**: `form_viewed`
+**Event**: `form_viewed` (Start)
 - First step in the funnel
 - Fired when the form is first loaded
 
-**Event**: `form_step_changed`
+**Event**: `form_step_changed` (Step Progression)
 - Step transitions in the form
-- Used for funnel visualization in PostHog
+- Used for funnel visualization
 - Important properties: `step_number: 2.0` or `step_number: 3.0`
 
-**Event**: `form_completed`
+**Event**: `form_completed` (PostHog) / `sign_up` (GA4) (Conversion)
 - Final step in the funnel
 - Indicates successful form submission
 
@@ -104,7 +157,7 @@ form_field_interaction: {
 
 ### 3. Conversion Tracking
 
-**Event**: `conversion_signup_completed`
+**Event**: `conversion_signup_completed` (PostHog) / `sign_up` (GA4)
 
 Fired when a user completes a significant action:
 
@@ -121,7 +174,7 @@ Fired when a user completes a significant action:
 
 ### 4. Engagement Tracking
 
-**Event**: `engagement_click`
+**Event**: `engagement_click` (PostHog) / `user_engagement` (GA4)
 
 Captures user interaction with page elements:
 
@@ -136,7 +189,7 @@ Captures user interaction with page elements:
 }
 ```
 
-**Event**: `cta_clicked`
+**Event**: `cta_clicked` (PostHog) / `click` (GA4)
 
 Specialized tracking for calls-to-action:
 
@@ -154,7 +207,7 @@ Specialized tracking for calls-to-action:
 
 ### 5. Session Quality Metrics
 
-**Event**: `session_quality_scroll_depth`
+**Event**: `session_quality_scroll_depth` (PostHog) / `session_quality` (GA4)
 
 Measures how far users scroll down pages:
 
@@ -182,7 +235,7 @@ Tracks time spent on pages:
 
 ### 6. Component Visibility
 
-**Event**: `component_viewed`
+**Event**: `component_viewed` (PostHog) / `component_view` (GA4)
 
 Tracks when important components are visible in the viewport:
 
@@ -197,7 +250,7 @@ Tracks when important components are visible in the viewport:
 
 ### 7. Error Tracking
 
-**Event**: `error_occurred`
+**Event**: `error_occurred` (PostHog) / `exception` (GA4)
 
 Records application errors with context:
 
@@ -216,6 +269,8 @@ Records application errors with context:
 
 User identification happens after form completion:
 
+### PostHog Identification
+
 ```javascript
 posthog.identify(email, {
   email: email,
@@ -230,6 +285,18 @@ posthog.identify(email, {
     initial_utm_campaign: "marina_launch",
     initial_landing_page: "/start"
   }
+});
+```
+
+### Google Analytics User Properties
+
+```javascript
+GA.setUserProperties({
+  user_id: email,
+  email: email,
+  user_type: interest,
+  region: region,
+  first_seen_at: new Date().toISOString()
 });
 ```
 
@@ -258,9 +325,9 @@ posthog.identify(email, {
    - Page load performance
    - UI interaction delays
 
-## PostHog Dashboard Setup
+## Analytics Dashboard Setup
 
-### Key Dashboards
+### PostHog Dashboards
 
 1. **Marketing Performance**:
    - Traffic source breakdown
@@ -282,7 +349,26 @@ posthog.identify(email, {
    - By region
    - By referrer
 
+### Google Analytics 4 Reports
+
+1. **Acquisition Overview**:
+   - Channel grouping analysis
+   - Campaign performance
+   - Source/medium analysis
+
+2. **Engagement Analysis**:
+   - Pages and screens report
+   - Events overview
+   - Conversion paths
+
+3. **Monetization (Future)**:
+   - E-commerce performance
+   - Subscription tracking
+   - Revenue attribution
+
 ### Key Funnels Configuration
+
+#### PostHog Funnel
 
 The main conversion funnel is configured as:
 
@@ -290,6 +376,15 @@ The main conversion funnel is configured as:
 2. `form_step_changed` with `step_number: 2.0`
 3. `form_step_changed` with `step_number: 3.0`
 4. `form_completed` (Conversion)
+
+#### GA4 Funnel
+
+The GA4 funnel leverages GA4's funnel exploration:
+
+1. `page_view` with `page_name: "Signup Form"`
+2. `form_step` with `step_number: 2`
+3. `form_step` with `step_number: 3`
+4. `sign_up` (Conversion event)
 
 ## Implementation Checklist
 
@@ -300,25 +395,43 @@ The main conversion funnel is configured as:
 - [x] Error tracking
 - [x] Conversion tracking
 - [x] UTM and referrer capture
+- [x] Dual-platform synchronization (PostHog + GA4)
+- [x] Custom GA4 event mapping
 
 ## Growth Analysis Recommendations
 
-1. **Funnel Optimization**:
+1. **Cross-Platform Analysis**:
+   - Compare data between PostHog and GA4 for consistency and validation
+   - Use PostHog for detailed funnel analysis
+   - Use GA4 for audience segmentation and campaign attribution
+
+2. **Funnel Optimization**:
    - Analyze drop-off points in the form
    - A/B test form field order and copy
    - Test different CTA text and colors
 
-2. **Traffic Quality**:
+3. **Traffic Quality**:
    - Compare conversion rates by source
    - Identify high-quality traffic channels
    - Optimize marketing spend accordingly
 
-3. **Content Effectiveness**:
+4. **Content Effectiveness**:
    - Analyze which content sections get most engagement
    - Identify content that drives conversions
    - Test different hero messages
 
-4. **User Segmentation Strategies**:
+5. **User Segmentation Strategies**:
    - Create targeted messaging by user type
    - Develop personalized follow-up based on form data
-   - Develop re-engagement campaigns for drop-offs 
+   - Develop re-engagement campaigns for drop-offs
+
+## GA4 and PostHog Data Alignment
+
+To ensure data parity between platforms, consider periodically comparing key metrics:
+
+1. **Page Views**: Compare total page views between platforms (adjusting for any sampling)
+2. **User Counts**: Compare unique user counts (adjusting for cookie policies)
+3. **Conversion Rates**: Compare signup completion rates
+4. **Event Counts**: Compare counts of key events like CTA clicks
+
+Any significant discrepancies may indicate tracking issues that should be addressed. 

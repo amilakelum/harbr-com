@@ -23,6 +23,55 @@ const CORE_PROPERTIES = {
   })
 };
 
+// Google Analytics (GA4) helper functions
+const GA = {
+  /**
+   * Track a custom event in Google Analytics
+   * @param {string} eventName - The event name to track
+   * @param {Object} parameters - Event parameters to include
+   */
+  trackEvent: (eventName, parameters = {}) => {
+    try {
+      if (window.gtag) {
+        window.gtag('event', eventName, parameters);
+        console.log(`📊 GA4 event tracked: ${eventName}`, parameters);
+      }
+    } catch (error) {
+      console.error(`Error tracking GA4 event ${eventName}:`, error);
+    }
+  },
+
+  /**
+   * Set user properties in Google Analytics
+   * @param {Object} properties - User properties to set
+   */
+  setUserProperties: (properties = {}) => {
+    try {
+      if (window.gtag) {
+        window.gtag('set', 'user_properties', properties);
+        console.log(`👤 GA4 user properties set`, properties);
+      }
+    } catch (error) {
+      console.error(`Error setting GA4 user properties:`, error);
+    }
+  },
+
+  /**
+   * Properly format event names for GA4
+   * Converts to snake_case and ensures compliance with GA4 naming conventions
+   * @param {string} eventName - The event name to format
+   * @returns {string} - The formatted event name
+   */
+  formatEventName: (eventName) => {
+    // Convert to snake_case and remove any special characters except underscores
+    return eventName
+      .toLowerCase()
+      .replace(/[^\w\s]/g, '')
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '');
+  }
+};
+
 // Helper functions for extracting UTM parameters and device info
 function getUTMParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -38,15 +87,22 @@ function getDeviceType() {
 
 /**
  * Track a custom event in PostHog with enhanced growth metrics
+ * Also tracks the event in Google Analytics for cross-platform analytics
  * @param {string} eventName - The name of the event to track
  * @param {Object} properties - Event properties to include
  */
 export const trackEvent = (eventName, properties = {}) => {
   try {
+    // Track in PostHog
     posthog.capture(eventName, {
       ...CORE_PROPERTIES.getBaseProperties(),
       ...properties,
     });
+    
+    // Track in Google Analytics (with properly formatted event name)
+    const ga4EventName = GA.formatEventName(eventName);
+    GA.trackEvent(ga4EventName, properties);
+    
     console.log(`🔍 Event tracked: ${eventName}`, properties);
   } catch (error) {
     console.error(`Error tracking event ${eventName}:`, error);
@@ -60,14 +116,29 @@ export const trackEvent = (eventName, properties = {}) => {
  */
 export const trackPageView = (pageName, properties = {}) => {
   try {
-    posthog.capture('page_viewed', {
+    // Prepare common properties for both platforms
+    const pageProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       page_name: pageName,
       page_title: document.title,
       page_section: getSectionFromPath(window.location.pathname),
       is_landing_page: isLandingPage(),
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture('page_viewed', pageProperties);
+    
+    // Track in Google Analytics as page_view event
+    // GA4 uses different parameter format for page_view events
+    GA.trackEvent('page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      page_name: pageName,
+      ...properties
     });
+    
     console.log(`📄 Page viewed: ${pageName}`);
   } catch (error) {
     console.error(`Error tracking page view for ${pageName}:`, error);
@@ -94,10 +165,19 @@ function getSectionFromPath(path) {
  */
 export const trackComponentView = (componentName, properties = {}) => {
   try {
-    posthog.capture('component_viewed', {
+    const componentProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       component_name: componentName,
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture('component_viewed', componentProperties);
+    
+    // Track in Google Analytics
+    GA.trackEvent('component_view', {
+      component_name: componentName,
+      ...properties
     });
   } catch (error) {
     console.error(`Error tracking component view for ${componentName}:`, error);
@@ -105,7 +185,7 @@ export const trackComponentView = (componentName, properties = {}) => {
 };
 
 /**
- * Identify a user in PostHog with enhanced user properties
+ * Identify a user in PostHog and Google Analytics with enhanced user properties
  * @param {string} userId - Unique identifier for the user (typically email)
  * @param {Object} traits - User properties to store
  */
@@ -125,7 +205,19 @@ export const identifyUser = (userId, traits = {}) => {
       }
     };
 
+    // Identify in PostHog
     posthog.identify(userId, enrichedTraits);
+    
+    // Set user properties in Google Analytics (limited set of relevant properties)
+    const gaUserProperties = {
+      user_id: userId,
+      email: traits.email,
+      user_type: traits.user_type || traits.userType,
+      region: traits.region,
+      first_seen_at: traits.$set_once?.first_seen_at || new Date().toISOString(),
+    };
+    GA.setUserProperties(gaUserProperties);
+    
     console.log(`👤 User identified: ${userId}`);
   } catch (error) {
     console.error(`Error identifying user ${userId}:`, error);
@@ -140,7 +232,7 @@ export const identifyUser = (userId, traits = {}) => {
  */
 export const trackFunnelStep = (funnelName, stepNumber, properties = {}) => {
   try {
-    posthog.capture(`${funnelName}_step_${stepNumber}`, {
+    const funnelProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       funnel_name: funnelName,
       step_number: stepNumber,
@@ -149,7 +241,19 @@ export const trackFunnelStep = (funnelName, stepNumber, properties = {}) => {
       time_spent_on_step: properties.time_spent,
       is_last_step: properties.is_last_step || false,
       ...properties,
+    };
+    
+    // Track in PostHog with specific funnel step event name
+    posthog.capture(`${funnelName}_step_${stepNumber}`, funnelProperties);
+    
+    // Track in Google Analytics
+    GA.trackEvent('funnel_step', {
+      funnel_name: funnelName,
+      step_number: stepNumber,
+      step_name: properties.step_name || `Step ${stepNumber}`,
+      ...properties
     });
+    
     console.log(`⚡ Funnel progress: ${funnelName} step ${stepNumber}`);
   } catch (error) {
     console.error(`Error tracking funnel step for ${funnelName}:`, error);
@@ -164,7 +268,7 @@ export const trackFunnelStep = (funnelName, stepNumber, properties = {}) => {
  */
 export const trackFormInteraction = (formName, action, properties = {}) => {
   try {
-    posthog.capture(`form_${action}`, {
+    const formProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       form_name: formName,
       form_action: action,
@@ -174,7 +278,26 @@ export const trackFormInteraction = (formName, action, properties = {}) => {
       input_method: properties.input_method || 'manual',
       time_spent_on_field: properties.time_spent,
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture(`form_${action}`, formProperties);
+    
+    // Track in Google Analytics
+    GA.trackEvent('form_interaction', {
+      form_name: formName,
+      action_type: action,
+      ...properties
     });
+    
+    // Special handling for form steps to ensure consistent funnel tracking in GA4
+    if (action === 'next_step' || action === 'step_changed') {
+      GA.trackEvent('form_step', {
+        form_name: formName,
+        step_number: properties.next_step || properties.step_number,
+        ...properties
+      });
+    }
   } catch (error) {
     console.error(`Error tracking form interaction for ${formName}:`, error);
   }
@@ -187,13 +310,31 @@ export const trackFormInteraction = (formName, action, properties = {}) => {
  */
 export const trackConversion = (conversionType, properties = {}) => {
   try {
-    posthog.capture(`conversion_${conversionType}`, {
+    const conversionProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       conversion_type: conversionType,
       conversion_value: properties.value,
       currency: properties.currency || 'USD',
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture(`conversion_${conversionType}`, conversionProperties);
+    
+    // Track in Google Analytics
+    GA.trackEvent('conversion', {
+      conversion_type: conversionType,
+      ...properties
     });
+    
+    // If this is a sign-up conversion, track with Google's recommended event name
+    if (conversionType === 'signup_completed' || conversionType.includes('signup')) {
+      GA.trackEvent('sign_up', {
+        method: properties.method || 'form',
+        ...properties
+      });
+    }
+    
     console.log(`🎯 Conversion: ${conversionType}`);
   } catch (error) {
     console.error(`Error tracking conversion ${conversionType}:`, error);
@@ -207,7 +348,7 @@ export const trackConversion = (conversionType, properties = {}) => {
  */
 export const trackEngagement = (engagementType, properties = {}) => {
   try {
-    posthog.capture(`engagement_${engagementType}`, {
+    const engagementProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       engagement_type: engagementType,
       target_element: properties.element,
@@ -216,6 +357,15 @@ export const trackEngagement = (engagementType, properties = {}) => {
       content_id: properties.content_id,
       engagement_duration: properties.duration,
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture(`engagement_${engagementType}`, engagementProperties);
+    
+    // Track in Google Analytics
+    GA.trackEvent('user_engagement', {
+      engagement_type: engagementType,
+      ...properties
     });
   } catch (error) {
     console.error(`Error tracking engagement ${engagementType}:`, error);
@@ -229,12 +379,24 @@ export const trackEngagement = (engagementType, properties = {}) => {
  */
 export const trackSessionQuality = (metricType, properties = {}) => {
   try {
-    posthog.capture(`session_quality_${metricType}`, {
+    const qualityProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       metric_type: metricType,
       metric_value: properties.value,
       ...properties,
-    });
+    };
+    
+    // Track in PostHog
+    posthog.capture(`session_quality_${metricType}`, qualityProperties);
+    
+    // Track key session quality metrics in Google Analytics
+    if (metricType === 'scroll_depth_final' || metricType === 'time_on_page_final') {
+      GA.trackEvent('session_quality', {
+        metric_type: metricType,
+        metric_value: properties.value,
+        ...properties
+      });
+    }
   } catch (error) {
     console.error(`Error tracking session quality ${metricType}:`, error);
   }
@@ -248,7 +410,7 @@ export const trackSessionQuality = (metricType, properties = {}) => {
  */
 export const trackError = (errorType, message, properties = {}) => {
   try {
-    posthog.capture('error_occurred', {
+    const errorProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       error_type: errorType,
       error_message: message,
@@ -257,6 +419,16 @@ export const trackError = (errorType, message, properties = {}) => {
       recovery_attempted: properties.recovery_attempted || false,
       recovery_successful: properties.recovery_successful,
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture('error_occurred', errorProperties);
+    
+    // Track in Google Analytics
+    GA.trackEvent('exception', {
+      description: `${errorType}: ${message}`,
+      fatal: properties.fatal || false,
+      ...properties
     });
   } catch (error) {
     console.error(`Error tracking app error of type ${errorType}:`, error);
@@ -270,13 +442,22 @@ export const trackError = (errorType, message, properties = {}) => {
  */
 export const trackFeatureUsage = (featureName, properties = {}) => {
   try {
-    posthog.capture('feature_used', {
+    const featureProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       feature_name: featureName,
       feature_category: properties.category,
       feature_location: properties.location,
       interaction_method: properties.method,
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture('feature_used', featureProperties);
+    
+    // Track in Google Analytics
+    GA.trackEvent('feature_use', {
+      feature_name: featureName,
+      ...properties
     });
   } catch (error) {
     console.error(`Error tracking feature usage for ${featureName}:`, error);
@@ -291,7 +472,7 @@ export const trackFeatureUsage = (featureName, properties = {}) => {
  */
 export const trackContentEngagement = (contentType, action, properties = {}) => {
   try {
-    posthog.capture(`content_${action}`, {
+    const contentProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       content_type: contentType,
       content_id: properties.id,
@@ -300,6 +481,18 @@ export const trackContentEngagement = (contentType, action, properties = {}) => 
       engagement_time: properties.time,
       scroll_depth: properties.scroll_depth,
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture(`content_${action}`, contentProperties);
+    
+    // Track in Google Analytics with recommended event names
+    const gaAction = action === 'view' ? 'view_item' : `content_${action}`;
+    GA.trackEvent(gaAction, {
+      content_type: contentType,
+      item_id: properties.id,
+      item_name: properties.title,
+      ...properties
     });
   } catch (error) {
     console.error(`Error tracking content engagement for ${contentType}:`, error);
@@ -314,7 +507,7 @@ export const trackContentEngagement = (contentType, action, properties = {}) => 
  */
 export const trackCTAInteraction = (ctaId, ctaText, properties = {}) => {
   try {
-    posthog.capture('cta_clicked', {
+    const ctaProperties = {
       ...CORE_PROPERTIES.getBaseProperties(),
       cta_id: ctaId,
       cta_text: ctaText,
@@ -323,7 +516,20 @@ export const trackCTAInteraction = (ctaId, ctaText, properties = {}) => {
       cta_position: properties.position,
       page_section: properties.section,
       ...properties,
+    };
+    
+    // Track in PostHog
+    posthog.capture('cta_clicked', ctaProperties);
+    
+    // Track in Google Analytics as a click event
+    GA.trackEvent('click', {
+      item_id: ctaId,
+      item_name: ctaText,
+      content_type: 'cta',
+      location: properties.location,
+      ...properties
     });
+    
     console.log(`🔘 CTA clicked: ${ctaText}`);
   } catch (error) {
     console.error(`Error tracking CTA interaction for ${ctaId}:`, error);

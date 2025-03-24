@@ -33,6 +33,17 @@
     
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google tag (gtag.js) - will be configured dynamically with env variable -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NQ2DLRDHJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // Configuration will be updated at runtime with the env variable
+      // Placeholder measurement ID is used for the script src
+      gtag('config', 'G-9NQ2DLRDHJ');
+    </script>
   </head>
   <body class="antialiased bg-[color(display-p3_0.9843_0.9843_0.9882)]">
     <div id="root"></div>
