@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import Admin from "./pages/Admin";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Callout from "./components/Callout";
@@ -25,6 +26,7 @@ function App() {
           <Route path="privacy" element={<PrivacyPolicy />} />
           <Route path="start" element={<StartForm />} />
         </Route>
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );
