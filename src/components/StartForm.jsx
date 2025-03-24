@@ -1,10 +1,11 @@
 import { motion } from "motion/react";
-import { useState, useEffect, forwardRef } from "react";
+import { useState, useEffect, forwardRef, useRef } from "react";
 import { Check, Calendar, Anchor, ShieldCheck, Clock, MapPin, ArrowRight, ExternalLink } from "lucide-react";
 import { supabase } from "../lib/supabase";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import posthog from "posthog-js";
+import { trackConversion, trackFormInteraction, trackCTAInteraction } from "../lib/analytics";
 
 export default function StartForm() {
   const [step, setStep] = useState(1);
@@ -21,6 +22,14 @@ export default function StartForm() {
     stayLength: "",
     interest: "book"
   });
+  
+  // Track form field focus time
+  const fieldFocusTime = useRef(null);
+  const activeField = useRef(null);
+  
+  // Step timer for funnel analysis
+  const stepStartTime = useRef(Date.now());
+  const formStartTime = useRef(Date.now());
 
   // Generate a unique session ID when the component mounts
   useEffect(() => {
@@ -54,6 +63,52 @@ export default function StartForm() {
       distinct_id: sessionId || 'unknown',
       form_name: 'harbr_signup'
     });
+    
+    // Track initial form view with enhanced growth metrics
+    trackFormInteraction('harbr_signup', 'viewed', {
+      initial_step: 1,
+      form_location: 'start-page',
+      total_steps: 3,
+      source: document.referrer || 'direct',
+      landing_page: window.location.pathname
+    });
+    
+    // Record form start time for conversion analysis
+    formStartTime.current = Date.now();
+    stepStartTime.current = Date.now();
+    
+    // Setup field focus/blur tracking
+    const trackFieldTime = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+        const fieldName = e.target.name;
+        const fieldType = e.target.type;
+        
+        if (e.type === 'focus') {
+          activeField.current = fieldName;
+          fieldFocusTime.current = Date.now();
+        } else if (e.type === 'blur' && activeField.current === fieldName) {
+          const timeSpent = Math.floor((Date.now() - fieldFocusTime.current) / 1000);
+          if (timeSpent > 1) { // Only track meaningful interactions (> 1 second)
+            trackFormInteraction('harbr_signup', 'field_interaction', {
+              field_name: fieldName,
+              field_type: fieldType,
+              time_spent: timeSpent,
+              step_number: step,
+              has_value: !!e.target.value
+            });
+          }
+          activeField.current = null;
+        }
+      }
+    };
+    
+    document.addEventListener('focus', trackFieldTime, true);
+    document.addEventListener('blur', trackFieldTime, true);
+    
+    return () => {
+      document.removeEventListener('focus', trackFieldTime, true);
+      document.removeEventListener('blur', trackFieldTime, true);
+    };
   }, []);
 
   // Function to save form data to Supabase
@@ -145,23 +200,26 @@ export default function StartForm() {
       
       console.log('Successfully saved data for step', step, result);
       
-      // Track successful save in PostHog
-      posthog.capture('form_step_saved', {
-        form_name: 'harbr_signup',
+      // Track successful save in PostHog with enhanced metrics
+      trackFormInteraction('harbr_signup', 'step_saved', {
         step_number: step,
-        is_complete: isComplete
+        total_steps: 3,
+        is_complete: isComplete,
+        time_spent_on_step: Math.floor((Date.now() - stepStartTime.current) / 1000),
+        form_step_conversion_rate: ((step / 3) * 100).toFixed(1)
       });
       
       return true;
     } catch (error) {
       console.error('Error saving form data:', error);
       
-      // Track error in PostHog
-      posthog.capture('form_error', {
-        form_name: 'harbr_signup',
+      // Track error in PostHog with detailed context
+      trackFormInteraction('harbr_signup', 'error', {
         step_number: step,
         error_type: 'save_error',
-        error_message: error.message
+        error_message: error.message,
+        form_data_complete: Object.values(formData).filter(Boolean).length,
+        recovery_attempted: true
       });
       
       // Check if localStorage has the backup
@@ -181,16 +239,19 @@ export default function StartForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Calculate time spent on current step before submission
+    const timeSpentOnStep = Math.floor((Date.now() - stepStartTime.current) / 1000);
+    
     // Basic validation before submission
     if (step === 1 && !formData.email) {
       setFormError('Please enter your email address.');
       
-      // Track validation error in PostHog
-      posthog.capture('form_validation_error', {
-        form_name: 'harbr_signup',
+      // Track validation error in PostHog with enhanced context
+      trackFormInteraction('harbr_signup', 'validation_error', {
         step_number: step,
         field: 'email',
-        error_message: 'Email is required'
+        error_message: 'Email is required',
+        time_spent_on_step: timeSpentOnStep
       });
       
       return;
@@ -199,12 +260,13 @@ export default function StartForm() {
     if (step === 3 && (!formData.name || !formData.region)) {
       setFormError('Please fill in all required fields.');
       
-      // Track validation error in PostHog
-      posthog.capture('form_validation_error', {
-        form_name: 'harbr_signup',
+      // Track validation error with improved context
+      trackFormInteraction('harbr_signup', 'validation_error', {
         step_number: step,
         field: (!formData.name) ? 'name' : 'region',
-        error_message: 'Required fields are missing'
+        error_message: 'Required fields are missing',
+        time_spent_on_step: timeSpentOnStep,
+        fields_completed: Object.values(formData).filter(Boolean).length
       });
       
       return;
@@ -260,10 +322,25 @@ export default function StartForm() {
           form_name: 'harbr_signup'
         });
         
+        // Track with enhanced analytics for growth insights
+        trackFormInteraction('harbr_signup', 'next_step', {
+          current_step: step,
+          next_step: nextStep,
+          time_spent_on_step: timeSpentOnStep,
+          fields_completed_count: Object.values(formData).filter(Boolean).length,
+          progression_rate: ((step / 3) * 100).toFixed(1)  // % of form completed
+        });
+        
+        // Reset the step timer
+        stepStartTime.current = Date.now();
+        
         // Now update the UI to show the next step
         setStep(nextStep);
       } else {
         console.log('Form submission complete!');
+        
+        // Calculate total form completion time
+        const totalFormTime = Math.floor((Date.now() - formStartTime.current) / 1000);
         
         // Track form completion - this is the final step in the funnel
         posthog.capture('form_completed', {
@@ -272,6 +349,16 @@ export default function StartForm() {
           user_type: formData.interest,
           has_start_date: !!formData.startDate,
           has_marina_preference: !!formData.preferredMarinas
+        });
+        
+        // Track as a conversion event for growth analysis
+        trackConversion('signup_completed', {
+          conversion_type: 'form_submission',
+          user_type: formData.interest,
+          time_to_convert: totalFormTime,
+          form_name: 'harbr_signup',
+          referrer: document.referrer || 'direct',
+          landing_page: window.location.pathname
         });
         
         // Send identify call to associate user with their email
@@ -291,12 +378,14 @@ export default function StartForm() {
       console.error('General form submission error:', error);
       setFormError('Something went wrong. Please try again later.');
       
-      // Track error in PostHog
-      posthog.capture('form_error', {
-        form_name: 'harbr_signup',
+      // Track error in PostHog with enhanced details
+      trackFormInteraction('harbr_signup', 'error', {
         step_number: step,
         error_type: 'general_error',
-        error_message: error.message
+        error_message: error.message,
+        is_last_step: step === 3,
+        time_on_step: timeSpentOnStep,
+        browser: navigator.userAgent
       });
     }
   };
@@ -308,15 +397,33 @@ export default function StartForm() {
       [name]: value
     }));
     
-    // Track field interactions for key fields
+    // Track field interactions for key fields with enhanced details
     if (['email', 'interest', 'name', 'region'].includes(name)) {
-      posthog.capture('form_field_interaction', {
-        form_name: 'harbr_signup',
+      trackFormInteraction('harbr_signup', 'field_change', {
         field_name: name,
+        field_type: e.target.type,
         step_number: step,
-        has_value: !!value
+        has_value: !!value,
+        value_length: value.length,
+        is_valid: e.target.validity?.valid,
+        is_required: e.target.required
       });
     }
+  };
+
+  // Handle CTA click events with enhanced tracking
+  const handleCTAClick = (ctaType) => {
+    trackCTAInteraction(
+      `form_submit_step_${step}`, 
+      step === 3 ? "Join Now — It's Free" : "Continue", 
+      {
+        step_number: step,
+        location: 'signup_form',
+        position: 'bottom',
+        form_completion: ((step / 3) * 100).toFixed(0) + '%',
+        time_on_step: Math.floor((Date.now() - stepStartTime.current) / 1000)
+      }
+    );
   };
 
   // Custom input component for DatePicker
@@ -488,6 +595,7 @@ export default function StartForm() {
                   className={`inline-flex items-center justify-center gap-2 w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
+                  onClick={() => !loading && handleCTAClick('continue_step_1')}
                 >
                   {loading ? 'Saving...' : 'Continue'}
                   {!loading && <ArrowRight className="w-5 h-5" />}
@@ -566,6 +674,7 @@ export default function StartForm() {
                   className={`inline-flex items-center justify-center gap-2 w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
+                  onClick={() => !loading && handleCTAClick('continue_step_2')}
                 >
                   {loading ? 'Saving...' : 'Continue'}
                   {!loading && <ArrowRight className="w-5 h-5" />}
@@ -773,6 +882,7 @@ export default function StartForm() {
                   className={`inline-flex items-center justify-center gap-2 w-full sm:w-auto min-w-[240px] rounded-xl bg-[#5371FF] px-6 sm:px-12 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
+                  onClick={() => !loading && handleCTAClick('submit_final')}
                 >
                   {loading ? 'Saving...' : 'Join Now — It\'s Free'}
                 </motion.button>
