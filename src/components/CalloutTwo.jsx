@@ -2,8 +2,18 @@ import Reveal from "./animations/Reveal";
 import { Ripple } from "./animations/Ripple";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import posthog from 'posthog-js';
 
 export default function CalloutTwo() {
+  const handleCalloutCTAClick = () => {
+    posthog.capture('callout_cta_clicked', {
+      distinct_id: localStorage.getItem('session_id'),
+      button_location: 'callout_section',
+      button_text: 'Book Now',
+      timestamp: new Date().toISOString()
+    });
+  };
+
   return (
     <div className="relative isolate px-6 lg:px-8 bg-radial from-stone-950 from-10%  to-zinc-950 mt-16 sm:mt-24 py-16 sm:py-24 overflow-hidden">
       <Ripple />
@@ -40,6 +50,7 @@ export default function CalloutTwo() {
           >
             <Link
               to="/start"
+              onClick={handleCalloutCTAClick}
               className="inline-flex items-center justify-center rounded-2xl bg-[#5371FF] px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
             >
               Book Now

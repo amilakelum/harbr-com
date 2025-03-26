@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BoatAnimation from "./animations/BoatAnimation";
+import posthog from 'posthog-js';
 
 export default function Hero() {
   const [termIndex, setTermIndex] = useState(0);
@@ -20,6 +21,15 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleHeroCTAClick = () => {
+    posthog.capture('hero_cta_clicked', {
+      distinct_id: localStorage.getItem('session_id'),
+      button_location: 'hero_section',
+      button_text: 'Book Now',
+      timestamp: new Date().toISOString()
+    });
+  };
 
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8 mb-[10px] overflow-visible">
@@ -57,6 +67,7 @@ export default function Hero() {
             >
               <Link
                 to="/start"
+                onClick={handleHeroCTAClick}
                 className="inline-flex items-center justify-center rounded-2xl bg-[#5371FF] px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
               >
                 Book Now
