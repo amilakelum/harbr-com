@@ -26,7 +26,7 @@ export default function Hero() {
     posthog.capture('hero_cta_clicked', {
       distinct_id: localStorage.getItem('session_id'),
       button_location: 'hero_section',
-      button_text: 'Book Now',
+      button_text: 'Book yours',
       timestamp: new Date().toISOString()
     });
   };
@@ -48,7 +48,7 @@ export default function Hero() {
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
             <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-              #1 platform to book marina berths and slips near you
+              Book marina berths and slips near you
             </div>
           </Reveal>
           <Reveal delay={0.1}>
@@ -70,7 +70,7 @@ export default function Hero() {
                 onClick={handleHeroCTAClick}
                 className="inline-flex items-center justify-center rounded-2xl bg-[#5371FF] px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
               >
-                Book Now
+                Book yours
               </Link>
             </motion.div>
           </Reveal>

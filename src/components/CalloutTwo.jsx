@@ -9,7 +9,7 @@ export default function CalloutTwo() {
     posthog.capture('callout_cta_clicked', {
       distinct_id: localStorage.getItem('session_id'),
       button_location: 'callout_section',
-      button_text: 'Book Now',
+      button_text: 'Book yours',
       timestamp: new Date().toISOString()
     });
   };
@@ -53,7 +53,7 @@ export default function CalloutTwo() {
               onClick={handleCalloutCTAClick}
               className="inline-flex items-center justify-center rounded-2xl bg-[#5371FF] px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
             >
-              Book Now
+              Book yours
             </Link>
           </motion.div>
         </Reveal>
