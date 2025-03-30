@@ -43,8 +43,9 @@ export default function Hero() {
             <p className="uppercase text-sm leading-[14px] text-blue-500">
             Smart marina stays
             </p>
-          </div>
+          </div>\
         </Reveal> */}
+        
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
             <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
