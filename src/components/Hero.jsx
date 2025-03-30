@@ -52,11 +52,11 @@ export default function Hero() {
               Book marina berths and slips near you
             </div>
           </Reveal>
-          <Reveal delay={0.1}>
+          {/* <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
               Search real-time marina availability, compare marina fees and book online immediately.
             </p>
-          </Reveal>
+          </Reveal> */}
           <Reveal
             delay={0.1}
             className="mt-10 flex items-center justify-center gap-x-6"
