@@ -22,11 +22,11 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleHeroCTAClick = () => {
+  const handleHeroCTAClick = (buttonType) => {
     posthog.capture('hero_cta_clicked', {
       distinct_id: localStorage.getItem('session_id'),
       button_location: 'hero_section',
-      button_text: 'Book yours',
+      button_text: buttonType,
       timestamp: new Date().toISOString()
     });
   };
@@ -49,14 +49,14 @@ export default function Hero() {
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
             <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-              Book marina berths and slips near you
+            Next generation of marina management software
             </div>
           </Reveal>
-          {/* <Reveal delay={0.1}>
+          <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-              Search real-time marina availability, compare marina fees and book online immediately.
+            Custom technology that understands and enhances what makes your marina special
             </p>
-          </Reveal> */}
+          </Reveal>
           <Reveal
             delay={0.1}
             className="mt-10 flex items-center justify-center gap-x-6"
@@ -68,10 +68,23 @@ export default function Hero() {
             >
               <Link
                 to="/start"
-                onClick={handleHeroCTAClick}
-                className="inline-flex items-center justify-center rounded-2xl bg-[#5371FF] px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
+                onClick={() => handleHeroCTAClick('Get started for free')}
+                className="inline-flex items-center justify-center rounded-2xl bg-[#F7F76E] px-8 py-4 text-lg font-semibold text-black shadow-md hover:bg-[#E8E85F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
               >
-                Book yours
+                Get started for free
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="z-20 relative"
+            >
+              <Link
+                to="/demo"
+                onClick={() => handleHeroCTAClick('Request a demo')}
+                className="inline-flex items-center justify-center rounded-2xl border-2 border-[#1C1C1C] bg-transparent px-8 py-4 text-lg font-semibold text-[#1C1C1C] shadow-sm hover:bg-[#1C1C1C] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1C1C] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
+              >
+                Request a demo
               </Link>
             </motion.div>
           </Reveal>
