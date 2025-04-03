@@ -1,54 +1,31 @@
-import { MessageSquareQuote } from "lucide-react";
-import React from "react";
-import { motion } from "motion/react";
+import React from 'react';
 
-export default function Testimonial({ quote, author, role }) {
+export default function Testimonial({ quote, author, role, company, companyLogo }) {
   return (
-    <motion.div 
-      className="bg-whiste rounded-lg sm:rounded-2xl rinsg ring-zinc-100 shadsow-lg lg:shadsow-xl p-8 md:p-10"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      whileHover={{ scale: 1.02 }}
-    >
-      <div className="flex flex-col items-center">
-        <motion.span 
-          className="text-[#5371FF] mb-4"
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 5, 0]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <MessageSquareQuote size={36} />
-        </motion.span>
-
-        <motion.blockquote 
-          className="text-xl md:text-2xl text-zinc-800 text-center italic mb-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+    <div className="flex flex-col space-y-8 p-6">
+      {/* Quote */}
+      <div className="flex-grow">
+        <p className="text-[32px] leading-[1.2] tracking-[-0.02em] font-normal text-[#1C1C1C]">
           "{quote}"
-        </motion.blockquote>
-
-        <motion.div 
-          className="mt-4"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <p className="font-semibold text-zinc-900">{author}</p>
-          {role && <p className="text-zinc-600 text-sm">{role}</p>}
-        </motion.div>
+        </p>
       </div>
-    </motion.div>
+      
+      {/* Author Info */}
+      <div className="flex items-start space-x-4">
+        <div className="flex-1">
+          <p className="font-medium text-base text-[#1C1C1C]">{author}</p>
+          <p className="text-sm text-zinc-600 mt-1">{role}</p>
+          {company && (
+            <div className="mt-3">
+              {companyLogo ? (
+                <img src={companyLogo} alt={company} className="h-6 w-auto" />
+              ) : (
+                <p className="text-sm font-medium text-zinc-900">{company}</p>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

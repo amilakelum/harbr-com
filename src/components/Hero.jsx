@@ -41,15 +41,15 @@ export default function Hero() {
           <div className="inline-flex items-center">
             <div className="rounded-xl w-[14px] h-2 mr-2 bg-blue-500"></div>
             <p className="uppercase text-sm leading-[14px] text-blue-500">
-            Smart marina stays
+            Harbr
             </p>
-          </div>\
+          </div>
         </Reveal> */}
     
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
             <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-            Next generation of marina management software
+            The AI Marina Management Platform
             </div>
           </Reveal>
           <Reveal delay={0.1}>
