@@ -209,7 +209,7 @@ export default function AiMeetings() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="rounded-t-2xl overflow-hidden shadow-2xl"
             >
-              <div className="h-[200px] sm:h-[300px] md:h-[380px] lg:h-[400px] overflow-hidden">
+              <div className="h-[140px] sm:h-[260px] md:h-[320px] lg:h-[480px] overflow-hidden">
                 <img 
                   src={meetingImage}
                   alt="Sales Dashboard"
