@@ -1,4 +1,4 @@
-import screenshot from "../assets/hero1.png";
+import screenshot from "../assets/hero6.png";
 import Reveal from "./animations/Reveal";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
@@ -18,9 +18,8 @@ export default function IntroVideo() {
   const phrases = [
     "optimize calls",
     "approve bookings",
-    "manage documents",
-    "grow your business",
-    "o"
+    "manage insurance",
+    "share berthing slips",
   ];
   
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -104,10 +103,10 @@ export default function IntroVideo() {
           <img 
             src={screenshot}
             alt="Harbr Platform Screenshot"
-            className="w-full h-[400px] sm:h-[500px] object-cover object-center rounded-2xl"
+            className="w-full h-[90vh] object-cover object-center rounded-2xl"
           />
           
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/10"></div>
           
           <div className="absolute inset-0 flex flex-col justify-center p-8 sm:p-12 lg:p-16">
             <div className="max-w-2xl">
