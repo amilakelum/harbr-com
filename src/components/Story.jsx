@@ -1,5 +1,5 @@
 import Reveal from "./animations/Reveal";
-import teamImage from "../assets/our-story5.jpg";
+import teamImage from "../assets/AI-stack4.png";
 
 export default function Story() {
   return (
@@ -18,14 +18,14 @@ export default function Story() {
           
           <Reveal delay={0.4}>
             <div className="text-left lg:pl-8">
-              <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl mb-6">
-                Harbr app was founded by boat owners, for boat owners.
-              </h2>
+              <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl mb-6">
+                Harbr, <br />The AI Marina Management<br /> Software
+              </h1>
               <p className="mt-4 text-lg leading-8 text-zinc-600 mb-6">
-                We're revolutionising the marina experience, starting with online bookings and real time availability at your local marina.
+                Harbr is an end-to-end AI marina management software with all the features, integrations, and training you need to grow your business.
               </p>
               <p className="mt-4 text-lg leading-8 text-zinc-600 mb-6">
-                Yep, we also can't believe its taken this long.
+                Yep, everything you need to run your marina.
               </p>
             </div>
           </Reveal>

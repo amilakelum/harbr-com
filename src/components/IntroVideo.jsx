@@ -1,4 +1,4 @@
-import screenshot from "../assets/background-laptop3.png";
+import screenshot from "../assets/hero1.png";
 import Reveal from "./animations/Reveal";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
@@ -85,8 +85,10 @@ export default function IntroVideo() {
         <img 
           src={screenshot}
           alt="Harbr Platform Screenshot"
-          className="w-full object-cover rounded-2xl"
+          className="w-full h-[500px] sm:h-auto object-cover object-center rounded-2xl"
         />
+        
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/20"></div>
         
         <div className="absolute inset-0 flex flex-col justify-center p-8 sm:p-12 lg:p-16">
           <div className="max-w-2xl">

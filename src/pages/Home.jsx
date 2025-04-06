@@ -8,10 +8,10 @@ import Story from "../components/Story";
 export default function Home() {
   return (
     <>
-      <Hero />
       <IntroVideo />
       {/* <Separator /> */}
       <Callout />
+      <Hero />
       <Story />
       <CalloutTwo />
     </>
