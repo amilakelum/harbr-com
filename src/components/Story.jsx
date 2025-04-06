@@ -24,9 +24,6 @@ export default function Story() {
               <p className="mt-4 text-lg leading-8 text-zinc-600 mb-6">
                 Harbr is an end-to-end AI marina management software with all the features, integrations, and training you need to grow your business.
               </p>
-              <p className="mt-4 text-lg leading-8 text-zinc-600 mb-6">
-                Yep, everything you need to run your marina.
-              </p>
             </div>
           </Reveal>
         </div>

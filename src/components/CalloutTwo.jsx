@@ -35,7 +35,7 @@ export default function CalloutTwo() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            The future of marina bookings
+            AI Marina Management Software
           </motion.h1>
           <motion.p 
             className="mx-auto mt-8 max-w-xl text-pretty text-white sm:text-xl/7"
@@ -43,7 +43,7 @@ export default function CalloutTwo() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
-            Join thousands of members already booking online at your marina.
+            Custom technology that understands and enhances what makes your marina special
           </motion.p>
         </Reveal>
 

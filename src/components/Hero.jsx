@@ -56,13 +56,13 @@ export default function Hero() {
     
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
-            <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-            AI Marina Management Software
-            </div>
+            <h2 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal">
+            Everything you need to <br/> grow your marina
+            </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-              Custom technology that understands and enhances what makes your marina special
+              Custom technology that understands and enhances<br/> what makes your marina special
             </p>
           </Reveal>
           <Reveal
