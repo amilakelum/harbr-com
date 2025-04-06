@@ -113,7 +113,7 @@ export default function IntroVideo() {
               <p className="text-white text-sm font-mono uppercase tracking-wide mb-2">
                 <span className="py-1 rounded-md">HARBR AI MARINA SOFTWARE</span>
               </p>
-              <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-tight">
+              <h1 className="text-white text-[46px] leading-[1.1] tracking-[-0.02em] font-normal">
                 <span className="opacity-80">Software for people<br />
                 to </span>
                 <span className="text-[#F7F76E] font-medium inline-block min-w-16">{currentText}</span>

@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import IntroVideo from "../components/IntroVideo";
 import Separator from "../components/Separator";
 import Story from "../components/Story";
+import AiMeetings from "../components/AiMeetings";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Callout />
       <Story />
       <Hero />
+      <AiMeetings />
       <CalloutTwo />
     </>
   );
