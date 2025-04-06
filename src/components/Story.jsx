@@ -8,10 +8,10 @@ export default function Story() {
         <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2 lg:items-center">
         <Reveal delay={0.4}>
             <div className="text-left lg:pl-8">
-              <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl mb-6">
+              <h1 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal">
                 Harbr, <br />The AI Marina Management<br /> Software
               </h1>
-              <p className="mt-4 text-lg leading-8 text-zinc-600 mb-6">
+              <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
                 Harbr is an end-to-end AI marina management software with all the features, integrations, and training you need to grow your business.
               </p>
             </div>
