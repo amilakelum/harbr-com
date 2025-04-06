@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import BoatAnimation from "./animations/BoatAnimation";
 import posthog from 'posthog-js';
 import { saveEmailSubscription } from "../lib/supabaseUtils";
+import FormFeedback from "./ui/FormFeedback";
 
 // Function to get or create a distinct ID for PostHog
 function getDistinctId() {
@@ -78,26 +79,61 @@ export default function Hero() {
       });
       
       if (result.success) {
-        setSubmitMessage({ 
-          type: 'success', 
-          text: 'Thank you! We\'ll be in touch soon.' 
-        });
-        setEmail('');
+        // Handle already subscribed case specially
+        if (result.isExistingEmail) {
+          setSubmitMessage({ 
+            type: 'info', 
+            text: result.message || "You're already subscribed! We've updated your information."
+          });
+        } else {
+          setSubmitMessage({ 
+            type: 'success', 
+            text: result.message || 'Thank you! We\'ll be in touch soon.' 
+          });
+          // Only clear email field on successful new subscription
+          setEmail('');
+        }
       } else {
-        setSubmitMessage({ 
-          type: 'error', 
-          text: 'Something went wrong. Please try again.' 
-        });
+        // Display specific error based on error type
+        switch (result.errorType) {
+          case 'duplicate_email':
+            setSubmitMessage({ 
+              type: 'info', 
+              text: 'This email is already subscribed. Thanks for your enthusiasm!' 
+            });
+            break;
+          case 'validation':
+            setSubmitMessage({ 
+              type: 'error', 
+              text: 'Please enter a valid email address.' 
+            });
+            break;
+          case 'auth':
+            setSubmitMessage({ 
+              type: 'error', 
+              text: 'Authentication error. Please try again later.' 
+            });
+            break;
+          default:
+            setSubmitMessage({ 
+              type: 'error', 
+              text: result.error || 'Something went wrong. Please try again.' 
+            });
+        }
       }
     } catch (error) {
       console.error('Error saving subscription:', error);
       setSubmitMessage({ 
         type: 'error', 
-        text: 'Something went wrong. Please try again.' 
+        text: 'Connection error. Please try again later.' 
       });
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const clearMessage = () => {
+    setSubmitMessage({ type: null, text: null });
   };
 
   return (
@@ -117,13 +153,13 @@ export default function Hero() {
     
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
-            <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-            AI Marina Management Software
-            </div>
+          <h2 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal">
+            Everything you need to <br/> grow your marina
+            </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-              Custom technology that understands and enhances what makes your marina special
+              Custom technology that understands and <br/>enhances what makes your marina special
             </p>
           </Reveal>
           <Reveal
@@ -154,14 +190,12 @@ export default function Hero() {
                   </div>
                 </form>
               </div>
+              <FormFeedback
+                isSubmitting={submitting}
+                message={submitMessage}
+                onDismiss={clearMessage}
+              />
             </Reveal>
-          {submitMessage.text && (
-            <Reveal delay={0.1}>
-              <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
-                {submitMessage.text}
-              </p>
-            </Reveal>
-          )}
         </div>
       </div>
       

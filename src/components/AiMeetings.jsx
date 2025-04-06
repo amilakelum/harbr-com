@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import posthog from 'posthog-js';
 import meetingImage from "../assets/reservation1.png";
 import { saveEmailSubscription } from "../lib/supabaseUtils";
+import FormFeedback from "./ui/FormFeedback";
 
 // Function to get or create a distinct ID for PostHog
 function getDistinctId() {
@@ -63,26 +64,61 @@ export default function AiMeetings() {
       });
       
       if (result.success) {
-        setSubmitMessage({ 
-          type: 'success', 
-          text: 'Thank you! We\'ll be in touch soon.' 
-        });
-        setEmail('');
+        // Handle already subscribed case specially
+        if (result.isExistingEmail) {
+          setSubmitMessage({ 
+            type: 'info', 
+            text: result.message || "You're already subscribed! We've updated your information."
+          });
+        } else {
+          setSubmitMessage({ 
+            type: 'success', 
+            text: result.message || 'Thank you! We\'ll be in touch soon.' 
+          });
+          // Only clear email field on successful new subscription
+          setEmail('');
+        }
       } else {
-        setSubmitMessage({ 
-          type: 'error', 
-          text: 'Something went wrong. Please try again.' 
-        });
+        // Display specific error based on error type
+        switch (result.errorType) {
+          case 'duplicate_email':
+            setSubmitMessage({ 
+              type: 'info', 
+              text: 'This email is already subscribed. Thanks for your enthusiasm!' 
+            });
+            break;
+          case 'validation':
+            setSubmitMessage({ 
+              type: 'error', 
+              text: 'Please enter a valid email address.' 
+            });
+            break;
+          case 'auth':
+            setSubmitMessage({ 
+              type: 'error', 
+              text: 'Authentication error. Please try again later.' 
+            });
+            break;
+          default:
+            setSubmitMessage({ 
+              type: 'error', 
+              text: result.error || 'Something went wrong. Please try again.' 
+            });
+        }
       }
     } catch (error) {
       console.error('Error saving subscription:', error);
       setSubmitMessage({ 
         type: 'error', 
-        text: 'Something went wrong. Please try again.' 
+        text: 'Connection error. Please try again later.' 
       });
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const clearMessage = () => {
+    setSubmitMessage({ type: null, text: null });
   };
 
   return (
@@ -102,7 +138,7 @@ export default function AiMeetings() {
                 Manage your entire marina with <br/>intuitive AI-powered tools
               </motion.h2>
               
-      
+              
             </Reveal>
           </div>
 

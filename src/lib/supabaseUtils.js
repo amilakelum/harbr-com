@@ -36,7 +36,7 @@ function getDistinctId() {
 export const saveEmailSubscription = async (email, source, additionalData = {}) => {
   if (!email) {
     console.error('Email is required for subscription');
-    return { success: false, error: 'Email is required' };
+    return { success: false, error: 'Email is required', errorType: 'validation' };
   }
 
   try {
@@ -114,6 +114,9 @@ export const saveEmailSubscription = async (email, source, additionalData = {}) 
     let result;
     
     if (existingEmail) {
+      console.log('Email already exists, updating record:', existingEmail);
+      
+      // If email already exists, just update the metadata but don't treat it as an error
       // Update existing record
       response = await fetch(
         `${supabaseUrl}/rest/v1/email_subscriptions?email=eq.${encodeURIComponent(formattedEmail)}`,
@@ -132,6 +135,26 @@ export const saveEmailSubscription = async (email, source, additionalData = {}) 
           })
         }
       );
+      
+      if (!response.ok) {
+        console.error('Error updating existing subscription:', response.statusText);
+        console.error('Error updating existing subscription:', response[0]);
+        console.error('Error updating existing subscription:', response);
+        return { 
+          success: false, 
+          error: `Error updating subscription: ${response.statusText}`, 
+          errorType: 'update_failed' 
+        };
+      }
+      
+      const data = await response.json();
+      // Return success but also indicate this was a duplicate
+      return { 
+        success: true, 
+        data, 
+        isExistingEmail: true, 
+        message: "You're already subscribed! We've updated your information."
+      };
     } else {
       // Insert new record
       response = await fetch(
@@ -151,14 +174,46 @@ export const saveEmailSubscription = async (email, source, additionalData = {}) 
 
     if (!response.ok) {
       console.error('Error saving subscription:', response.statusText);
-      return { success: false, error: `HTTP error: ${response.status}` };
+      // Check for specific error types
+      if (response.status === 409) {
+        return { 
+          success: false, 
+          error: "This email is already subscribed", 
+          errorType: 'duplicate_email' 
+        };
+      } else if (response.status === 422) {
+        return { 
+          success: false, 
+          error: "Invalid email format", 
+          errorType: 'validation' 
+        };
+      } else if (response.status === 401 || response.status === 403) {
+        return { 
+          success: false, 
+          error: "Authentication error. Please try again later", 
+          errorType: 'auth' 
+        };
+      }
+      return { 
+        success: false, 
+        error: `Subscription error (${response.status}): ${response.statusText}`, 
+        errorType: 'server' 
+      };
     }
 
     const data = await response.json();
     console.log('Email subscription saved successfully:', data);
-    return { success: true, data };
+    return { 
+      success: true, 
+      data, 
+      message: "Thank you! You're subscribed and we'll be in touch soon."
+    };
   } catch (error) {
     console.error('Unexpected error saving email subscription:', error);
-    return { success: false, error: error.message };
+    return { 
+      success: false, 
+      error: error.message || "An unexpected error occurred",
+      errorType: 'unexpected' 
+    };
   }
 };

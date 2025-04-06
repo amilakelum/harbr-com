@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import posthog from 'posthog-js';
 import { saveEmailSubscription } from "../lib/supabaseUtils";
+import FormFeedback from "./ui/FormFeedback";
 
 // Function to get or create a distinct ID for PostHog
 function getDistinctId() {
@@ -128,26 +129,61 @@ export default function IntroVideo() {
       });
       
       if (result.success) {
-        setSubmitMessage({ 
-          type: 'success', 
-          text: 'Thank you! We\'ll be in touch soon.' 
-        });
-        setEmail('');
+        // Handle already subscribed case specially
+        if (result.isExistingEmail) {
+          setSubmitMessage({ 
+            type: 'info', 
+            text: result.message || "You're already subscribed! We've updated your information."
+          });
+        } else {
+          setSubmitMessage({ 
+            type: 'success', 
+            text: result.message || 'Thank you! We\'ll be in touch soon.' 
+          });
+          // Only clear email field on successful new subscription
+          setEmail('');
+        }
       } else {
-        setSubmitMessage({ 
-          type: 'error', 
-          text: 'Something went wrong. Please try again.' 
-        });
+        // Display specific error based on error type
+        switch (result.errorType) {
+          case 'duplicate_email':
+            setSubmitMessage({ 
+              type: 'info', 
+              text: 'This email is already subscribed. Thanks for your enthusiasm!' 
+            });
+            break;
+          case 'validation':
+            setSubmitMessage({ 
+              type: 'error', 
+              text: 'Please enter a valid email address.' 
+            });
+            break;
+          case 'auth':
+            setSubmitMessage({ 
+              type: 'error', 
+              text: 'Authentication error. Please try again later.' 
+            });
+            break;
+          default:
+            setSubmitMessage({ 
+              type: 'error', 
+              text: result.error || 'Something went wrong. Please try again.' 
+            });
+        }
       }
     } catch (error) {
       console.error('Error saving subscription:', error);
       setSubmitMessage({ 
         type: 'error', 
-        text: 'Something went wrong. Please try again.' 
+        text: 'Connection error. Please try again later.' 
       });
     } finally {
       setSubmitting(false);
     }
+  };
+  
+  const clearMessage = () => {
+    setSubmitMessage({ type: null, text: null });
   };
   
   return (
@@ -210,11 +246,12 @@ export default function IntroVideo() {
                   {submitting ? 'Submitting...' : 'Get started for free'}
                 </motion.button>
               </form>
-              {submitMessage.text && (
-                <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
-                  {submitMessage.text}
-                </p>
-              )}
+              <FormFeedback
+                isSubmitting={submitting}
+                message={submitMessage}
+                onDismiss={clearMessage}
+                className="bg-opacity-90 backdrop-blur-sm"
+              />
             </Reveal>
               </div>
             </div>
@@ -247,11 +284,11 @@ export default function IntroVideo() {
                   {submitting ? 'Submitting...' : 'Get started for free'}
                 </motion.button>
               </form>
-              {submitMessage.text && (
-                <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
-                  {submitMessage.text}
-                </p>
-              )}
+              <FormFeedback
+                isSubmitting={submitting}
+                message={submitMessage}
+                onDismiss={clearMessage}
+              />
             </Reveal>
         </div>
       </div>
