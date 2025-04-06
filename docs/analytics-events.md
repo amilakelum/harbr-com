@@ -97,7 +97,7 @@ Fired when a user loads a page. Includes additional context:
 ```javascript
 {
   page_name: "Home",
-  page_title: "Harbr — Smart marina stays",
+  page_title: "Harbr —  AI Marina Software",
   page_section: "home",
   is_landing_page: true,
   previous_path: "/about"
@@ -216,7 +216,7 @@ Measures how far users scroll down pages:
   metric_type: "scroll_depth",
   metric_value: 75, // 75% of page scrolled
   page_path: "/",
-  page_title: "Harbr — Smart marina stays"
+  page_title: "Harbr — AI Marina Software"
 }
 ```
 
