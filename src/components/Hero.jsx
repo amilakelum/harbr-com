@@ -66,28 +66,28 @@ export default function Hero() {
             </p>
           </Reveal>
           <Reveal
-            delay={0.1}
-            className="mt-12 flex items-center justify-center gap-x-3"
-          >
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-y-3 sm:gap-x-3 w-full max-w-xl">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your business email"
-                required
-                className="w-full px-5 py-4 text-base rounded-2xl border border-zinc-300 shadow-sm focus:outline-none focus:border-[#F7F76E] focus:ring-1 focus:ring-[#F7F76E] h-[56px] text-[16px]"
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center rounded-2xl bg-[#F7F76E] px-8 py-4 text-lg font-semibold text-black shadow-md hover:bg-[#E8E85F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] hover:scale-[1.02] transition-all duration-200 ease-in-out whitespace-nowrap h-[56px]"
-              >
-                Get started for free
-              </motion.button>
-            </form>
-          </Reveal>
+              delay={0.25}
+              className="mt-10"
+            >
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-x-4 bg-white p-2 rounded-2xl shadow-sm">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your business email"
+                  required
+                  className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
+                >
+                  Get started for free
+                </motion.button>
+              </form>
+            </Reveal>
         </div>
       </div>
       

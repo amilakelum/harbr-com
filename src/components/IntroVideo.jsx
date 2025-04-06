@@ -112,7 +112,7 @@ export default function IntroVideo() {
           <div className="absolute inset-0 flex flex-col justify-center p-8 sm:p-12 lg:p-16">
             <div className="max-w-2xl">
               <p className="text-white text-sm font-mono uppercase tracking-wide mb-2">
-                <span className="py-1 px-2 rounded-md">HARBR AI MARINA SOFTWARE</span>
+                <span className="py-1 rounded-md">HARBR AI MARINA SOFTWARE</span>
               </p>
               <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-tight">
                 <span className="opacity-80">Software for people<br />
@@ -126,24 +126,29 @@ export default function IntroVideo() {
               
               
               <div className="mt-6 hidden sm:block">
-                <form onSubmit={handleSubmit} className="flex items-center gap-x-3 w-full max-w-md">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your business email"
-                    required
-                    className="w-full px-4 py-3 text-base rounded-xl border border-white/20 bg-white/90 text-black shadow-sm focus:outline-none focus:border-[#F7F76E] focus:ring-1 focus:ring-[#F7F76E] h-[48px] text-[16px]"
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    className="w-auto inline-flex items-center justify-center rounded-xl bg-[#F7F76E] px-6 py-3 text-base font-semibold text-black shadow-md hover:bg-[#F7F76E]/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] transition-all duration-200 ease-in-out whitespace-nowrap h-[48px]"
-                  >
-                    Get started free
-                  </motion.button>
-                </form>
+              <Reveal
+              delay={0.25}
+              className="mt-10"
+            >
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-x-4 bg-white p-2 rounded-2xl shadow-sm max-w-lg">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your business email"
+                  required
+                  className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
+                >
+                  Get started for free
+                </motion.button>
+              </form>
+            </Reveal>
               </div>
             </div>
           </div>
@@ -151,24 +156,29 @@ export default function IntroVideo() {
         
         {/* Mobile form outside image */}
         <div className="sm:hidden mt-6 bg-zinc-50 p-6 rounded-2xl shadow-sm border border-zinc-100">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-y-3 w-full">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your business email"
-              required
-              className="w-full px-4 py-3 text-base rounded-xl border border-zinc-300 shadow-sm focus:outline-none focus:border-[#F7F76E] focus:ring-1 focus:ring-[#F7F76E] h-[48px] text-[16px]"
-            />
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              className="w-full inline-flex items-center justify-center rounded-xl bg-[#F7F76E] px-6 py-3 text-base font-semibold text-black shadow-md hover:bg-[#F7F76E]/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] transition-all duration-200 ease-in-out h-[48px]"
+            <Reveal
+              delay={0.25}
+              className="mt-10"
             >
-              Get started free
-            </motion.button>
-          </form>
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-x-4 bg-white p-2 rounded-2xl shadow-sm mx-auto max-w-sm">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your business email"
+                  required
+                  className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
+                >
+                  Get started for free
+                </motion.button>
+              </form>
+            </Reveal>
         </div>
       </div>
     </Reveal>
