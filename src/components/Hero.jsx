@@ -1,7 +1,7 @@
 import Reveal from "./animations/Reveal";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import BoatAnimation from "./animations/BoatAnimation";
 import posthog from 'posthog-js';
 import { saveEmailSubscription } from "../lib/supabaseUtils";
@@ -44,6 +44,17 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Auto-dismiss form feedback message after 6 seconds
+  useEffect(() => {
+    if (submitMessage.text) {
+      const timer = setTimeout(() => {
+        clearMessage();
+      }, 6000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [submitMessage]);
 
   const handleHeroCTAClick = (buttonType) => {
     const distinctId = email || getDistinctId();

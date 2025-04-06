@@ -95,6 +95,17 @@ export default function IntroVideo() {
     return () => clearTimeout(timer);
   }, [currentText, isDeleting, currentPhraseIndex, phrases, typingSpeed, isPaused]);
   
+  // Auto-dismiss form feedback message after 6 seconds
+  useEffect(() => {
+    if (submitMessage.text) {
+      const timer = setTimeout(() => {
+        clearMessage();
+      }, 6000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [submitMessage]);
+  
   const handleVideoCTAClick = (buttonType) => {
     const distinctId = email || getDistinctId();
     
