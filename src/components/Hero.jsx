@@ -7,6 +7,7 @@ import posthog from 'posthog-js';
 
 export default function Hero() {
   const [termIndex, setTermIndex] = useState(0);
+  const [email, setEmail] = useState('');
   const terms = [
     "berths",
     "slips",
@@ -27,8 +28,15 @@ export default function Hero() {
       distinct_id: localStorage.getItem('session_id'),
       button_location: 'hero_section',
       button_text: buttonType,
+      email: email,
       timestamp: new Date().toISOString()
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleHeroCTAClick('Get started for free');
+    // You can add additional logic here to handle the email submission
   };
 
   return (
@@ -49,50 +57,42 @@ export default function Hero() {
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
             <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
-            The AI Marina Management Platform
+            AI Marina Management Software
             </div>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-            Custom technology that understands and enhances what makes your marina special
+              Custom technology that understands and enhances what makes your marina special
             </p>
           </Reveal>
           <Reveal
             delay={0.1}
-            className="mt-10 flex items-center justify-center gap-x-6"
+            className="mt-12 flex items-center justify-center gap-x-3"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="z-20 relative"
-            >
-              <Link
-                to="/start"
-                onClick={() => handleHeroCTAClick('Get started for free')}
-                className="inline-flex items-center justify-center rounded-2xl bg-[#F7F76E] px-8 py-4 text-lg font-semibold text-black shadow-md hover:bg-[#E8E85F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
+            <form onSubmit={handleSubmit} className="flex items-center gap-x-3 w-full max-w-xl">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your business email"
+                required
+                className="flex-grow px-5 py-4 text-base rounded-2xl border border-zinc-300 shadow-sm focus:outline-none focus:border-[#F7F76E] focus:ring-1 focus:ring-[#F7F76E] h-[56px] text-[16px]"
+              />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="submit"
+                className="inline-flex items-center justify-center rounded-2xl bg-[#F7F76E] px-8 py-4 text-lg font-semibold text-black shadow-md hover:bg-[#E8E85F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] hover:scale-[1.02] transition-all duration-200 ease-in-out whitespace-nowrap h-[56px]"
               >
                 Get started for free
-              </Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="z-20 relative"
-            >
-              <Link
-                to="/demo"
-                onClick={() => handleHeroCTAClick('Request a demo')}
-                className="inline-flex items-center justify-center rounded-2xl border-2 border-[#1C1C1C] bg-transparent px-8 py-4 text-lg font-semibold text-[#1C1C1C] shadow-sm hover:bg-[#1C1C1C] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1C1C] hover:scale-[1.02] transition-all duration-200 ease-in-out min-w-[200px]"
-              >
-                Request a demo
-              </Link>
-            </motion.div>
+              </motion.button>
+            </form>
           </Reveal>
         </div>
       </div>
       
       {/* Boat Animation */}
-      <BoatAnimation />
+      {/* <BoatAnimation /> */}
     </div>
   );
 }
