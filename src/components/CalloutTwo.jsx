@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import posthog from 'posthog-js';
 import { useState } from "react";
 import marinaSoftwareImage from "../assets/best_software.png";
+import { saveEmailSubscription } from "../lib/supabaseUtils";
 
 export default function CalloutTwo() {
   const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState({ type: null, text: null });
 
   const handleCalloutCTAClick = () => {
     posthog.capture('callout_cta_clicked', {
@@ -19,10 +22,42 @@ export default function CalloutTwo() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
+    setSubmitMessage({ type: null, text: null });
+    
+    // Track click event in PostHog
     handleCalloutCTAClick();
-    // You can add additional logic here to handle the email submission
+    
+    try {
+      // Save email to Supabase
+      const result = await saveEmailSubscription(email, 'callout_section', {
+        page: window.location.pathname,
+        button_text: 'Get started for free'
+      });
+      
+      if (result.success) {
+        setSubmitMessage({ 
+          type: 'success', 
+          text: 'Thank you! We\'ll be in touch soon.' 
+        });
+        setEmail('');
+      } else {
+        setSubmitMessage({ 
+          type: 'error', 
+          text: 'Something went wrong. Please try again.' 
+        });
+      }
+    } catch (error) {
+      console.error('Error saving subscription:', error);
+      setSubmitMessage({ 
+        type: 'error', 
+        text: 'Something went wrong. Please try again.' 
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -81,6 +116,7 @@ export default function CalloutTwo() {
                     placeholder="Enter your business email"
                     required
                     className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
+                    disabled={submitting}
                   />
                   <div className="w-full lg:w-auto">
                     <motion.button
@@ -88,12 +124,18 @@ export default function CalloutTwo() {
                       whileTap={{ scale: 0.98 }}
                       type="submit"
                       className="w-full inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
+                      disabled={submitting}
                     >
-                      Get started for free
+                      {submitting ? 'Submitting...' : 'Get started for free'}
                     </motion.button>
                   </div>
                 </form>
               </div>
+              {submitMessage.text && (
+                <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                  {submitMessage.text}
+                </p>
+              )}
             </Reveal>
           </div>
         </div>

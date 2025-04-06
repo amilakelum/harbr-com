@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BoatAnimation from "./animations/BoatAnimation";
 import posthog from 'posthog-js';
+import { saveEmailSubscription } from "../lib/supabaseUtils";
 
 export default function Hero() {
   const [termIndex, setTermIndex] = useState(0);
   const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState({ type: null, text: null });
   const terms = [
     "berths",
     "slips",
@@ -33,10 +36,42 @@ export default function Hero() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
+    setSubmitMessage({ type: null, text: null });
+    
+    // Track click event in PostHog
     handleHeroCTAClick('Get started for free');
-    // You can add additional logic here to handle the email submission
+    
+    try {
+      // Save email to Supabase
+      const result = await saveEmailSubscription(email, 'hero_section', {
+        page: window.location.pathname,
+        button_text: 'Get started for free'
+      });
+      
+      if (result.success) {
+        setSubmitMessage({ 
+          type: 'success', 
+          text: 'Thank you! We\'ll be in touch soon.' 
+        });
+        setEmail('');
+      } else {
+        setSubmitMessage({ 
+          type: 'error', 
+          text: 'Something went wrong. Please try again.' 
+        });
+      }
+    } catch (error) {
+      console.error('Error saving subscription:', error);
+      setSubmitMessage({ 
+        type: 'error', 
+        text: 'Something went wrong. Please try again.' 
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -56,38 +91,47 @@ export default function Hero() {
     
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
-            <h2 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal">
-            Everything you need to <br/> grow your marina
-            </h2>
+            <div className="text-4xl font-semibold text-pretty tracking-tight text-zinc-900 sm:text-6xl">
+            AI Marina Management Software
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-              Custom technology that understands and enhances<br/> what makes your marina special
+              Custom technology that understands and enhances what makes your marina special
             </p>
           </Reveal>
           <Reveal
-              delay={0.25}
-              className="mt-10"
-            >
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-x-4 bg-white p-2 rounded-2xl shadow-sm">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your business email"
-                  required
-                  className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
-                >
-                  Get started for free
-                </motion.button>
-              </form>
+            delay={0.1}
+            className="mt-12 flex items-center justify-center gap-x-3"
+          >
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-y-3 sm:gap-x-3 w-full max-w-xl">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your business email"
+                required
+                className="w-full px-5 py-4 text-base rounded-2xl border border-zinc-300 shadow-sm focus:outline-none focus:border-[#F7F76E] focus:ring-1 focus:ring-[#F7F76E] h-[56px] text-[16px]"
+                disabled={submitting}
+              />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="submit"
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-2xl bg-[#F7F76E] px-8 py-4 text-lg font-semibold text-black shadow-md hover:bg-[#E8E85F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] hover:scale-[1.02] transition-all duration-200 ease-in-out whitespace-nowrap h-[56px]"
+                disabled={submitting}
+              >
+                {submitting ? 'Submitting...' : 'Get started for free'}
+              </motion.button>
+            </form>
+          </Reveal>
+          {submitMessage.text && (
+            <Reveal delay={0.1}>
+              <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                {submitMessage.text}
+              </p>
             </Reveal>
+          )}
         </div>
       </div>
       

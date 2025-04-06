@@ -20,7 +20,9 @@ const options = {
   },
   global: {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'apikey': supabaseKey || '',
+      'Authorization': `Bearer ${supabaseKey || ''}`
     },
   },
 };
@@ -36,6 +38,13 @@ try {
   if (supabaseServiceKey) {
     supabaseAdmin = createClient(supabaseUrl || '', supabaseServiceKey, {
       ...options,
+      global: {
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseServiceKey,
+          'Authorization': `Bearer ${supabaseServiceKey}`
+        },
+      },
       auth: {
         persistSession: false, // Don't persist admin sessions
         autoRefreshToken: false

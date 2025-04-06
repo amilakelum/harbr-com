@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import posthog from 'posthog-js';
+import { saveEmailSubscription } from "../lib/supabaseUtils";
 
 // Add custom cursor blink animation
 const cursorStyle = {
@@ -28,6 +29,8 @@ export default function IntroVideo() {
   const [typingSpeed, setTypingSpeed] = useState(150);
   const [isPaused, setIsPaused] = useState(false);
   const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState({ type: null, text: null });
   
   useEffect(() => {
     let timer;
@@ -83,10 +86,42 @@ export default function IntroVideo() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
+    setSubmitMessage({ type: null, text: null });
+    
+    // Track click event in PostHog
     handleVideoCTAClick('Get started for free');
-    // You can add additional logic here to handle the email submission
+    
+    try {
+      // Save email to Supabase
+      const result = await saveEmailSubscription(email, 'intro_video_section', {
+        page: window.location.pathname,
+        button_text: 'Get started for free'
+      });
+      
+      if (result.success) {
+        setSubmitMessage({ 
+          type: 'success', 
+          text: 'Thank you! We\'ll be in touch soon.' 
+        });
+        setEmail('');
+      } else {
+        setSubmitMessage({ 
+          type: 'error', 
+          text: 'Something went wrong. Please try again.' 
+        });
+      }
+    } catch (error) {
+      console.error('Error saving subscription:', error);
+      setSubmitMessage({ 
+        type: 'error', 
+        text: 'Something went wrong. Please try again.' 
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
   
   return (
@@ -137,16 +172,23 @@ export default function IntroVideo() {
                   placeholder="Enter your business email"
                   required
                   className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
+                  disabled={submitting}
                 />
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
+                  disabled={submitting}
                 >
-                  Get started for free
+                  {submitting ? 'Submitting...' : 'Get started for free'}
                 </motion.button>
               </form>
+              {submitMessage.text && (
+                <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                  {submitMessage.text}
+                </p>
+              )}
             </Reveal>
               </div>
             </div>
@@ -167,16 +209,23 @@ export default function IntroVideo() {
                   placeholder="Enter your business email"
                   required
                   className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
+                  disabled={submitting}
                 />
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
+                  disabled={submitting}
                 >
-                  Get started for free
+                  {submitting ? 'Submitting...' : 'Get started for free'}
                 </motion.button>
               </form>
+              {submitMessage.text && (
+                <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                  {submitMessage.text}
+                </p>
+              )}
             </Reveal>
         </div>
       </div>
