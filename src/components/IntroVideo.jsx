@@ -250,7 +250,7 @@ export default function IntroVideo() {
                 isSubmitting={submitting}
                 message={submitMessage}
                 onDismiss={clearMessage}
-                className="bg-opacity-90 backdrop-blur-sm"
+                className="bg-opacity-90 backdrop-blur-sm max-w-lg"
               />
             </Reveal>
               </div>
@@ -259,7 +259,7 @@ export default function IntroVideo() {
         </motion.div>
         
         {/* Mobile form outside image */}
-        <div className="sm:hidden mt-6 bg-zinc-50 p-6 rounded-2xl shadow-sm border border-zinc-100">
+        <div className="sm:hidden mt-6 bg-zinc-50 p-6 rounded-2xl shadow-sm border border-zinc-100 ">
             <Reveal
               delay={0.25}
               className="mt-10"
@@ -288,6 +288,7 @@ export default function IntroVideo() {
                 isSubmitting={submitting}
                 message={submitMessage}
                 onDismiss={clearMessage}
+                className="max-w-sm"
               />
             </Reveal>
         </div>
