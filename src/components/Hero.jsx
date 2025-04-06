@@ -6,6 +6,24 @@ import BoatAnimation from "./animations/BoatAnimation";
 import posthog from 'posthog-js';
 import { saveEmailSubscription } from "../lib/supabaseUtils";
 
+// Function to get or create a distinct ID for PostHog
+function getDistinctId() {
+  let distinctId = localStorage.getItem('ph_distinct_id');
+  
+  if (!distinctId) {
+    distinctId = crypto.randomUUID ? crypto.randomUUID() : 
+      `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+      
+    try {
+      localStorage.setItem('ph_distinct_id', distinctId);
+    } catch (e) {
+      console.error('Could not store distinct ID:', e);
+    }
+  }
+  
+  return distinctId;
+}
+
 export default function Hero() {
   const [termIndex, setTermIndex] = useState(0);
   const [email, setEmail] = useState('');
@@ -27,13 +45,21 @@ export default function Hero() {
   }, []);
 
   const handleHeroCTAClick = (buttonType) => {
-    posthog.capture('hero_cta_clicked', {
-      distinct_id: localStorage.getItem('session_id'),
-      button_location: 'hero_section',
-      button_text: buttonType,
-      email: email,
-      timestamp: new Date().toISOString()
-    });
+    const distinctId = email || getDistinctId();
+    
+    try {
+      posthog.capture('hero_cta_clicked', {
+        distinct_id: distinctId,
+        button_location: 'hero_section',
+        button_text: buttonType,
+        email: email,
+        timestamp: new Date().toISOString()
+      });
+      
+      console.log('Hero CTA tracked with distinct_id:', distinctId);
+    } catch (error) {
+      console.error('Error tracking hero CTA:', error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -101,30 +127,34 @@ export default function Hero() {
             </p>
           </Reveal>
           <Reveal
-            delay={0.1}
-            className="mt-12 flex items-center justify-center gap-x-3"
-          >
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-y-3 sm:gap-x-3 w-full max-w-xl">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your business email"
-                required
-                className="w-full px-5 py-4 text-base rounded-2xl border border-zinc-300 shadow-sm focus:outline-none focus:border-[#F7F76E] focus:ring-1 focus:ring-[#F7F76E] h-[56px] text-[16px]"
-                disabled={submitting}
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center rounded-2xl bg-[#F7F76E] px-8 py-4 text-lg font-semibold text-black shadow-md hover:bg-[#E8E85F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F7F76E] hover:scale-[1.02] transition-all duration-200 ease-in-out whitespace-nowrap h-[56px]"
-                disabled={submitting}
-              >
-                {submitting ? 'Submitting...' : 'Get started for free'}
-              </motion.button>
-            </form>
-          </Reveal>
+              delay={0.25}
+              className="mt-10"
+            >
+              <div className="bg-white p-2 rounded-2xl shadow-sm">
+                <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your business email"
+                    required
+                    className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
+                    disabled={submitting}
+                  />
+                  <div className="w-full lg:w-auto">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      type="submit"
+                      className="w-full inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
+                      disabled={submitting}
+                    >
+                      {submitting ? 'Submitting...' : 'Get started for free'}
+                    </motion.button>
+                  </div>
+                </form>
+              </div>
+            </Reveal>
           {submitMessage.text && (
             <Reveal delay={0.1}>
               <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>

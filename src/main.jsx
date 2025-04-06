@@ -8,15 +8,20 @@ import "./assets/favicon.svg";
 import { trackSessionQuality } from "./lib/analytics";
 
 // Initialize PostHog with your project API key
-// Replace 'phc_YourPostHogApiKey' with your actual PostHog API key
 posthog.init(import.meta.env.VITE_POSTHOG_API_KEY, {
-  api_host: import.meta.env.VITE_POSTHOG_HOST || 'https://app.posthog.com',
+  api_host: 'https://us.i.posthog.com', // Corrected API host for US instance
   // Enable debug mode in development
   debug: import.meta.env.DEV,
   // Only capture events in production by default
-  capture_pageview: import.meta.env.PROD,
-  // Disable autocapture in development
-  autocapture: import.meta.env.PROD,
+  capture_pageview: true,
+  // Configure autocapture
+  autocapture: true,
+  // Properly handle network errors
+  on_xhr_error: function(xhr) {
+    console.error('PostHog XHR error:', xhr);
+  },
+  // Configure property formatting
+  property_blacklist: ['$ip'],
   // Set a property to distinguish test events during development
   loaded: (posthog) => {
     if (import.meta.env.DEV) {
@@ -24,6 +29,11 @@ posthog.init(import.meta.env.VITE_POSTHOG_API_KEY, {
       // Mark events as coming from development environment
       posthog.register({
         environment: 'development'
+      });
+    } else {
+      // For production
+      posthog.register({
+        environment: 'production'
       });
     }
   }

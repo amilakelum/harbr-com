@@ -7,19 +7,45 @@ import { useState } from "react";
 import marinaSoftwareImage from "../assets/best_software.png";
 import { saveEmailSubscription } from "../lib/supabaseUtils";
 
+// Function to get or create a distinct ID for PostHog
+function getDistinctId() {
+  let distinctId = localStorage.getItem('ph_distinct_id');
+  
+  if (!distinctId) {
+    distinctId = crypto.randomUUID ? crypto.randomUUID() : 
+      `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+      
+    try {
+      localStorage.setItem('ph_distinct_id', distinctId);
+    } catch (e) {
+      console.error('Could not store distinct ID:', e);
+    }
+  }
+  
+  return distinctId;
+}
+
 export default function CalloutTwo() {
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState({ type: null, text: null });
 
   const handleCalloutCTAClick = () => {
-    posthog.capture('callout_cta_clicked', {
-      distinct_id: localStorage.getItem('session_id'),
-      button_location: 'callout_section',
-      button_text: 'Get started for free',
-      email: email,
-      timestamp: new Date().toISOString()
-    });
+    const distinctId = email || getDistinctId();
+    
+    try {
+      posthog.capture('callout_cta_clicked', {
+        distinct_id: distinctId,
+        button_location: 'callout_section',
+        button_text: 'Get started for free',
+        email: email,
+        timestamp: new Date().toISOString()
+      });
+      
+      console.log('Callout CTA tracked with distinct_id:', distinctId);
+    } catch (error) {
+      console.error('Error tracking callout CTA:', error);
+    }
   };
 
   const handleSubmit = async (e) => {

@@ -6,6 +6,24 @@ import { useState, useEffect, useRef } from "react";
 import posthog from 'posthog-js';
 import { saveEmailSubscription } from "../lib/supabaseUtils";
 
+// Function to get or create a distinct ID for PostHog
+function getDistinctId() {
+  let distinctId = localStorage.getItem('ph_distinct_id');
+  
+  if (!distinctId) {
+    distinctId = crypto.randomUUID ? crypto.randomUUID() : 
+      `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+      
+    try {
+      localStorage.setItem('ph_distinct_id', distinctId);
+    } catch (e) {
+      console.error('Could not store distinct ID:', e);
+    }
+  }
+  
+  return distinctId;
+}
+
 // Add custom cursor blink animation
 const cursorStyle = {
   "@keyframes blink": {
@@ -77,13 +95,21 @@ export default function IntroVideo() {
   }, [currentText, isDeleting, currentPhraseIndex, phrases, typingSpeed, isPaused]);
   
   const handleVideoCTAClick = (buttonType) => {
-    posthog.capture('video_cta_clicked', {
-      distinct_id: localStorage.getItem('session_id'),
-      button_location: 'intro_video_section',
-      button_text: buttonType,
-      email: email,
-      timestamp: new Date().toISOString()
-    });
+    const distinctId = email || getDistinctId();
+    
+    try {
+      posthog.capture('video_cta_clicked', {
+        distinct_id: distinctId,
+        button_location: 'intro_video_section',
+        button_text: buttonType,
+        email: email,
+        timestamp: new Date().toISOString()
+      });
+      
+      console.log('Video CTA tracked with distinct_id:', distinctId);
+    } catch (error) {
+      console.error('Error tracking video CTA:', error);
+    }
   };
 
   const handleSubmit = async (e) => {

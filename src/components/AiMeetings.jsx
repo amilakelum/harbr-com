@@ -6,19 +6,45 @@ import posthog from 'posthog-js';
 import meetingImage from "../assets/reservation1.png";
 import { saveEmailSubscription } from "../lib/supabaseUtils";
 
+// Function to get or create a distinct ID for PostHog
+function getDistinctId() {
+  let distinctId = localStorage.getItem('ph_distinct_id');
+  
+  if (!distinctId) {
+    distinctId = crypto.randomUUID ? crypto.randomUUID() : 
+      `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+      
+    try {
+      localStorage.setItem('ph_distinct_id', distinctId);
+    } catch (e) {
+      console.error('Could not store distinct ID:', e);
+    }
+  }
+  
+  return distinctId;
+}
+
 export default function AiMeetings() {
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState({ type: null, text: null });
 
   const handleCTAClick = (buttonType) => {
-    posthog.capture('ai_meetings_cta_clicked', {
-      distinct_id: localStorage.getItem('session_id'),
-      button_location: 'ai_meetings_section',
-      button_text: buttonType,
-      email: email,
-      timestamp: new Date().toISOString()
-    });
+    const distinctId = email || getDistinctId();
+    
+    try {
+      posthog.capture('ai_meetings_cta_clicked', {
+        distinct_id: distinctId,
+        button_location: 'ai_meetings_section',
+        button_text: buttonType,
+        email: email,
+        timestamp: new Date().toISOString()
+      });
+      
+      console.log('AI Meetings CTA tracked with distinct_id:', distinctId);
+    } catch (error) {
+      console.error('Error tracking AI Meetings CTA:', error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -76,33 +102,7 @@ export default function AiMeetings() {
                 Manage your entire marina with <br/>intuitive AI-powered tools
               </motion.h2>
               
-              <Reveal delay={0.3} className="mt-8">
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 sm:gap-x-4 bg-white p-2 rounded-2xl shadow-sm max-w-md">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your business email"
-                    required
-                    className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
-                    disabled={submitting}
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
-                    disabled={submitting}
-                  >
-                    {submitting ? 'Submitting...' : 'Get started free'}
-                  </motion.button>
-                </form>
-                {submitMessage.text && (
-                  <p className={`mt-3 text-sm ${submitMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
-                    {submitMessage.text}
-                  </p>
-                )}
-              </Reveal>
+      
             </Reveal>
           </div>
 

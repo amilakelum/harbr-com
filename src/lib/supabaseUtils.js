@@ -3,6 +3,30 @@ import posthog from 'posthog-js';
 import { createClient } from '@supabase/supabase-js';
 
 /**
+ * Generate a persistent distinct ID for PostHog tracking
+ * @returns {string} The distinct ID
+ */
+function getDistinctId() {
+  // Check if we already have a stored ID
+  let distinctId = localStorage.getItem('ph_distinct_id');
+  
+  if (!distinctId) {
+    // Generate a new ID if none exists
+    distinctId = crypto.randomUUID ? crypto.randomUUID() : 
+      `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+    
+    // Store for future use
+    try {
+      localStorage.setItem('ph_distinct_id', distinctId);
+    } catch (e) {
+      console.error('Could not store distinct ID:', e);
+    }
+  }
+  
+  return distinctId;
+}
+
+/**
  * Save an email subscription to Supabase
  * @param {string} email - The email address to save
  * @param {string} source - The source of the subscription (e.g. 'hero', 'callout')
@@ -27,14 +51,35 @@ export const saveEmailSubscription = async (email, source, additionalData = {}) 
       ...additionalData
     };
 
-    // Track event in PostHog
-    posthog.capture('email_subscription_added', {
-      distinct_id: localStorage.getItem('session_id'),
-      email: email,
-      source: source,
-      timestamp: new Date().toISOString(),
-      ...additionalData
-    });
+    // Track event in PostHog - With proper distinct_id
+    try {
+      const distinctId = getDistinctId();
+      
+      // Identify user with their email if available
+      if (formattedEmail) {
+        posthog.identify(formattedEmail, {
+          email: formattedEmail,
+          $set: { 
+            source_first_seen: source,
+            email: formattedEmail
+          }
+        });
+      }
+      
+      // Capture the subscription event
+      posthog.capture('email_subscription', {
+        distinct_id: formattedEmail || distinctId, // Use email as ID if available
+        email: formattedEmail,
+        source: source,
+        form_location: additionalData.page || 'unknown',
+        button_text: additionalData.button_text || 'Get started for free'
+      });
+      
+      console.log('PostHog event tracked with distinct_id:', formattedEmail || distinctId);
+    } catch (posthogError) {
+      console.error('PostHog tracking error (non-critical):', posthogError);
+      // Continue with saving to database regardless of PostHog errors
+    }
 
     // Get Supabase API keys from environment variables
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
