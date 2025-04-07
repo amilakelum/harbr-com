@@ -36,10 +36,12 @@ const cursorStyle = {
 
 export default function IntroVideo() {
   const phrases = [
-    "optimize calls",
-    "approve bookings",
+    "find & approve bookings",
+    "automate calls",
+    "optimize vacancy",
     "manage insurance",
-    "share berthing slips",
+    "enrich data",
+    "grow your business",
   ];
   
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -58,7 +60,7 @@ export default function IntroVideo() {
       timer = setTimeout(() => {
         setIsPaused(false);
         setIsDeleting(true);
-      }, 2000);
+      }, 3000);
     } else {
       timer = setTimeout(() => {
         // Handle the typing and deleting logic
@@ -226,8 +228,8 @@ export default function IntroVideo() {
                 to </span>
                 <span className="text-[#F7F76E] font-medium inline-block min-w-16">{currentText}</span>
                 <span 
-                  className={`inline-block w-1.5 h-[1em] bg-[#F7F76E] ml-1 align-middle ${isPaused ? 'animate-pulse' : ''}`}
-                  style={!isPaused ? cursorStyle : {}}
+                  className={`inline-block w-1.5 h-[1em] bg-[#F7F76E] ml-1 align-middle`}
+                  style={!isPaused && !isDeleting ? cursorStyle : { opacity: isPaused ? 1 : 0 }}
                 ></span>
               </h1>
               
