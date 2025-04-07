@@ -1,5 +1,5 @@
 import Reveal from "./animations/Reveal";
-import teamImage from "../assets/AI-stack4.png";
+import teamImage from "../assets/AI-stack5.png";
 
 export default function Story() {
   return (

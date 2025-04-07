@@ -165,7 +165,7 @@ export default function Hero() {
         <div className="text-center pb-6">
           <Reveal delay={0.1}>
           <h2 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal">
-            Everything you need to <br/> grow your marina
+            Everything you need to <br/> grow your business
             </h2>
           </Reveal>
           <Reveal delay={0.1}>

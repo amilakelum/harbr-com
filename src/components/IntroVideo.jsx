@@ -36,8 +36,8 @@ const cursorStyle = {
 
 export default function IntroVideo() {
   const phrases = [
-    "find & approve bookings",
-    "automate calls",
+    "approve bookings",
+    "increase revenue",
     "optimize vacancy",
     "manage insurance",
     "enrich data",
