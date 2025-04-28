@@ -46,9 +46,8 @@ export default function Callout() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                   >
-                    "Harbr supports marina owners<br />
-                    who want to be innovative — to do <br />
-                    something new."
+                    "The future of <br />
+                    marina management software"
                   </motion.h2>
                 </Reveal>
               
@@ -59,21 +58,20 @@ export default function Callout() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     >
-                      <p className="font-mono text-sm tracking-[0.01em] font-medium text-zinc-600 uppercase">SABINE SEABROOK</p>
+                      <p className="font-mono text-sm tracking-[0.01em] font-medium text-zinc-600 uppercase">ANDREW FIELDING</p>
                       <div className="mt-4"></div>
                       <p className="font-mono text-sm tracking-[0.01em] leading-tight font-medium text-zinc-600 uppercase text-center">
-                        Marina Systems &<br />
-                        Innovation Manager
+                      CEO of &<br />
+                      Boating Industry Australia
+
                       </p>
-                      <img 
-                        src="/ms-logo.png" 
-                        alt="MS Marinas" 
-                        className="h-9 w-auto mt-6 opacity-70" 
-                        style={{ 
-                          filter: 'grayscale(100%) brightness(0.4) contrast(1.2)',
-                          opacity: 0.7
-                        }}
-                      />
+                      <div className="flex justify-center w-full">
+                        <img 
+                          src="/andrew_logo3.png" 
+                          alt="MS Marinas" 
+                          className="h-30 w-auto mt-6"
+                        />
+                      </div>
                     </motion.div>
                   </Reveal>
                 </div>
