@@ -61,7 +61,7 @@ export default function Callout() {
                       <p className="font-mono text-sm tracking-[0.01em] font-medium text-zinc-600 uppercase">ANDREW FIELDING</p>
                       <div className="mt-4"></div>
                       <p className="font-mono text-sm tracking-[0.01em] leading-tight font-medium text-zinc-600 uppercase text-center">
-                      CEO of &<br />
+                      CEO of <br />
                       Boating Industry Australia
 
                       </p>
