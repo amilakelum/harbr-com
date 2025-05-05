@@ -1,6 +1,6 @@
 import screenshot from "../assets/hero6.png";
 import Reveal from "./animations/Reveal";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import posthog from 'posthog-js';

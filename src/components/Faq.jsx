@@ -4,7 +4,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { ChevronUp } from "lucide-react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import Reveal from "./animations/Reveal";
 
 const faqs = [

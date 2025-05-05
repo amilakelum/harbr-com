@@ -1,6 +1,6 @@
 import Reveal from "./animations/Reveal";
 import Testimonial from "./Testimonial";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 export default function Callout() {
   const stats = [

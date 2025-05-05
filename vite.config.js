@@ -24,6 +24,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
+      'motion/react': 'framer-motion',
     },
   },
   server: {
