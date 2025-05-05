@@ -12,330 +12,338 @@ export default function Features() {
   }, []);
 
   return (
-    <div id="features" className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-8 text-center">Features</h1>
-      <p className="mb-4">
-            Manage your berths, bookings, customer records, invoices, and so much more - all on one, easy-to-use platform. Try every feature now!
-          </p>
-      <div className="bg-white rounded-lg shadow-md p-8">
-        <div className="text-lg text-center text-gray-600 mb-8">
-
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="flex flex-col">
-            <h2 className="text-2xl font-bold mb-3">AI Occupancy Prediction & Dynamic Pricing</h2>
-            <p className="mb-4">
-              Harbr's AI helps marina managers to eliminate guesswork and maximizes marina revenue. Harbr AI analyzes your historical booking data alongside local events and weather patterns to accurately set marina pricing strategy.
-            </p>
-            <div className="mb-4">
-              <p className="font-medium mb-2">AI occupancy prediction features:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Observe trends via historical data</li>
-                <li>Capture opportunities by listining to local events</li>
-                <li>Weather forecast correlation predicts seasonal fluctuations</li>
-                <li>Automated price adjustment recommendations</li>
-              </ul>
-            </div>
-            <div className="bg-white p-2 rounded-2xl shadow-sm mb-4">
-              <form className="flex flex-col lg:flex-row gap-4">
-                <input
-                  type="email"
-                  placeholder="Enter your business email"
-                  required
-                  className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-gray-50 text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
-                />
-                <div className="w-full lg:w-auto">
-                  <button
-                    type="submit"
-                    className="w-full inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
-                  >
-                    Get started for free
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-lg overflow-hidden shadow-md relative h-[400px] flex flex-col">
-            <div className="p-4 flex flex-col h-full">
-              {/* Main visualization area */}
-              <div className="relative flex-1 overflow-hidden">
-                {/* Background grid */}
-                <div className="absolute inset-0 grid grid-cols-6 grid-rows-5">
-                  {Array.from({ length: 30 }).map((_, i) => (
-                    <motion.div 
-                      key={`grid-cell-${i}-${Math.floor(i/6)}-${i%6}`}
-                      className="border-r border-b border-slate-700/30"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.05 * (i % 6), duration: 0.5 }}
-                    />
-                  ))}
-                </div>
-
-                {/* Animated price waves - background effect */}
-                <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#10B981" stopOpacity="0.1" />
-                      <stop offset="100%" stopColor="#0EA5E9" stopOpacity="0.05" />
-                    </linearGradient>
-                  </defs>
-                  <motion.path 
-                    d="M0,200 C150,100 250,300 400,200 C550,100 650,300 800,200 L800,400 L0,400 Z" 
-                    fill="url(#gradient1)"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.5, delay: 0.2 }}
+    <>
+      <div className="relative isolate px-6 pt-14 lg:px-8 mb-[10px] overflow-visible">
+        <div className="mx-auto max-w-2xl pb-16 sm:pb-16 lg:pb-16">
+          <div className="text-center pb-6">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal"
+            >
+              Everything you need to <br/> manage your marina
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+              className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8"
+            >
+              Manage your berths, bookings, customer records, invoices, and so much more - <br/>all on one, easy-to-use platform. Try every feature now!
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="mt-10"
+            >
+              <div className="bg-white p-2 rounded-2xl shadow-sm">
+                <form className="flex flex-col lg:flex-row gap-4">
+                  <input
+                    type="email"
+                    placeholder="Enter your business email"
+                    required
+                    className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-gray-50 text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
                   />
-                </svg>
-
-                {/* Data circles with ripple effect */}
-                {[
-                  { x: 15, y: 30, size: 54, color: 'emerald', value: '$82', label: 'Standard' },
-                  { x: 40, y: 60, size: 92, color: 'blue', value: '$95', label: 'Premium' },
-                  { x: 75, y: 35, size: 72, color: 'purple', value: '$120', label: 'Luxury' },
-                ].map((point, index) => (
-                  <motion.div 
-                    key={`price-point-${point.label}-${point.value}`}
-                    className="absolute flex flex-col items-center justify-center"
-                    style={{ 
-                      left: `${point.x}%`, 
-                      top: `${point.y}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ 
-                      delay: 0.5 + index * 0.3,
-                      duration: 0.6,
-                      type: 'spring'
-                    }}
-                  >
-                    {/* Outer ripple */}
-                    <motion.div 
-                      className={`absolute rounded-full bg-${point.color}-400/10`}
-                      style={{ width: point.size, height: point.size }}
-                      animate={{ 
-                        scale: [1, 1.2, 1],
-                        opacity: [0.7, 0.3, 0.7]
-                      }}
-                      transition={{
-                        repeat: Number.POSITIVE_INFINITY,
-                        duration: 3,
-                        ease: "easeInOut"
-                      }}
-                    />
-                    
-                    {/* Inner circle */}
-                    <div className={`relative flex items-center justify-center rounded-full bg-${point.color}-500 shadow-lg shadow-${point.color}-900/20 h-16 w-16 z-10`}>
-                      <div className="text-center">
-                        <motion.div 
-                          className="text-white font-bold text-xl"
-                          initial={{ opacity: 0, y: 5 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 1 + index * 0.3 }}
-                        >
-                          {point.value}
-                        </motion.div>
-                      </div>
-                    </div>
-                    <motion.div 
-                      className="mt-2 bg-slate-800/80 backdrop-blur-sm px-2 py-0.5 rounded text-xs text-white font-medium"
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.2 + index * 0.3 }}
+                  <div className="w-full lg:w-auto">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      type="submit"
+                      className="w-full inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px]"
                     >
-                      {point.label}
-                    </motion.div>
-                  </motion.div>
-                ))}
-
-                {/* AI recommendation highlight */}
-                <motion.div 
-                  className="absolute rounded-xl border border-dashed border-blue-400 bg-blue-400/5 p-3"
-                  style={{ top: '20%', right: '15%', width: '35%', height: '35%' }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 2.2, duration: 0.5 }}
-                >
-                  <div className="absolute -top-2.5 left-4 bg-slate-900 px-2 text-xs font-semibold text-blue-400">
-                    AI RECOMMENDS
+                      Get started for free
+                    </motion.button>
                   </div>
-                  <div className="h-full flex flex-col justify-center items-center">
-                    <motion.div 
-                      className="text-3xl font-bold text-blue-400"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 2.5 }}
-                    >
-                      +18%
-                    </motion.div>
-                    <motion.div 
-                      className="text-xs text-blue-300"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 2.7 }}
-                    >
-                      Revenue Increase
-                    </motion.div>
-                  </div>
-                </motion.div>
-
-                {/* "Dynamic" label with pulse */}
-                <motion.div 
-                  className="absolute left-5 top-4 text-emerald-400 font-bold text-xl tracking-wide"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  Dynamic Pricing
-                </motion.div>
-
-                {/* Animated graph line */}
-                <svg className="absolute left-0 bottom-1/4 w-full h-1/3 overflow-visible" preserveAspectRatio="none" aria-hidden="true">
-                  <motion.path 
-                    d="M0,80 C60,40 140,100 200,60 C260,20 280,80 400,30 C520,0 620,50 800,15"
-                    fill="none"
-                    stroke="url(#lineGradient)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{ duration: 2, delay: 0.8 }}
-                  />
-                  <defs>
-                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#10B981" />
-                      <stop offset="50%" stopColor="#0EA5E9" />
-                      <stop offset="100%" stopColor="#8B5CF6" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-
-                {/* Pulse indicators along line */}
-                {[
-                  { position: 20, delayMultiplier: 0 },
-                  { position: 45, delayMultiplier: 1 },
-                  { position: 68, delayMultiplier: 2 }
-                ].map((marker) => (
-                  <motion.div
-                    key={`pulse-marker-${marker.position}`}
-                    className="absolute bottom-1/4 w-3 h-3 rounded-full bg-gradient-to-r from-emerald-400 to-blue-400 shadow-lg shadow-blue-500/30"
-                    style={{ left: `${marker.position}%` }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: [0, 1.2, 1] }}
-                    transition={{ delay: 1.5 + marker.delayMultiplier * 0.3, duration: 0.8 }}
-                  >
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-blue-400"
-                      animate={{ 
-                        opacity: [1, 0.2, 1],
-                        scale: [1, 1.8, 1] 
-                      }}
-                      transition={{
-                        repeat: Number.POSITIVE_INFINITY,
-                        duration: 2,
-                        delay: marker.delayMultiplier * 0.7
-                      }}
-                    />
-                  </motion.div>
-                ))}
+                </form>
               </div>
-
-              {/* Bottom stats area */}
-              <motion.div 
-                className="mt-3 h-20 bg-slate-800/60 backdrop-blur-sm rounded-xl p-3 flex items-center justify-between"
-                initial={{ y: 60, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 2.8, duration: 0.5 }}
-              >
-                {/* Three key metrics */}
-                {[
-                  { value: '92%', label: 'Occupancy', color: 'text-emerald-400' },
-                  { value: '+24%', label: 'Revenue', color: 'text-blue-400' },
-                  { value: '45%', label: 'Seasonal Adj.', color: 'text-amber-400' }
-                ].map((stat) => (
-                  <motion.div 
-                    key={`stat-metric-${stat.label}`}
-                    className="flex-1 text-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 3 + ['Occupancy', 'Revenue', 'Seasonal Adj.'].indexOf(stat.label) * 0.15 }}
-                  >
-                    <div className={`text-2xl font-bold ${stat.color}`}>
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-gray-400">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-gray-200 rounded-lg flex items-center justify-center order-2 md:order-1">
-            <p className="text-gray-600 italic">Interactive marina map with berth allocation</p>
-          </div>
-          <div className="flex flex-col order-1 md:order-2">
-            <h2 className="text-2xl font-bold mb-3">Smart Berth Allocation</h2>
-            <p className="mb-4">
-              Our intelligent berth matching algorithm considers vessel specifications, owner preferences, and marina layout to recommend the perfect berth for each booking. Eliminate manual guesswork and optimize your marina's space utilization.
-            </p>
-            <a href="/features/berth-allocation" className="text-blue-600 hover:text-blue-800 font-medium">Berth allocation features</a>
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="flex flex-col">
-            <h2 className="text-2xl font-bold mb-3">Automated Document Processing</h2>
-            <p className="mb-4">
-              Stop manually entering data from insurance documents and registration forms. Our AI instantly extracts, verifies, and flags discrepancies in vessel documentation, saving hours of administrative work and reducing human error.
-            </p>
-            <a href="/features/document-processing" className="text-blue-600 hover:text-blue-800 font-medium">Document processing features</a>
-          </div>
-          <div className="bg-gray-200 rounded-lg flex items-center justify-center">
-            <p className="text-gray-600 italic">Document scanning and data extraction interface</p>
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-gray-200 rounded-lg flex items-center justify-center order-2 md:order-1">
-            <p className="text-gray-600 italic">Marina performance analytics dashboard</p>
-          </div>
-          <div className="flex flex-col order-1 md:order-2">
-            <h2 className="text-2xl font-bold mb-3">Interactive Marina Map</h2>
-            <p className="mb-4">
-              Real-time visualization of your marina with color-coded status indicators for arrivals, departures, and maintenance needs. Identify available berths instantly and manage your marina at a glance with our interactive digital twin.
-            </p>
-            <a href="/features/marina-map" className="text-blue-600 hover:text-blue-800 font-medium">Marina map features</a>
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="flex flex-col">
-            <h2 className="text-2xl font-bold mb-3">Streamlined Customer Communications</h2>
-            <p className="mb-4">
-              Automated, personalized email sequences for booking confirmations, insurance renewal reminders, and weather alerts. Maintain professional communication with minimal effort while providing exceptional customer service.
-            </p>
-            <a href="/features/communications" className="text-blue-600 hover:text-blue-800 font-medium">Communication features</a>
-          </div>
-          <div className="bg-gray-200 rounded-lg flex items-center justify-center">
-            <p className="text-gray-600 italic">Customer communication hub with template builder</p>
-          </div>
-        </div>
-        
-        <div className="text-center mt-12 pt-8 border-t border-gray-200">
-          <h3 className="text-xl font-semibold mb-2">Free for 30 days</h3>
-          <p className="mb-4">Create an account to get full access to Harbr. You'll only be charged if you choose not to cancel your subscription at the end of your 30-day trial.</p>
-          <button type="button" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg mt-2">
-            Try Harbr for free
-          </button>
         </div>
       </div>
-    </div>
+
+      <div className="bg-gradient-to-br from-zinc-50 to-zinc-100">
+        <div className="container mx-auto px-4 py-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="bg-white rounded-lg shadow-md p-8"
+          >
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <div className="flex flex-col">
+                <h2 className="text-2xl font-bold mb-3">AI Dynamic Pricing</h2>
+                <p className="mb-4">
+                Harbr's AI helps marina managers eliminate guesswork and maximize marina revenue by analyzing historical booking data, local events, and weather patterns to automatically set optimal pricing strategies.                </p>
+                <div className="mb-4">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Observe trends via historical data</li>
+                    <li>Listen to local events</li>
+                    <li>Predicts seasonal fluctuations</li>
+                    <li>Automated price adjustments</li>
+                  </ul>
+                </div>
+
+              </div>
+              <div className="bg-gradient-to-br from-white to-slate-50 rounded-lg overflow-hidden shadow-md relative h-[300px] flex flex-col border border-slate-100">
+                <div className="p-3 flex flex-col h-full">
+                  {/* Main visualization area */}
+                  <div className="relative flex-1 overflow-hidden">
+                    {/* Background grid */}
+                    <div className="absolute inset-0 grid grid-cols-24 grid-rows-12">
+                      {Array.from({ length: 288 }).map((_, i) => (
+                        <motion.div 
+                          key={`grid-cell-${i}-${Math.floor(i/24)}-${i%24}`}
+                          className="border-r border-b border-slate-100/60"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.005 * (i % 24), duration: 0.2 }}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Revenue growth area - filled gradient with stronger growth curve */}
+                    <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="growthGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                          <stop offset="0%" stopColor="#5371FF" stopOpacity="0.05" />
+                          <stop offset="100%" stopColor="#5371FF" stopOpacity="0.25" />
+                        </linearGradient>
+                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#5371FF" />
+                          <stop offset="100%" stopColor="#5C88FF" />
+                        </linearGradient>
+                      </defs>
+                      
+                      {/* Revenue growth area - more dramatic curve */}
+                      <motion.path 
+                        d="M0,250 C50,240 100,230 150,210 C200,190 250,170 300,140 C350,110 400,80 450,60 C500,40 550,30 600,20 C650,15 700,10 750,8 C800,6 850,5 900,4 L900,300 L0,300 Z"
+                        fill="url(#growthGradient)"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.5, delay: 0.3 }}
+                      />
+                    </svg>
+
+                    {/* Revenue growth line - more pronounced growth */}
+                    <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+                      {/* Primary revenue trend line with stronger curve */}
+                      <motion.path 
+                        d="M0,250 C50,240 100,230 150,210 C200,190 250,170 300,140 C350,110 400,80 450,60 C500,40 550,30 600,20 C650,15 700,10 750,8 C800,6 850,5 900,4"
+                        fill="none"
+                        stroke="url(#lineGradient)"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 2.5, delay: 0.5 }}
+                      />
+                    </svg>
+
+                    {/* Quarterly data points - repositioned for stronger growth */}
+                    {[
+                      { id: 'q1', x: 12.5, y: 84, size: 8, delay: 1.0 },
+                      { id: 'q2', x: 37.5, y: 60, size: 8, delay: 1.4 },
+                      { id: 'q3', x: 62.5, y: 20, size: 8, delay: 1.8 },
+                      { id: 'q4', x: 87.5, y: 5, size: 8, delay: 2.2 }
+                    ].map((point) => (
+                      <motion.div
+                        key={point.id}
+                        className="absolute flex items-center justify-center"
+                        style={{ 
+                          left: `${point.x}%`, 
+                          top: `${point.y}%` 
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: point.delay, duration: 0.6, type: 'spring' }}
+                      >
+                        {/* Outer pulse */}
+                        <motion.div
+                          className="absolute rounded-full bg-[#5371FF]/20"
+                          style={{ width: point.size * 3, height: point.size * 3 }}
+                          animate={{ 
+                            scale: [1, 1.5, 1],
+                            opacity: [0.6, 0.2, 0.6]
+                          }}
+                          transition={{
+                            repeat: Number.POSITIVE_INFINITY,
+                            duration: 2,
+                            ease: "easeInOut"
+                          }}
+                        />
+                        
+                        {/* Inner dot */}
+                        <div className="rounded-full bg-[#5371FF] w-2 h-2 z-10" />
+                      </motion.div>
+                    ))}
+
+                    {/* Growth indicator arrows - positioned to emphasize growth */}
+                    {[
+                      { id: 'arrow1', x: 25, y: 72, rotation: -50, delay: 2.4, scale: 0.8 },
+                      { id: 'arrow2', x: 50, y: 35, rotation: -60, delay: 2.6, scale: 1 },
+                      { id: 'arrow3', x: 75, y: 12, rotation: -70, delay: 2.8, scale: 1.2 }
+                    ].map((arrow) => (
+                      <motion.div
+                        key={arrow.id}
+                        className="absolute"
+                        style={{ 
+                          left: `${arrow.x}%`, 
+                          top: `${arrow.y}%`,
+                          transform: `rotate(${arrow.rotation}deg)` 
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: arrow.scale }}
+                        transition={{ delay: arrow.delay, duration: 0.5 }}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#5371FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </motion.div>
+                    ))}
+
+                    {/* Growth percentage indicators */}
+                    {[
+                      { id: 'growth-1', x: 23, y: 65, scale: 0.8, delay: 3.0 },
+                      { id: 'growth-2', x: 48, y: 30, scale: 1, delay: 3.1 },
+                      { id: 'growth-3', x: 72, y: 8, scale: 1.2, delay: 3.2 }
+                    ].map((indicator) => (
+                      <motion.div
+                        key={indicator.id}
+                        className="absolute bg-[#5371FF]/10 rounded-full flex items-center justify-center w-10 h-10"
+                        style={{ 
+                          left: `${indicator.x}%`, 
+                          top: `${indicator.y}%`,
+                          transform: `translate(-50%, -50%) scale(${indicator.scale})` 
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: indicator.scale }}
+                        transition={{ delay: indicator.delay, duration: 0.6 }}
+                      >
+                        <motion.div 
+                          className="w-6 h-6 rounded-full bg-[#5371FF]/20 flex items-center justify-center"
+                          animate={{ 
+                            boxShadow: ['0 0 0 0 rgba(83, 113, 255, 0.2)', '0 0 0 4px rgba(83, 113, 255, 0)', '0 0 0 0 rgba(83, 113, 255, 0.2)']
+                          }}
+                          transition={{
+                            repeat: Number.POSITIVE_INFINITY,
+                            duration: 2,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+
+                    {/* Revenue milestone indicators */}
+                    <div className="absolute inset-y-0 left-0 w-[1px] h-full flex flex-col justify-between py-6">
+                      {[
+                        { id: 'milestone-1', position: 1 },
+                        { id: 'milestone-2', position: 2 },
+                        { id: 'milestone-3', position: 3 },
+                        { id: 'milestone-4', position: 4 }
+                      ].map((milestone, index) => (
+                        <motion.div
+                          key={milestone.id}
+                          className="w-2 h-[1px] bg-slate-300"
+                          initial={{ opacity: 0, width: 0 }}
+                          animate={{ opacity: 1, width: 8 }}
+                          transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Time period indicators */}
+                    <div className="absolute bottom-0 inset-x-0 h-[1px] w-full flex justify-between px-8">
+                      {[
+                        { id: 'period-1', position: 1 },
+                        { id: 'period-2', position: 2 },
+                        { id: 'period-3', position: 3 },
+                        { id: 'period-4', position: 4 }
+                      ].map((period, index) => (
+                        <motion.div
+                          key={period.id}
+                          className="h-2 w-[1px] bg-slate-300"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 8 }}
+                          transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Accent elements for visual interest */}
+                    <motion.div
+                      className="absolute bottom-[10%] right-[15%] w-16 h-16 rounded-full border border-[#5371FF]/10"
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 3.3, duration: 0.8 }}
+                    />
+                    
+                    {/* Small decorative dots */}
+                    {[
+                      { id: 'dot1', x: 15, y: 90, delay: 3.4, size: 3 },
+                      { id: 'dot2', x: 35, y: 80, delay: 3.5, size: 2 },
+                      { id: 'dot3', x: 55, y: 50, delay: 3.6, size: 4 },
+                      { id: 'dot4', x: 75, y: 30, delay: 3.7, size: 2 },
+                      { id: 'dot5', x: 90, y: 15, delay: 3.8, size: 3 }
+                    ].map((dot) => (
+                      <motion.div
+                        key={dot.id}
+                        className="absolute rounded-full bg-[#5371FF]/40"
+                        style={{ 
+                          left: `${dot.x}%`, 
+                          top: `${dot.y}%`,
+                          width: dot.size,
+                          height: dot.size 
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: dot.delay, duration: 0.3 }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
+                <h3 className="text-xl font-bold mb-2">Smart Berth Allocation</h3>
+                <p className="text-sm mb-3">
+                  Our intelligent algorithm matches vessels to berths based on specifications and preferences, optimizing space utilization.
+                </p>
+                {/* <a href="/features/berth-allocation" className="text-blue-600 hover:text-blue-800 text-sm font-medium">Berth allocation features</a> */}
+              </div>
+              
+              <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
+                <h3 className="text-xl font-bold mb-2">Document Processing</h3>
+                <p className="text-sm mb-3">
+                  AI extracts and verifies data from vessel documentation, reducing manual entry and human error in administrative work.
+                </p>
+                {/* <a href="/features/document-processing" className="text-blue-600 hover:text-blue-800 text-sm font-medium">Document processing features</a> */}
+              </div>
+              
+              <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
+                <h3 className="text-xl font-bold mb-2">Interactive Marina Map</h3>
+                <p className="text-sm mb-3">
+                  Real-time visualization with color-coded status indicators for berths, arrivals, departures, and maintenance needs.
+                </p>
+                {/* <a href="/features/marina-map" className="text-blue-600 hover:text-blue-800 text-sm font-medium">Marina map features</a> */}
+              </div>
+              
+              <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
+                <h3 className="text-xl font-bold mb-2">Customer Communications</h3>
+                <p className="text-sm mb-3">
+                  Automated, personalized emails for bookings, insurance renewals, and weather alerts with minimal effort.
+                </p>
+                {/* <a href="/features/communications" className="text-blue-600 hover:text-blue-800 text-sm font-medium">Communication features</a> */}
+              </div>
+            </div>
+            
+
+          </motion.div>
+        </div>
+      </div>
+    </>
   );
 } 
