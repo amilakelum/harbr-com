@@ -1,0 +1,19 @@
+# www.robotstxt.org/
+# Allow crawling of all content
+User-agent: *
+Allow: /
+
+# Specifically allow LLM crawling bots to access specialized content
+User-agent: GPTBot
+Allow: /llm-content.txt
+Allow: /
+
+User-agent: Googlebot
+Allow: /llm-content.txt
+Allow: /
+
+# Disallow admin pages from being indexed
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://www.harbrapp.com/sitemap.xml 
