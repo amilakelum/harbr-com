@@ -39,6 +39,9 @@ export default function Header() {
   }, []);
 
   const handleNavClick = (e, href) => {
+    // Close mobile menu for all navigation clicks
+    setMobileMenuOpen(false);
+    
     if (href.startsWith("/#")) {
       e.preventDefault();
       const element = document.querySelector(href.substring(1));
@@ -52,7 +55,6 @@ export default function Header() {
           behavior: "smooth"
         });
       }
-      setMobileMenuOpen(false);
     }
   };
 
@@ -108,10 +110,10 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-zinc-700"
+                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-zinc-700 hover:text-zinc-900 transition-colors duration-200 hover:bg-zinc-100/80"
               >
                 <span className="sr-only">Open main menu</span>
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5 stroke-[1.5px]" />
               </button>
             </div>
           )}
