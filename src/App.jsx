@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import Features from "./pages/Features";
+import Pricing from "./pages/Pricing";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Callout from "./components/Callout";
@@ -27,6 +29,8 @@ function RouteChangeTracker() {
     const getPageNameFromPath = (path) => {
       if (path === '/') return 'Home';
       if (path === '/admin') return 'Admin Dashboard';
+      if (path === '/features') return 'Features';
+      if (path === '/pricing') return 'Pricing';
       if (path === '/start') return 'Signup Form';
       if (path === '/terms') return 'Terms and Conditions';
       if (path === '/privacy') return 'Privacy Policy';
@@ -63,6 +67,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="features" element={<Features />} />
+          <Route path="pricing" element={<Pricing />} />
           <Route path="terms" element={<TermsAndConditions />} />
           <Route path="privacy" element={<PrivacyPolicy />} />
           <Route path="start" element={<StartForm />} />

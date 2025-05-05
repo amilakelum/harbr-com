@@ -12,7 +12,9 @@ import { cn } from "../lib/utils";
 import { trackEvent } from "../lib/analytics";
 
 const navigation = [
-
+  { name: "Home", href: "/" },
+  { name: "Features", href: "/features" },
+  { name: "Pricing", href: "/pricing" },
 ];
 
 export default function Header() {
