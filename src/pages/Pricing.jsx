@@ -23,8 +23,7 @@ export default function Pricing() {
           <Reveal delay={0.2}>
             <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-16">
               <p className="text-pretty text-zinc-600 text-base sm:text-lg/8">
-                Subscriptions are then priced according to how many berths there are 
-                in your marina. SMS messages sent from Harbr cost an additional 10¢ each.
+                Subscriptions are priced according to how many berths there are in your marina. SMS messages sent from Harbr cost an additional 10¢ each.
                 Emails are free.
               </p>
             </div>
@@ -41,7 +40,7 @@ export default function Pricing() {
                       <p className="text-center text-zinc-600 mb-4 sm:mb-6 text-sm sm:text-base">berth</p>
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
-                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$95 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
+                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$195 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
                     </div>
                   </div>
                 </div>
@@ -56,7 +55,7 @@ export default function Pricing() {
                       <p className="text-center text-zinc-600 mb-4 sm:mb-6 text-sm sm:text-base">berths</p>
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
-                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$195 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
+                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$295 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
                     </div>
                   </div>
                 </div>
@@ -71,7 +70,7 @@ export default function Pricing() {
                       <p className="text-center text-zinc-600 mb-4 sm:mb-6 text-sm sm:text-base">berths</p>
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
-                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$295 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
+                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$495 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
                     </div>
                   </div>
                 </div>
@@ -86,7 +85,7 @@ export default function Pricing() {
                       <p className="text-center text-zinc-600 mb-4 sm:mb-6 text-sm sm:text-base">berths</p>
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
-                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$395 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
+                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$695 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
                     </div>
                   </div>
                 </div>
@@ -101,7 +100,7 @@ export default function Pricing() {
                       <p className="text-center text-zinc-600 mb-4 sm:mb-6 text-sm sm:text-base">berths</p>
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
-                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$595 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
+                      <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">$1195 <span className="text-sm sm:text-base text-zinc-600">/mo</span></p>
                     </div>
                   </div>
                 </div>
