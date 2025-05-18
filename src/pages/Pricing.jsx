@@ -28,6 +28,8 @@ export default function Pricing() {
               </p>
             </div>
           </Reveal>
+
+
           
           <div className="w-full mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
@@ -132,22 +134,26 @@ export default function Pricing() {
               </Reveal>
             </div>
             
-            <Reveal delay={0.9}>
-              <div className="mt-10 sm:mt-16 text-center">
-                <p className="text-base sm:text-lg mb-4 sm:mb-6 text-zinc-600">Need help deciding? Questions about pricing?</p>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="button"
-                  className="bg-black text-white rounded-xl px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold hover:bg-zinc-800 shadow-md transition-all duration-200 ease-in-out h-[45px] sm:h-[52px]"
-                  onClick={() => {
-                    window.open('mailto:chris@harbrapp.com?subject=Pricing%20Question', '_blank');
-                  }}
-                >
-                  Contact Us
-                </motion.button>
-              </div>
-            </Reveal>
+
+                      {/* Promotional Banner */}
+          <Reveal delay={0.25}>
+            <div className="bg-[#5371FF] text-white rounded-2xl p-6 sm:p-8 mb-10 sm:mb-16 text-center mt-10 sm:mt-16">
+              <h2 className="text-2xl sm:text-3xl font-semibold mb-3">Limited Time Offer!</h2>
+              <p className="text-lg sm:text-xl mb-4">Get 50% off for the first 6 months</p>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="button"
+                className="bg-white text-[#5371FF] rounded-xl px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold hover:bg-[#EEF1FF] shadow-md transition-all duration-200 ease-in-out"
+                onClick={() => {
+                  window.open('mailto:chris@harbrapp.com?subject=50%25%20Discount%20Offer', '_blank');
+                }}
+              >
+                Contact Us Now
+              </motion.button>
+            </div>
+          </Reveal>
+
           </div>
         </div>
       </div>
