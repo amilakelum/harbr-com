@@ -153,7 +153,10 @@ export default function Pricing() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-zinc-800 mb-1">What fees will I be charged?</h3>
-                <p className="text-base text-zinc-700">Your monthly subscription fee.</p>
+                <ul className="list-disc pl-5 text-base text-zinc-700 space-y-1">
+                  <li>Your monthly subscription fee.</li>
+                  <li>SMS credits for reservation, insurance expiry, and overdue invoice reminders (optional, 10¢ per message).</li>
+                </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-zinc-800 mb-1">Is there a minimum contract term?</h3>
