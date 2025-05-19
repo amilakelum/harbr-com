@@ -149,7 +149,7 @@ export default function Pricing() {
             <div className="flex-1 space-y-14">
               <div>
                 <h3 className="text-xl font-semibold text-zinc-800 mb-1">Are there any upfront costs?</h3>
-                <p className="text-base text-zinc-700">Absolutely not! You'll only be charged if you decide to subscribe.</p>
+                <p className="text-base text-zinc-700">Absolutely not! You'll only be charged when you choose to start your subscription.</p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-zinc-800 mb-1">What fees will I be charged?</h3>
