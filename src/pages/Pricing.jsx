@@ -133,7 +133,7 @@ export default function Pricing() {
           {/* Details Section */}
           <div className="max-w-7xl mx-auto px-4 py-14 mb-12 flex flex-col md:flex-row gap-4 md:gap-8 rounded-xl">
             {/* Left: Features List */}
-            <div className="flex-1 pl-8 ml-8">
+            <div className="flex-1 md:pl-8 md:ml-8 mb-5 pb-5">
               <h2 className="text-xl font-bold text-zinc-800 mb-3">All subscriptions include:</h2>
               <ul className="space-y-1 text-base text-zinc-700">
                 <li className="flex items-start"><span className="text-green-500 mr-2 mt-1">✓</span>Every Harbr feature</li>
