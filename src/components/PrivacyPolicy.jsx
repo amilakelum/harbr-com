@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
             className="mb-4 sm:mb-4 sm:flex sm:justify-center text-center"
           >
             <div className="inline-flex items-center">
-              <div className="rounded-xl w-[14px] h-2 mr-2 bg-[#5371FF]"></div>
+              <div className="rounded-xl w-[14px] h-2 mr-2 bg-[#5371FF]" />
               <p className="uppercase text-sm leading-[14px] text-[#5371FF]">
                 Legal
               </p>
@@ -23,7 +23,7 @@ export default function PrivacyPolicy() {
           </Reveal>
         </div>
 
-        <Reveal slideY={0} delay={0.4} className="mt-16">
+        <div className="mt-16">
           <div className="text-center text-zinc-600 mb-12">
             Last updated: 1 APRIL 2024
           </div>
@@ -38,7 +38,6 @@ export default function PrivacyPolicy() {
             <p>
               Please read this Privacy Policy carefully before using Our Service.
             </p>
-            <p></p>
           </div>
 
           <section className="mb-12">
@@ -679,7 +678,7 @@ export default function PrivacyPolicy() {
               <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
             </div>
           </section>
-        </Reveal>
+        </div>
       </div>
     </div>
   );
