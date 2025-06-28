@@ -19,6 +19,7 @@ import Story from "./components/Story";
 import ThreeColumn from "./components/ThreeColumn";
 import StartForm from "./components/StartForm";
 import { trackPageView } from "./lib/analytics";
+import { AthenaTracker } from "./components/AthenaTracker";
 
 // Route change tracker component
 function RouteChangeTracker() {
@@ -64,6 +65,7 @@ function App() {
   return (
     <Router>
       <RouteChangeTracker />
+      <AthenaTracker />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
