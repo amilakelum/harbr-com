@@ -15,6 +15,7 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Features", href: "/features" },
   { name: "Pricing", href: "/pricing" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export default function Header() {
@@ -22,7 +23,7 @@ export default function Header() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const isHomePage = location.pathname === '/';
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,18 +42,19 @@ export default function Header() {
   const handleNavClick = (e, href) => {
     // Close mobile menu for all navigation clicks
     setMobileMenuOpen(false);
-    
+
     if (href.startsWith("/#")) {
       e.preventDefault();
       const element = document.querySelector(href.substring(1));
       if (element) {
         const headerOffset = 80;
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
     }
@@ -61,26 +63,26 @@ export default function Header() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
     setMobileMenuOpen(false);
   };
 
   const handleLogoClick = (e) => {
     e.preventDefault();
-    
+
     // Track the logo click event
-    trackEvent('navigation_logo_click', {
+    trackEvent("navigation_logo_click", {
       location: location.pathname,
-      destination: isHomePage ? 'scroll_top' : 'home'
+      destination: isHomePage ? "scroll_top" : "home",
     });
-    
+
     if (isHomePage) {
       // If already on home page, just scroll to top
       scrollToTop();
     } else {
       // If on another page, navigate to home
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -90,7 +92,7 @@ export default function Header() {
         "sticky top-0 z-50 backdrop-blur-md  bg-[color(display-p3_0.9843_0.9843_0.9882)]/80 transition-shadow duration-300",
         {
           "shadow-[0_24px_24px_-12px_#16223b08] bg-white/80": hasScrolled,
-        },
+        }
       )}
     >
       <header className="">
@@ -99,7 +101,11 @@ export default function Header() {
           className="container mx-auto flex items-center justify-between p-4 sm:p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <a href="/" className="-m-1.5 p-1.5 flex items-center gap-x-2" onClick={handleLogoClick}>
+            <a
+              href="/"
+              className="-m-1.5 p-1.5 flex items-center gap-x-2"
+              onClick={handleLogoClick}
+            >
               <span className="sr-only">Harbr</span>
               <img alt="Harbr Logo" src={logo} className="h-7 sm:h-6 w-auto" />
               <span className="font-semibold text-lg">Harbr</span>
@@ -133,7 +139,12 @@ export default function Header() {
           )}
         </nav>
         {navigation.length > 0 && (
-          <Transition appear show={mobileMenuOpen} as="div" className="lg:hidden">
+          <Transition
+            appear
+            show={mobileMenuOpen}
+            as="div"
+            className="lg:hidden"
+          >
             <Dialog
               as="div"
               className="relative z-50"
@@ -169,7 +180,11 @@ export default function Header() {
                           onClick={handleLogoClick}
                         >
                           <span className="sr-only">Harbr</span>
-                          <img alt="Harbr Logo" src={logo} className="h-7 sm:h-6 w-auto" />
+                          <img
+                            alt="Harbr Logo"
+                            src={logo}
+                            className="h-7 sm:h-6 w-auto"
+                          />
                           <span className="font-semibold text-lg">Harbr</span>
                         </a>
                         <button

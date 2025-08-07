@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+/* Line clamp utilities */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
 @theme {
   --font-sans: "Inter", sans-serif;
 
@@ -44,15 +61,23 @@
 }
 
 .fancy-shadow {
-  box-shadow:
-    0 0 0 1px #0e3f7e0a, 0 1px 1px -0.5px #2a33450a,
+  box-shadow: 0 0 0 1px #0e3f7e0a, 0 1px 1px -0.5px #2a33450a,
     0 3px 3px -1.5px #2a33460a, 0 6px 6px -3px #2a33460a,
     0 12px 12px -6px #0e3f7e0a, 0 24px 24px -12px #0e3f7e0a;
-  box-shadow:
-    0 0 1px color(display-p3 0.1137 0.2431 0.4784 / 0.04),
+  box-shadow: 0 0 1px color(display-p3 0.1137 0.2431 0.4784 / 0.04),
     0 1px 1px -0.5px color(display-p3 0.1723 0.1983 0.2651 / 0.04),
     0 3px 3px -1.5px color(display-p3 0.1725 0.2 0.2667 / 0.04),
     0 6px 6px -3px color(display-p3 0.1725 0.2 0.2667 / 0.04),
     0 12px 12px -6px color(display-p3 0.1137 0.2431 0.4784 / 0.04),
     0 24px 24px -12px color(display-p3 0.1137 0.2431 0.4784 / 0.04);
+}
+
+/* === Cliniko-style Charity Section Helpers === */
+
+/* .bg-cliniko-angle {
+  background: linear-gradient(135deg, #ff6f7d 60%, transparent 60%);
+} */
+
+.clip-angle {
+  clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
