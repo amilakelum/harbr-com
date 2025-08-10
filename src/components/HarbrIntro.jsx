@@ -73,7 +73,7 @@ export default function HarbrIntro() {
           <Reveal delay={0.25}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="src/assets/AI-stack5.png"
+                src="/AI-stack5.png"
                 alt="Marina Management Software"
                 className="w-full h-full object-cover"
               />
