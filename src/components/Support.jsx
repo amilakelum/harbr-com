@@ -1,0 +1,87 @@
+import Reveal from "./animations/Reveal";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+export default function Support() {
+  return (
+    <div className="relative isolate px-6 py-16 lg:px-8 bg-gradient-to-br from-zinc-100 to-zinc-200">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:items-center">
+          {/* Left side - Image */}
+          <Reveal delay={0.25}>
+            <div className="relative overflow-hidden rounded-2xl">
+              <img
+                src="/Support.png"
+                alt="Customer Support"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </Reveal>
+
+          {/* Right side - Content */}
+          <Reveal delay={0.4}>
+            <div className="text-left lg:pl-8">
+              <h2 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal mb-8">
+                Unlimited Free Support
+              </h2>
+              <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
+                <strong>
+                  {" "}
+                  All Harbr customers benefit from free online chat and email
+                  support, provided by a knowledgeable round the clock support
+                  team
+                </strong>
+                . We are also developing an active online marina management
+                community where you can engage with other marina managers &
+                owners.
+              </p>
+
+              <Link to="/support">
+                <motion.a
+                  href="/support"
+                  whileHover={{ x: 4 }}
+                  className="inline-flex items-center justify-center gap-2 font-medium border-2 rounded-md px-6 py-3 bg-transparent transition-all duration-150 ease-in-out"
+                  style={{
+                    cursor: "pointer",
+                    paddingTop: "0.96rem",
+                    paddingBottom: "1.04rem",
+                    paddingLeft: "2rem",
+                    paddingRight: "2rem",
+                    fontSize: "1.25rem",
+                    lineHeight: "2rem",
+                    color: "rgb(87, 116, 245)",
+                    borderColor: "rgb(87, 116, 245)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = "rgb(87, 116, 245)";
+                    e.target.style.color = "white";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = "transparent";
+                    e.target.style.color = "rgb(87, 116, 245)";
+                  }}
+                >
+                  Learn about Harbr Support
+                  <svg
+                    className="w-4 h-4 transition-colors duration-150"
+                    viewBox="0 0 16.1 31.59"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <title>Arrow</title>
+                    <path
+                      d="M.5 31.09l15.1-15.3L.5.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.a>
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </div>
+  );
+}
