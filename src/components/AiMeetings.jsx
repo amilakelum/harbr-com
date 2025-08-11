@@ -2,49 +2,53 @@ import Reveal from "./animations/Reveal";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import posthog from 'posthog-js';
-import meetingImage from "../assets/reservation1.png";
+import posthog from "posthog-js";
+import meetingImage from "../../public/reservation1.png";
 import { saveEmailSubscription } from "../lib/supabaseUtils";
 import FormFeedback from "./ui/FormFeedback";
 
 // Function to get or create a distinct ID for PostHog
 function getDistinctId() {
-  let distinctId = localStorage.getItem('ph_distinct_id');
-  
+  let distinctId = localStorage.getItem("ph_distinct_id");
+
   if (!distinctId) {
-    distinctId = crypto.randomUUID ? crypto.randomUUID() : 
-      `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-      
+    distinctId = crypto.randomUUID
+      ? crypto.randomUUID()
+      : `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+
     try {
-      localStorage.setItem('ph_distinct_id', distinctId);
+      localStorage.setItem("ph_distinct_id", distinctId);
     } catch (e) {
-      console.error('Could not store distinct ID:', e);
+      console.error("Could not store distinct ID:", e);
     }
   }
-  
+
   return distinctId;
 }
 
 export default function AiMeetings() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState({ type: null, text: null });
+  const [submitMessage, setSubmitMessage] = useState({
+    type: null,
+    text: null,
+  });
 
   const handleCTAClick = (buttonType) => {
     const distinctId = email || getDistinctId();
-    
+
     try {
-      posthog.capture('ai_meetings_cta_clicked', {
+      posthog.capture("ai_meetings_cta_clicked", {
         distinct_id: distinctId,
-        button_location: 'ai_meetings_section',
+        button_location: "ai_meetings_section",
         button_text: buttonType,
         email: email,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
-      
-      console.log('AI Meetings CTA tracked with distinct_id:', distinctId);
+
+      console.log("AI Meetings CTA tracked with distinct_id:", distinctId);
     } catch (error) {
-      console.error('Error tracking AI Meetings CTA:', error);
+      console.error("Error tracking AI Meetings CTA:", error);
     }
   };
 
@@ -52,65 +56,67 @@ export default function AiMeetings() {
     e.preventDefault();
     setSubmitting(true);
     setSubmitMessage({ type: null, text: null });
-    
+
     // Track click event in PostHog
-    handleCTAClick('Get started for free');
-    
+    handleCTAClick("Get started for free");
+
     try {
       // Save email to Supabase
-      const result = await saveEmailSubscription(email, 'ai_meetings_section', {
+      const result = await saveEmailSubscription(email, "ai_meetings_section", {
         page: window.location.pathname,
-        button_text: 'Get started for free'
+        button_text: "Get started for free",
       });
-      
+
       if (result.success) {
         // Handle already subscribed case specially
         if (result.isExistingEmail) {
-          setSubmitMessage({ 
-            type: 'info', 
-            text: result.message || "You're already subscribed! We've updated your information."
+          setSubmitMessage({
+            type: "info",
+            text:
+              result.message ||
+              "You're already subscribed! We've updated your information.",
           });
         } else {
-          setSubmitMessage({ 
-            type: 'success', 
-            text: result.message || 'Thank you! We\'ll be in touch soon.' 
+          setSubmitMessage({
+            type: "success",
+            text: result.message || "Thank you! We'll be in touch soon.",
           });
           // Only clear email field on successful new subscription
-          setEmail('');
+          setEmail("");
         }
       } else {
         // Display specific error based on error type
         switch (result.errorType) {
-          case 'duplicate_email':
-            setSubmitMessage({ 
-              type: 'info', 
-              text: 'This email is already subscribed. Thanks for your enthusiasm!' 
+          case "duplicate_email":
+            setSubmitMessage({
+              type: "info",
+              text: "This email is already subscribed. Thanks for your enthusiasm!",
             });
             break;
-          case 'validation':
-            setSubmitMessage({ 
-              type: 'error', 
-              text: 'Please enter a valid email address.' 
+          case "validation":
+            setSubmitMessage({
+              type: "error",
+              text: "Please enter a valid email address.",
             });
             break;
-          case 'auth':
-            setSubmitMessage({ 
-              type: 'error', 
-              text: 'Authentication error. Please try again later.' 
+          case "auth":
+            setSubmitMessage({
+              type: "error",
+              text: "Authentication error. Please try again later.",
             });
             break;
           default:
-            setSubmitMessage({ 
-              type: 'error', 
-              text: result.error || 'Something went wrong. Please try again.' 
+            setSubmitMessage({
+              type: "error",
+              text: result.error || "Something went wrong. Please try again.",
             });
         }
       }
     } catch (error) {
-      console.error('Error saving subscription:', error);
-      setSubmitMessage({ 
-        type: 'error', 
-        text: 'Connection error. Please try again later.' 
+      console.error("Error saving subscription:", error);
+      setSubmitMessage({
+        type: "error",
+        text: "Connection error. Please try again later.",
       });
     } finally {
       setSubmitting(false);
@@ -129,16 +135,15 @@ export default function AiMeetings() {
           {/* Left column - Heading and buttons */}
           <div>
             <Reveal delay={0.1}>
-              <motion.h2 
+              <motion.h2
                 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                Manage your entire marina with <br/>intuitive AI-powered tools
+                Manage your entire marina with <br />
+                intuitive AI-powered tools
               </motion.h2>
-              
-              
             </Reveal>
           </div>
 
@@ -148,31 +153,64 @@ export default function AiMeetings() {
               <div className="space-y-6">
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 rounded-md p-1.5 w-8 h-8 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-800">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-zinc-800"
+                    >
                       <rect x="3" y="3" width="18" height="18" rx="2"></rect>
                       <path d="M3 9h18"></path>
                       <path d="M9 21V9"></path>
                     </svg>
                   </div>
                   <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-                  Occupancy prediction & dynamic pricing 
+                    Occupancy prediction & dynamic pricing
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 rounded-md p-1.5 w-8 h-8 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-800">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-zinc-800"
+                    >
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
                   </div>
                   <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-                  Intelligent document processing
+                    Intelligent document processing
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 rounded-md p-1.5 w-8 h-8 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-800">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-zinc-800"
+                    >
                       <circle cx="12" cy="12" r="10"></circle>
                       <path d="M12 16v-4"></path>
                       <path d="M12 8h.01"></path>
@@ -185,14 +223,25 @@ export default function AiMeetings() {
 
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 rounded-md p-1.5 w-8 h-8 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-800">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-zinc-800"
+                    >
                       <path d="M4 3h16a2 2 0 0 1 2 2v6a10 10 0 0 1-10 10A10 10 0 0 1 2 11V5a2 2 0 0 1 2-2z"></path>
                       <path d="M8 10h8"></path>
                       <path d="M8 14h4"></path>
                     </svg>
                   </div>
                   <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8">
-                  Seamless API integrations 
+                    Seamless API integrations
                   </p>
                 </div>
               </div>
@@ -210,14 +259,15 @@ export default function AiMeetings() {
               className="rounded-t-2xl overflow-hidden shadow-2xl"
             >
               <div className="h-[140px] sm:h-[260px] md:h-[320px] lg:h-[480px] overflow-hidden">
-                <img 
+                <img
                   src={meetingImage}
                   alt="Sales Dashboard"
                   className="w-full object-cover object-top"
-                  style={{ maxHeight: 'none' }}
+                  style={{ maxHeight: "none" }}
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/1200x400?text=Sales+Dashboard';
+                    e.target.src =
+                      "https://via.placeholder.com/1200x400?text=Sales+Dashboard";
                   }}
                 />
               </div>
@@ -227,4 +277,4 @@ export default function AiMeetings() {
       </div>
     </div>
   );
-} 
+}
