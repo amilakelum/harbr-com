@@ -175,7 +175,7 @@ export default function CrmFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/reservation1.png"
+                      src="/reservation1.png"
                       alt="Template Library"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -188,7 +188,7 @@ export default function CrmFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-1.png"
+                      src="/screenshot-1.png"
                       alt="Automation"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -201,7 +201,7 @@ export default function CrmFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-2.webp"
+                      src="/screenshot-2.webp"
                       alt="Trip history"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -214,7 +214,7 @@ export default function CrmFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-23.png"
+                      src="/Screenshot-23.png"
                       alt="Smart Notes & Rating System"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />

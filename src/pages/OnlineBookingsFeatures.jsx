@@ -187,7 +187,7 @@ export default function OnlineBookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/reservation1.png"
+                      src="/reservation1.png"
                       alt="Online Bookings"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -200,7 +200,7 @@ export default function OnlineBookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-1.png"
+                      src="/screenshot-1.png"
                       alt="Customer Portal"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -213,7 +213,7 @@ export default function OnlineBookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-2.webp"
+                      src="/screenshot-2.webp"
                       alt="Secure Payments"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -226,7 +226,7 @@ export default function OnlineBookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-23.png"
+                      src="/Screenshot-23.png"
                       alt="Our Tech, Your Brand"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />

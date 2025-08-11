@@ -28,7 +28,7 @@ const blogPosts = [
     date: "January 12",
     category: "BUSINESS STRATEGY",
     readTime: "12 min read",
-    image: "/src/assets/screenshot-1.png",
+    image: "/screenshot-1.png",
     slug: "complete-guide-marina-revenue-optimization",
   },
   {
@@ -41,7 +41,7 @@ const blogPosts = [
     date: "January 10",
     category: "SOFTWARE FEATURES",
     readTime: "6 min read",
-    image: "/src/assets/screenshot-2.webp",
+    image: "/screenshot-2.webp",
     slug: "essential-features-modern-marina-software",
   },
   {
@@ -54,7 +54,7 @@ const blogPosts = [
     date: "January 8",
     category: "CUSTOMER EXPERIENCE",
     readTime: "10 min read",
-    image: "/src/assets/Screenshot-23.png",
+    image: "/Screenshot-23.png",
     slug: "customer-experience-trends-marina-industry",
   },
   {
@@ -67,7 +67,7 @@ const blogPosts = [
     date: "January 5",
     category: "SUSTAINABILITY",
     readTime: "9 min read",
-    image: "/src/assets/Screenshot-24.png",
+    image: "/Screenshot-24.png",
     slug: "sustainable-marina-practices-guide",
   },
   {
@@ -80,7 +80,7 @@ const blogPosts = [
     date: "January 3",
     category: "DIGITAL TRANSFORMATION",
     readTime: "11 min read",
-    image: "/src/assets/Screenshot-25.png",
+    image: "/Screenshot-25.png",
     slug: "digital-transformation-traditional-smart-marinas",
   },
   {
@@ -93,7 +93,7 @@ const blogPosts = [
     date: "December 30",
     category: "ANALYTICS",
     readTime: "7 min read",
-    image: "/src/assets/reservation1.png",
+    image: "/reservation1.png",
     slug: "understanding-marina-management-analytics-kpis",
   },
   {

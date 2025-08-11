@@ -204,7 +204,7 @@ export default function FinanceManagementFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/reservation1.png"
+                      src="/reservation1.png"
                       alt="Invoices"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -217,7 +217,7 @@ export default function FinanceManagementFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-1.png"
+                      src="/screenshot-1.png"
                       alt="Batch Invoicing & Disbursements"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -230,7 +230,7 @@ export default function FinanceManagementFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-2.webp"
+                      src="/screenshot-2.webp"
                       alt="Related invoice items"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -243,7 +243,7 @@ export default function FinanceManagementFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-23.png"
+                      src="/Screenshot-23.png"
                       alt="Statements"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -256,7 +256,7 @@ export default function FinanceManagementFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-24.png"
+                      src="/Screenshot-24.png"
                       alt="Financial Reporting"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -269,7 +269,7 @@ export default function FinanceManagementFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-25.png"
+                      src="/Screenshot-25.png"
                       alt="Integration"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />

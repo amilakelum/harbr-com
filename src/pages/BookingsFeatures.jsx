@@ -214,7 +214,7 @@ export default function BookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/reservation1.png"
+                      src="/reservation1.png"
                       alt="Online Bookings"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -227,7 +227,7 @@ export default function BookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-1.png"
+                      src="/screenshot-1.png"
                       alt="Calendar view"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -240,7 +240,7 @@ export default function BookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/screenshot-2.webp"
+                      src="/screenshot-2.webp"
                       alt="Customisable Dashboard"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -253,7 +253,7 @@ export default function BookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-23.png"
+                      src="/Screenshot-23.png"
                       alt="One click editing"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -266,7 +266,7 @@ export default function BookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-24.png"
+                      src="/Screenshot-24.png"
                       alt="Quickly find and add customers"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
@@ -279,7 +279,7 @@ export default function BookingsFeatures() {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <img
-                      src="/src/assets/Screenshot-25.png"
+                      src="/Screenshot-25.png"
                       alt="Set up automated emails and SMS"
                       className="w-full h-full object-contain rounded-lg shadow-lg"
                     />
