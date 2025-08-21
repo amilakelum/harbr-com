@@ -167,7 +167,7 @@ export default function Pricing() {
                   updates
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>2% donated
+                  <span className="text-green-500 mr-2 mt-1">✓</span>1% donated
                   to charity
                 </li>
               </ul>

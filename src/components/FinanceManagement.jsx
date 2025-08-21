@@ -68,7 +68,7 @@ export default function FinanceManagement() {
           <Reveal delay={0.4}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/Finance.png"
+                src="/Finance1.png"
                 alt="Finance Management"
                 className="w-full h-full object-cover"
               />

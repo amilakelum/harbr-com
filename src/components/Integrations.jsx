@@ -52,13 +52,16 @@ export default function Integrations() {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 max-w-4xl mx-auto mb-8">
-                Harbr can integrate with most apps and online tools that support
-                API Integration. If we don't have an existing integration you
-                need, we will do everything we can to build one. Harbr's
-                overarching goal is to be one operating system that consolidates
-                everything from accounting (MYOB, Xero, Newbook etc), metering &
-                utilities systems (Tallykey etc.) as well as secure access
-                infrastructure (integriti etc.)
+                <strong>
+                  Harbr can integrate with most apps and online tools that
+                  support API Integration.
+                </strong>{" "}
+                If we don't have an existing integration you need, we will do
+                everything we can to build one. Harbr's overarching goal is to
+                be one operating system that consolidates everything from
+                accounting (MYOB, Xero, QuickBooks etc), metering & utilities
+                systems (Tallykey etc.) as well as secure access infrastructure
+                (integriti etc.)
               </p>
             </Reveal>
           </div>

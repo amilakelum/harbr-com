@@ -19,6 +19,7 @@ import Support from "./pages/Support";
 import AIManager from "./pages/AIManager";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BoatTypesGuide from "./pages/BoatTypesGuide";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Callout from "./components/Callout";
@@ -110,6 +111,10 @@ function App() {
           <Route path="support" element={<Support />} />
           <Route path="ai-marina-manager" element={<AIManager />} />
           <Route path="blog" element={<Blog />} />
+          <Route
+            path="blog/complete-guide-different-types-boats"
+            element={<BoatTypesGuide />}
+          />
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="terms" element={<TermsAndConditions />} />
           <Route path="privacy" element={<PrivacyPolicy />} />

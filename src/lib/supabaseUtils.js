@@ -1,6 +1,5 @@
-import { supabase } from './supabase';
-import posthog from 'posthog-js';
-import { createClient } from '@supabase/supabase-js';
+import posthog from "posthog-js";
+import { sendSubmissionEmails } from "./emailService";
 
 /**
  * Generate a persistent distinct ID for PostHog tracking
@@ -8,21 +7,22 @@ import { createClient } from '@supabase/supabase-js';
  */
 function getDistinctId() {
   // Check if we already have a stored ID
-  let distinctId = localStorage.getItem('ph_distinct_id');
-  
+  let distinctId = localStorage.getItem("ph_distinct_id");
+
   if (!distinctId) {
     // Generate a new ID if none exists
-    distinctId = crypto.randomUUID ? crypto.randomUUID() : 
-      `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-    
+    distinctId = crypto.randomUUID
+      ? crypto.randomUUID()
+      : `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+
     // Store for future use
     try {
-      localStorage.setItem('ph_distinct_id', distinctId);
+      localStorage.setItem("ph_distinct_id", distinctId);
     } catch (e) {
-      console.error('Could not store distinct ID:', e);
+      console.error("Could not store distinct ID:", e);
     }
   }
-  
+
   return distinctId;
 }
 
@@ -33,187 +33,145 @@ function getDistinctId() {
  * @param {Object} additionalData - Any additional data to store
  * @returns {Promise<Object>} - The result of the operation
  */
-export const saveEmailSubscription = async (email, source, additionalData = {}) => {
+export const saveEmailSubscription = async (
+  email,
+  source,
+  additionalData = {}
+) => {
   if (!email) {
-    console.error('Email is required for subscription');
-    return { success: false, error: 'Email is required', errorType: 'validation' };
+    console.error("Email is required for subscription");
+    return {
+      success: false,
+      error: "Email is required",
+      errorType: "validation",
+    };
   }
 
   try {
     const formattedEmail = email.toLowerCase().trim();
-    
+
     // Prepare the data to save
     const subscriptionData = {
       email: formattedEmail,
       source: source,
-      status: 'active',
+      status: "active",
       created_at: new Date().toISOString(),
-      ...additionalData
+      ...additionalData,
     };
 
     // Track event in PostHog - With proper distinct_id
     try {
       const distinctId = getDistinctId();
-      
+
       // Identify user with their email if available
       if (formattedEmail) {
         posthog.identify(formattedEmail, {
           email: formattedEmail,
-          $set: { 
+          $set: {
             source_first_seen: source,
-            email: formattedEmail
-          }
+            email: formattedEmail,
+          },
         });
       }
-      
+
       // Capture the subscription event
-      posthog.capture('email_subscription', {
+      posthog.capture("email_subscription", {
         distinct_id: formattedEmail || distinctId, // Use email as ID if available
         email: formattedEmail,
         source: source,
-        form_location: additionalData.page || 'unknown',
-        button_text: additionalData.button_text || 'Get started for free'
+        form_location: additionalData.page || "unknown",
+        button_text: additionalData.button_text || "Get started for free",
       });
-      
-      console.log('PostHog event tracked with distinct_id:', formattedEmail || distinctId);
+
+      console.log(
+        "PostHog event tracked with distinct_id:",
+        formattedEmail || distinctId
+      );
     } catch (posthogError) {
-      console.error('PostHog tracking error (non-critical):', posthogError);
+      console.error("PostHog tracking error (non-critical):", posthogError);
       // Continue with saving to database regardless of PostHog errors
     }
 
-    // Get Supabase API keys from environment variables
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    // Use server-side proxy to talk to Supabase in production.
+    // This avoids CORS and DNS issues when calling Supabase directly from the browser.
+    const isDev = import.meta.env.DEV;
 
-    // Simple approach - use direct fetch with proper headers
-    // First check if the email exists
-    let response = await fetch(
-      `${supabaseUrl}/rest/v1/email_subscriptions?email=eq.${encodeURIComponent(formattedEmail)}&select=*`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': supabaseKey,
-          'Authorization': `Bearer ${supabaseKey}`,
-          'Prefer': 'return=representation'
-        }
+    let savedResult;
+
+    try {
+      // Try calling local /api endpoint first (works in Vercel dev and production)
+      const apiResponse = await fetch("/api/save-subscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formattedEmail,
+          source,
+          additionalData,
+          subscriptionData,
+        }),
+      });
+
+      if (!apiResponse.ok) {
+        const txt = await apiResponse
+          .text()
+          .catch(() => apiResponse.statusText);
+        throw new Error(`API error: ${txt}`);
       }
-    );
 
-    if (!response.ok && response.status !== 404) {
-      console.error('Error checking if email exists:', response.statusText);
-      throw new Error(`HTTP error: ${response.status}`);
+      savedResult = await apiResponse.json();
+    } catch (proxyError) {
+      console.warn("Proxy /api/save-subscription failed:", proxyError.message);
+
+      if (isDev) {
+        // In dev, simulate success if direct Supabase URL is unreachable
+        console.log("DEV fallback: simulating saved subscription");
+        savedResult = { success: true, data: subscriptionData };
+      } else {
+        // In production, rethrow so the outer catch handles it
+        throw proxyError;
+      }
     }
 
-    let existingEmail = null;
-    if (response.status !== 404) {
-      const data = await response.json();
-      existingEmail = data.length > 0 ? data[0] : null;
-    }
-
-    let result;
-    
-    if (existingEmail) {
-      console.log('Email already exists, updating record:', existingEmail);
-      
-      // If email already exists, just update the metadata but don't treat it as an error
-      // Update existing record
-      response = await fetch(
-        `${supabaseUrl}/rest/v1/email_subscriptions?email=eq.${encodeURIComponent(formattedEmail)}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': supabaseKey,
-            'Authorization': `Bearer ${supabaseKey}`,
-            'Prefer': 'return=representation'
-          },
-          body: JSON.stringify({
-            source: source,
-            updated_at: new Date().toISOString(),
-            ...additionalData
-          })
-        }
-      );
-      
-      if (!response.ok) {
-        console.error('Error updating existing subscription:', response.statusText);
-        console.error('Error updating existing subscription:', response[0]);
-        console.error('Error updating existing subscription:', response);
-        return { 
-          success: false, 
-          error: `Error updating subscription: ${response.statusText}`, 
-          errorType: 'update_failed' 
-        };
-      }
-      
-      const data = await response.json();
-      // Return success but also indicate this was a duplicate
-      return { 
-        success: true, 
-        data, 
-        isExistingEmail: true, 
-        message: "You're already subscribed! We've updated your information."
-      };
-    } else {
-      // Insert new record
-      response = await fetch(
-        `${supabaseUrl}/rest/v1/email_subscriptions`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': supabaseKey,
-            'Authorization': `Bearer ${supabaseKey}`,
-            'Prefer': 'return=representation'
-          },
-          body: JSON.stringify(subscriptionData)
-        }
-      );
-    }
-
-    if (!response.ok) {
-      console.error('Error saving subscription:', response.statusText);
-      // Check for specific error types
-      if (response.status === 409) {
-        return { 
-          success: false, 
-          error: "This email is already subscribed", 
-          errorType: 'duplicate_email' 
-        };
-      } else if (response.status === 422) {
-        return { 
-          success: false, 
-          error: "Invalid email format", 
-          errorType: 'validation' 
-        };
-      } else if (response.status === 401 || response.status === 403) {
-        return { 
-          success: false, 
-          error: "Authentication error. Please try again later", 
-          errorType: 'auth' 
-        };
-      }
-      return { 
-        success: false, 
-        error: `Subscription error (${response.status}): ${response.statusText}`, 
-        errorType: 'server' 
+    if (!savedResult || !savedResult.success) {
+      return {
+        success: false,
+        error: savedResult?.error || "Failed to save subscription",
       };
     }
 
-    const data = await response.json();
-    console.log('Email subscription saved successfully:', data);
-    return { 
-      success: true, 
-      data, 
-      message: "Thank you! You're subscribed and we'll be in touch soon."
+    const data = savedResult.data;
+    console.log("Email subscription saved successfully:", data);
+
+    // Send notification and welcome emails for new subscriptions
+    try {
+      const emailResult = await sendSubmissionEmails(formattedEmail, source, {
+        page: additionalData.page || "unknown",
+        button_text: additionalData.button_text || "Get started for free",
+        timestamp: new Date().toISOString(),
+      });
+
+      if (emailResult.success) {
+        console.log("Emails sent successfully:", emailResult.details);
+      } else {
+        console.error("Failed to send emails:", emailResult.error);
+        // Don't fail the subscription if email sending fails
+      }
+    } catch (emailError) {
+      console.error("Error sending emails (non-critical):", emailError);
+      // Continue with success response even if email fails
+    }
+
+    return {
+      success: true,
+      data,
+      message: "Thank you! You're subscribed and we'll be in touch soon.",
     };
   } catch (error) {
-    console.error('Unexpected error saving email subscription:', error);
-    return { 
-      success: false, 
+    console.error("Unexpected error saving email subscription:", error);
+    return {
+      success: false,
       error: error.message || "An unexpected error occurred",
-      errorType: 'unexpected' 
+      errorType: "unexpected",
     };
   }
 };

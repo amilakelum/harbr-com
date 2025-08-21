@@ -71,7 +71,7 @@ export default function Implementation() {
           <Reveal delay={0.4}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/implementation.png"
+                src="/implementation_free.png"
                 alt="Implementation Process"
                 className="w-full h-full object-cover"
               />

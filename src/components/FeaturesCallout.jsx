@@ -11,7 +11,7 @@ export default function FeaturesCallout() {
           <Reveal delay={0.25}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/crm.png"
+                src="/crm1.png"
                 alt="CRM"
                 className="w-full h-full object-cover"
               />
@@ -25,13 +25,15 @@ export default function FeaturesCallout() {
                 CRM
               </h2>
               <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
-                Harbr's internal CRM system gives you unprecedented access to
-                your customers. Manage all customer information, send automated,
-                AI generated & personalized messages via SMS and email.
-                Streamline insurance renewals, invoice communications and extend
-                promotional content to your customers & members. Experience
-                unprecedented access to your customers, powered by Harbr's AI
-                Marina Manager.
+                <strong>
+                  Harbr's internal CRM system gives you unprecedented access to
+                  your customers.
+                </strong>{" "}
+                Manage all customer information, send automated, AI generated &
+                personalised messages via SMS and email. Streamline insurance
+                renewals, invoice communications and extend promotional content
+                to your customers & members. Experience unprecedented access to
+                your customers, powered by Harbr's AI Marina Manager.
               </p>
 
               <Link to="/crm-features">

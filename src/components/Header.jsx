@@ -92,7 +92,7 @@ export default function Header() {
       className={cn(
         "sticky top-0 z-50 backdrop-blur-md  bg-[color(display-p3_0.9843_0.9843_0.9882)]/80 transition-shadow duration-300",
         {
-          "shadow-[0_24px_24px_-12px_#16223b08] bg-white/80": hasScrolled,
+          "shadow-[0_24px_24px_-12px_#16223b08] bg-white": hasScrolled,
         }
       )}
     >

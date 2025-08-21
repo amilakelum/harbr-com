@@ -14,13 +14,15 @@ export default function AIManager() {
                 Harbr's AI Marina Manager
               </h2>
               <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
-                A world first, Harbr's AI Marina Manager operates alongside your
-                users to support & enhance your experience with Harbr's
-                software. Think Microsoft Co-pilot meets ChatGPT that's always
-                on call to help with navigating the Harbr platform, drafting
-                emails to customers, finding invoices, insurance renewals &
-                more. Harbr is and always will be at the forefront of AI in
-                Marina Management.
+                <strong>
+                  A world first, Harbr's AI Marina Manager operates alongside
+                  your users to support & enhance your experience with Harbr's
+                  software.
+                </strong>{" "}
+                Think Microsoft Co-pilot meets ChatGPT that's always on call to
+                help with navigating the Harbr platform, drafting emails to
+                customers, finding invoices, insurance renewals & more. Harbr is
+                and always will be at the forefront of AI in Marina Management.
               </p>
 
               <Link to="/ai-marina-manager">
@@ -72,7 +74,7 @@ export default function AIManager() {
           <Reveal delay={0.4}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/AI-marina.png"
+                src="/Hurbr-AI.png"
                 alt="AI Marina Manager"
                 className="w-full h-full object-cover"
               />

@@ -11,7 +11,7 @@ export default function Support() {
           <Reveal delay={0.25}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/Support.png"
+                src="/Unlimited_Free_Support.png"
                 alt="Customer Support"
                 className="w-full h-full object-cover"
               />

@@ -14,11 +14,13 @@ export default function FeaturesHero() {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="mt-8 text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-10 max-w-3xl mx-auto">
-                Harbr's end to end marina management software has everything you
-                need to elevate your marina operations, impress your customers
-                and grow revenue beyond berth/slip rates. We have also
-                meticulously incorporated AI where possible to streamline your
-                operations.
+                <strong>
+                  Harbr's end to end marina management software has everything
+                  you need to elevate your marina operations, impress your
+                  customers and grow revenue beyond berth/slip rates.
+                </strong>{" "}
+                We have also meticulously incorporated AI where possible to
+                streamline your operations.
               </p>
             </Reveal>
             <Reveal delay={0.3}>

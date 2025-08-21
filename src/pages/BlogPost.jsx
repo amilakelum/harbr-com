@@ -642,21 +642,15 @@ export default function BlogPost() {
                 </p>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   The{" "}
-                  <span
-                    className="font-semibold"
-                    style={{ background: "yellow" }}
-                  >
-                    Australian Maritime Safety Authority (AMSA)
-                  </span>{" "}
-                  website is a great source of information.{" "}
                   <a
                     href="https://www.amsa.gov.au/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
+                    className="font-semibold text-blue-600 hover:text-blue-600 hover:underline transition-colors duration-200"
                   >
-                    https://www.amsa.gov.au/
-                  </a>
+                    Australian Maritime Safety Authority (AMSA)
+                  </a>{" "}
+                  website is a great source of information.
                 </p>
               </div>
 
@@ -715,59 +709,37 @@ export default function BlogPost() {
                 </p>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Boat and PWC training providers like{" "}
-                  <span
-                    className="font-semibold"
-                    style={{ background: "yellow" }}
-                  >
-                    Australian Boating College
-                  </span>{" "}
-                  (
                   <a
                     href="https://abcboating.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
+                    className="font-semibold text-blue-600 hover:text-blue-600 hover:underline transition-colors duration-200"
                   >
-                    https://abcboating.com
-                  </a>
-                  ) and{" "}
-                  <span
-                    className="font-semibold"
-                    style={{ background: "yellow" }}
-                  >
-                    All State Boat Licensing & Training
-                  </span>{" "}
-                  (
+                    Australian Boating College
+                  </a>{" "}
+                  and{" "}
                   <a
-                    href="https://boatlicensing.com.au/start/"
+                    href="https://www.allstateboating.com.au/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
+                    className="font-semibold text-blue-600 hover:text-blue-600 hover:underline transition-colors duration-200"
                   >
-                    https://boatlicensing.com.au/start/
-                  </a>
-                  ) provide great courses for boaties of all experience levels,
+                    All State Boat Licensing & Training
+                  </a>{" "}
+                  provide great courses for boaties of all experience levels,
                   not just initial licensing courses.
                 </p>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   You can find a more detailed list on the{" "}
-                  <span
-                    className="font-semibold"
-                    style={{ background: "yellow" }}
-                  >
-                    Queensland Government
-                  </span>{" "}
-                  website here: (
                   <a
                     href="https://www.qld.gov.au/transport/boating/licences/boatsafe"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
-                    aria-label="Boat Licensing Australia"
+                    className="font-semibold text-blue-600 hover:text-blue-800"
                   >
-                    https://www.qld.gov.au/transport/boating/licences/boatsafe
-                  </a>
-                  ).
+                    Queensland Government
+                  </a>{" "}
+                  website here:
                 </p>
                 <h3
                   id="weather-factors"
@@ -825,20 +797,15 @@ export default function BlogPost() {
                   enable two-way messaging even in remote areas, while
                   smartphone apps can integrate with beacon systems to provide
                   additional emergency capabilities.{" "}
-                  <span className="font-bold" style={{ background: "yellow" }}>
-                    Starlink’s
-                  </span>
-                  (
                   <a
                     href="https://www.starlink.com/au/business/maritime?srsltid=AfmBOorn18fgrLQtK_eNCtAISkJct8fAWDbYdzKpZm5dE6I6_qle-1nY"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
-                    aria-label="starlink maritime internet"
+                    className="font-semibold text-blue-600 hover:text-blue-800"
                   >
-                    https://www.starlink.com/au/business/maritime?srsltid=AfmBOorn18fgrLQtK_eNCtAISkJct8fAWDbYdzKpZm5dE6I6_qle-1nY
-                  </a>
-                  ) satellite internet coverage is also a game-changer for
+                    Starlink’s
+                  </a>{" "}
+                  satellite internet coverage is also a game-changer for
                   offshore & open ocean boaties.
                 </p>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
@@ -891,22 +858,15 @@ export default function BlogPost() {
                 </p>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Keen to improve your boat docking skills? Read{" "}
-                  <span
-                    className="font-semibold"
-                    style={{ background: "yellow" }}
-                  >
-                    Harbr’s detailed guide to mooring at marinas
-                  </span>{" "}
-                  here.
                   <a
-                    href="http://localhost:5173/blog"
+                    href="/blog"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
-                    aria-label="starlink maritime internet"
+                    className="font-semibold text-blue-600 hover:text-blue-800"
                   >
-                    http://localhost:5173/blog
-                  </a>
+                    Harbr’s detailed guide to mooring at marinas
+                  </a>{" "}
+                  here.
                 </p>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg italic">
                   Stay safe, stay prepared, and ensure every journey on the

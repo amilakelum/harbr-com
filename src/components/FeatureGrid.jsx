@@ -14,13 +14,15 @@ export default function FeatureGrid() {
                 Online Bookings & Customer Portal
               </h2>
               <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
-                Harbr's customizable online booking and customer portal means
-                you set the level of access your customers have to view
-                availability, pricing & book online. Offer your customers a
-                simple online calendar only to minimize phone enquiries for
-                availability, or make money while you sleep with a full end to
-                end online booking function that integrates with your current
-                marina website.
+                <strong>
+                  Harbr's customisable online booking and customer portal means
+                  you set the level of access your customers have to view
+                  availability, pricing & book online.
+                </strong>{" "}
+                Offer your customers a simple online calendar only to minimise
+                phone enquiries for availability, or make money while you sleep
+                with a full end to end online booking function that integrates
+                with your current marina website.
               </p>
 
               <Link to="/online-bookings-features">

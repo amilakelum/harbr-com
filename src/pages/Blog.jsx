@@ -20,6 +20,19 @@ const blogPosts = [
   },
   {
     id: 2,
+    title: "Complete Guide to Different Types of Boats",
+    excerpt:
+      "Discover the perfect vessel for your needs with our comprehensive guide to boat types, from recreational powerboats to luxury yachts.",
+    author: "Michael Chen",
+    authorInitials: "MC",
+    date: "January 20",
+    category: "BOAT TYPES & BUYING GUIDE",
+    readTime: "12 min read",
+    image: "/different-type-of-boat.png",
+    slug: "complete-guide-different-types-boats",
+  },
+  {
+    id: 3,
     title: "The Complete Guide to Marina Revenue Optimization",
     excerpt:
       "Learn proven strategies to maximize your marina's revenue through dynamic pricing, capacity management, and customer experience enhancement.",

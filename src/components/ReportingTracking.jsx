@@ -11,7 +11,7 @@ export default function ReportingTracking() {
           <Reveal delay={0.25}>
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/report.png"
+                src="/report1.png"
                 alt="Reporting and Tracking"
                 className="w-full h-full object-cover"
               />
@@ -25,11 +25,13 @@ export default function ReportingTracking() {
                 Reporting and Tracking
               </h2>
               <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
-                Detailed performance reports & AI generated insights give you an
-                unprecedented, in-depth understanding of your marina. Track and
-                record your marina's performance over time to see which aspects
-                of your business are the most effective. Get real time
-                information you need to make decisions that will grow and
+                <strong>
+                  Detailed performance reports & AI generated insights give you
+                  an unprecedented, in-depth understanding of your marina.
+                </strong>{" "}
+                Track and record your marina's performance over time to see
+                which aspects of your business are the most effective. Get real
+                time information you need to make decisions that will grow and
                 improve revenue & customer satisfaction.
               </p>
               <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
