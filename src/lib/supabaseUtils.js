@@ -50,15 +50,6 @@ export const saveEmailSubscription = async (
   try {
     const formattedEmail = email.toLowerCase().trim();
 
-    // Prepare the data to save
-    const subscriptionData = {
-      email: formattedEmail,
-      source: source,
-      status: "active",
-      created_at: new Date().toISOString(),
-      ...additionalData,
-    };
-
     // Track event in PostHog - With proper distinct_id
     try {
       const distinctId = getDistinctId();
@@ -92,57 +83,14 @@ export const saveEmailSubscription = async (
       // Continue with saving to database regardless of PostHog errors
     }
 
-    // Use server-side proxy to talk to Supabase in production.
-    // This avoids CORS and DNS issues when calling Supabase directly from the browser.
-    const isDev = import.meta.env.DEV;
+    // Skip database saving - just process the email submission
+    console.log("Email subscription processed (no database save):", {
+      email: formattedEmail,
+      source,
+      additionalData,
+    });
 
-    let savedResult;
-
-    try {
-      // Try calling local /api endpoint first (works in Vercel dev and production)
-      const apiResponse = await fetch("/api/save-subscription", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formattedEmail,
-          source,
-          additionalData,
-          subscriptionData,
-        }),
-      });
-
-      if (!apiResponse.ok) {
-        const txt = await apiResponse
-          .text()
-          .catch(() => apiResponse.statusText);
-        throw new Error(`API error: ${txt}`);
-      }
-
-      savedResult = await apiResponse.json();
-    } catch (proxyError) {
-      console.warn("Proxy /api/save-subscription failed:", proxyError.message);
-
-      if (isDev) {
-        // In dev, simulate success if direct Supabase URL is unreachable
-        console.log("DEV fallback: simulating saved subscription");
-        savedResult = { success: true, data: subscriptionData };
-      } else {
-        // In production, rethrow so the outer catch handles it
-        throw proxyError;
-      }
-    }
-
-    if (!savedResult || !savedResult.success) {
-      return {
-        success: false,
-        error: savedResult?.error || "Failed to save subscription",
-      };
-    }
-
-    const data = savedResult.data;
-    console.log("Email subscription saved successfully:", data);
-
-    // Send notification and welcome emails for new subscriptions
+    // Send notification and welcome emails
     try {
       const emailResult = await sendSubmissionEmails(formattedEmail, source, {
         page: additionalData.page || "unknown",
@@ -163,7 +111,11 @@ export const saveEmailSubscription = async (
 
     return {
       success: true,
-      data,
+      data: {
+        email: formattedEmail,
+        source,
+        processed_at: new Date().toISOString(),
+      },
       message: "Thank you! You're subscribed and we'll be in touch soon.",
     };
   } catch (error) {
