@@ -62,107 +62,13 @@ export default async function handler(req, res) {
       );
     }
 
-    // First check if the email exists
-    const checkUrl = `${supabaseUrl.replace(
-      /\/$/,
-      ""
-    )}/rest/v1/email_subscriptions?email=eq.${encodeURIComponent(
-      email
-    )}&select=*`;
-
-    let response;
-    try {
-      response = await fetch(checkUrl, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: supabaseServiceKey,
-          Authorization: `Bearer ${supabaseServiceKey}`,
-        },
-      });
-    } catch (fetchErr) {
-      console.error("Error fetching checkUrl", checkUrl, fetchErr);
-      return res.status(502).json({
-        error: "Failed to check existing subscription",
-        details: fetchErr.message,
-      });
-    }
-
-    if (!response.ok && response.status !== 404) {
-      const text = await response.text().catch(() => response.statusText);
-      console.error(
-        "Error checking existing subscription (bad status):",
-        response.status,
-        text
-      );
-      return res.status(502).json({
-        error: "Failed to check existing subscription",
-        details: text,
-      });
-    }
-
-    let existingEmail = null;
-    if (response.status !== 404) {
-      const data = await response.json();
-      existingEmail = data.length > 0 ? data[0] : null;
-    }
-
-    if (existingEmail) {
-      // Update the existing record
-      const patchUrl = `${supabaseUrl.replace(
-        /\/$/,
-        ""
-      )}/rest/v1/email_subscriptions?email=eq.${encodeURIComponent(email)}`;
-      try {
-        response = await fetch(patchUrl, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            apikey: supabaseServiceKey,
-            Authorization: `Bearer ${supabaseServiceKey}`,
-            Prefer: "return=representation",
-          },
-          body: JSON.stringify({
-            source: source,
-            updated_at: new Date().toISOString(),
-            ...additionalData,
-          }),
-        });
-      } catch (patchErr) {
-        console.error("Error patching subscription", patchUrl, patchErr);
-        return res.status(502).json({
-          error: "Failed to update subscription",
-          details: patchErr.message,
-        });
-      }
-
-      if (!response.ok) {
-        const text = await response.text().catch(() => response.statusText);
-        console.error(
-          "Error updating subscription (bad status):",
-          response.status,
-          text
-        );
-        return res
-          .status(502)
-          .json({ error: "Failed to update subscription", details: text });
-      }
-
-      const updated = await response.json();
-      return res.status(200).json({
-        success: true,
-        data: updated,
-        isExistingEmail: true,
-        message: "You're already subscribed! We've updated your information.",
-      });
-    }
-
-    // Insert new record
+    // Insert new record (removed email check to avoid fetch issues)
     const insertUrl = `${supabaseUrl.replace(
       /\/$/,
       ""
     )}/rest/v1/email_subscriptions`;
 
+    let response;
     try {
       response = await fetch(insertUrl, {
         method: "POST",
