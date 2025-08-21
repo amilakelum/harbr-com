@@ -1,4 +1,7 @@
-import Resend from 'resend';
+import Resend from "resend";
+
+/* eslint-env node */
+/* global process */
 
 export default async function handler(req, res) {
   // Set CORS headers
@@ -23,14 +26,15 @@ export default async function handler(req, res) {
   }
 
   try {
-        // Initialize Resend client with server-side env var (RESEND_API_KEY).
-        const resendApiKey = process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
-        if (!resendApiKey) {
-            console.error('Missing RESEND_API_KEY environment variable');
-            return res.status(500).json({ error: 'Email service not configured' });
-        }
+    // Initialize Resend client with server-side env var (RESEND_API_KEY).
+    const resendApiKey =
+      process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
+    if (!resendApiKey) {
+      console.error("Missing RESEND_API_KEY environment variable");
+      return res.status(500).json({ error: "Email service not configured" });
+    }
 
-        const resend = new Resend(resendApiKey);
+    const resend = new Resend(resendApiKey);
     const { email, source, additionalData } = req.body;
 
     if (!email) {

@@ -1,3 +1,5 @@
+/* eslint-env node */
+/* global process */
 // Serverless endpoint to save email subscriptions using Supabase Service Role key
 // This avoids exposing the REST call directly from the browser and works in Vercel production.
 
@@ -31,22 +33,36 @@ export default async function handler(req, res) {
     }
 
     // Support both VITE_ prefixed env vars (used locally) and plain names (used in Vercel)
-    const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+    const supabaseUrl =
+      process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
     const supabaseServiceKey =
-      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
+      process.env.SUPABASE_SERVICE_ROLE_KEY ||
+      process.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
 
+    // Validate configuration and log helpful diagnostics (do not print secrets)
     if (!supabaseUrl || !supabaseServiceKey) {
-      console.error('Missing Supabase server configuration (SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY)');
-      return res.status(500).json({ error: 'Missing Supabase server configuration' });
-    }
-
-    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error(
+        "save-subscription: Missing Supabase server configuration (SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY).",
+        { hasSupabaseUrl: !!supabaseUrl, hasServiceKey: !!supabaseServiceKey }
+      );
       return res
         .status(500)
         .json({ error: "Missing Supabase server configuration" });
     }
 
-  // First check if the email exists
+    try {
+      // Log the host we will call (non-sensitive)
+      const urlHost = new URL(supabaseUrl).host;
+      console.log(`save-subscription: supabase host: ${urlHost}`);
+    } catch (urlErr) {
+      console.warn(
+        "save-subscription: supabaseUrl appears invalid",
+        supabaseUrl,
+        urlErr.message
+      );
+    }
+
+    // First check if the email exists
     const checkUrl = `${supabaseUrl.replace(
       /\/$/,
       ""
@@ -54,24 +70,35 @@ export default async function handler(req, res) {
       email
     )}&select=*`;
 
-    let response = await fetch(checkUrl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: supabaseServiceKey,
-        Authorization: `Bearer ${supabaseServiceKey}`,
-      },
-    });
+    let response;
+    try {
+      response = await fetch(checkUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: supabaseServiceKey,
+          Authorization: `Bearer ${supabaseServiceKey}`,
+        },
+      });
+    } catch (fetchErr) {
+      console.error("Error fetching checkUrl", checkUrl, fetchErr);
+      return res.status(502).json({
+        error: "Failed to check existing subscription",
+        details: fetchErr.message,
+      });
+    }
 
     if (!response.ok && response.status !== 404) {
       const text = await response.text().catch(() => response.statusText);
-      console.error("Error checking existing subscription:", text);
-      return res
-        .status(502)
-        .json({
-          error: "Failed to check existing subscription",
-          details: text,
-        });
+      console.error(
+        "Error checking existing subscription (bad status):",
+        response.status,
+        text
+      );
+      return res.status(502).json({
+        error: "Failed to check existing subscription",
+        details: text,
+      });
     }
 
     let existingEmail = null;
@@ -86,38 +113,48 @@ export default async function handler(req, res) {
         /\/$/,
         ""
       )}/rest/v1/email_subscriptions?email=eq.${encodeURIComponent(email)}`;
-      response = await fetch(patchUrl, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: supabaseServiceKey,
-          Authorization: `Bearer ${supabaseServiceKey}`,
-          Prefer: "return=representation",
-        },
-        body: JSON.stringify({
-          source: source,
-          updated_at: new Date().toISOString(),
-          ...additionalData,
-        }),
-      });
+      try {
+        response = await fetch(patchUrl, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: supabaseServiceKey,
+            Authorization: `Bearer ${supabaseServiceKey}`,
+            Prefer: "return=representation",
+          },
+          body: JSON.stringify({
+            source: source,
+            updated_at: new Date().toISOString(),
+            ...additionalData,
+          }),
+        });
+      } catch (patchErr) {
+        console.error("Error patching subscription", patchUrl, patchErr);
+        return res.status(502).json({
+          error: "Failed to update subscription",
+          details: patchErr.message,
+        });
+      }
 
       if (!response.ok) {
         const text = await response.text().catch(() => response.statusText);
-        console.error("Error updating subscription:", text);
+        console.error(
+          "Error updating subscription (bad status):",
+          response.status,
+          text
+        );
         return res
           .status(502)
           .json({ error: "Failed to update subscription", details: text });
       }
 
       const updated = await response.json();
-      return res
-        .status(200)
-        .json({
-          success: true,
-          data: updated,
-          isExistingEmail: true,
-          message: "You're already subscribed! We've updated your information.",
-        });
+      return res.status(200).json({
+        success: true,
+        data: updated,
+        isExistingEmail: true,
+        message: "You're already subscribed! We've updated your information.",
+      });
     }
 
     // Insert new record
@@ -126,41 +163,51 @@ export default async function handler(req, res) {
       ""
     )}/rest/v1/email_subscriptions`;
 
-    response = await fetch(insertUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: supabaseServiceKey,
-        Authorization: `Bearer ${supabaseServiceKey}`,
-        Prefer: "return=representation",
-      },
-      body: JSON.stringify(
-        subscriptionData || {
-          email,
-          source,
-          status: "active",
-          created_at: new Date().toISOString(),
-          ...additionalData,
-        }
-      ),
-    });
+    try {
+      response = await fetch(insertUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: supabaseServiceKey,
+          Authorization: `Bearer ${supabaseServiceKey}`,
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify(
+          subscriptionData || {
+            email,
+            source,
+            status: "active",
+            created_at: new Date().toISOString(),
+            ...additionalData,
+          }
+        ),
+      });
+    } catch (insertErr) {
+      console.error("Error inserting subscription", insertUrl, insertErr);
+      return res.status(502).json({
+        error: "Failed to save subscription",
+        details: insertErr.message,
+      });
+    }
 
     if (!response.ok) {
       const text = await response.text().catch(() => response.statusText);
-      console.error("Error inserting subscription:", text);
+      console.error(
+        "Error inserting subscription (bad status):",
+        response.status,
+        text
+      );
       return res
         .status(502)
         .json({ error: "Failed to save subscription", details: text });
     }
 
     const inserted = await response.json();
-    return res
-      .status(200)
-      .json({
-        success: true,
-        data: inserted,
-        message: "Thank you! You're subscribed and we'll be in touch soon.",
-      });
+    return res.status(200).json({
+      success: true,
+      data: inserted,
+      message: "Thank you! You're subscribed and we'll be in touch soon.",
+    });
   } catch (error) {
     console.error("Error in save-subscription:", error);
     return res
