@@ -1,17 +1,16 @@
-import { motion } from "motion/react";
-import { CheckCircle, AlertCircle, InfoIcon, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 import FormMessage from "./FormMessage";
 
 /**
  * FormFeedback component to handle the full form submission feedback experience
  * Includes loading state, success/error messages, and animations
  */
-export default function FormFeedback({ 
-  isSubmitting, 
+export default function FormFeedback({
+  isSubmitting,
   message,
   onDismiss,
-  className = ""
+  className = "",
 }) {
   // If submitting, show loading state
   if (isSubmitting) {
@@ -23,11 +22,13 @@ export default function FormFeedback({
         className={`mt-4 flex items-center justify-center p-3 ${className}`}
       >
         <Loader2 className="w-5 h-5 text-zinc-500 animate-spin mr-2" />
-        <span className="text-sm text-zinc-600 font-medium">Processing your request...</span>
+        <span className="text-sm text-zinc-600 font-medium">
+          Processing your request...
+        </span>
       </motion.div>
     );
   }
-  
+
   // If there's a message, show it using the FormMessage component
   if (message?.text) {
     return (
@@ -39,7 +40,7 @@ export default function FormFeedback({
       />
     );
   }
-  
+
   // If neither submitting nor showing a message, return null
   return null;
-} 
+}
