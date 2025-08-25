@@ -1,28 +1,8 @@
 import Reveal from "./animations/Reveal";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import PricingQuoteForm from "./PricingQuoteForm";
 
 export default function Pricing() {
-  const [berthNumber, setBerthNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-
-    // Handle form submission here
-    console.log("Berth Number:", berthNumber);
-    console.log("Email:", email);
-
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false);
-      setBerthNumber("");
-      setEmail("");
-    }, 1000);
-  };
-
   const pricingTiers = [
     {
       range: "Up to 20",
@@ -79,7 +59,7 @@ export default function Pricing() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              ></motion.p>
+              />
             </Reveal>
           </div>
 
@@ -121,52 +101,19 @@ export default function Pricing() {
 
               {/* Quote Form */}
               <div className="max-w-6xl mx-auto">
-                {/* <p className="text-black font-normal mb-8 text-center text-[23px]">
-                  Enter your berth number to get a free quote.
-                </p> */}
                 <div className="grid grid-cols-1 lg:grid-cols-1 items-center">
-                  {/* Left Column - Image */}
-                  {/* <div className="flex justify-center">
-                    <img
-                      src="/Dollar.png"
-                      alt="Marina berths"
-                      className="w-full max-w-xs"
-                    />
-                  </div> */}
-
-                  {/* Right Column - Form */}
-                  <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col sm:flex-row items-center gap-4 sm:gap-x-4 bg-white p-2 rounded-2xl shadow-sm border border-zinc-200 max-w-3xl mx-auto"
-                  >
-                    <input
-                      type="number"
-                      value={berthNumber}
-                      onChange={(e) => setBerthNumber(e.target.value)}
-                      placeholder="Number of berths"
-                      required
-                      className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
-                      disabled={submitting}
-                    />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email"
-                      required
-                      className="w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400"
-                      disabled={submitting}
-                    />
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      type="submit"
-                      className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px] cursor-pointer"
-                      disabled={submitting}
-                    >
-                      {submitting ? "Getting Quote..." : "Get Free Quote"}
-                    </motion.button>
-                  </form>
+                  <PricingQuoteForm
+                    source="pricing_page"
+                    buttonText="Get Free Quote"
+                    className="max-w-3xl mx-auto"
+                    formClassName=""
+                    onSuccess={(result) => {
+                      console.log("Quote request submitted successfully:", result);
+                    }}
+                    onError={(error) => {
+                      console.error("Quote request failed:", error);
+                    }}
+                  />
                 </div>
               </div>
             </div>
