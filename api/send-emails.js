@@ -1,7 +1,7 @@
-import Resend from "resend";
-
 /* eslint-env node */
 /* global process */
+
+import { Resend } from "resend";
 
 export default async function handler(req, res) {
   // Set CORS headers
@@ -338,7 +338,7 @@ export default async function handler(req, res) {
     const emailPromises = [
       // 1. Send notification to admin
       resend.emails.send({
-        from: "Harbr Notifications <noreply@harbr.com>",
+        from: "Harbr Notifications <onboarding@resend.dev>",
         to: [adminEmail],
         subject: `🚢 New Harbr subscription from ${email}`,
         html: adminNotificationTemplate,
@@ -346,7 +346,7 @@ export default async function handler(req, res) {
 
       // 2. Send welcome email to user
       resend.emails.send({
-        from: "Amila from Harbr <devharbr@gmail.com>",
+        from: "Amila from Harbr <onboarding@resend.dev>",
         to: [email],
         subject: "Welcome to Harbr - Your Marina Management Journey Begins! 🚢",
         html: userWelcomeTemplate,
