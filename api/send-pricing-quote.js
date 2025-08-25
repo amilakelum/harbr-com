@@ -61,65 +61,132 @@ export default async function handler(req, res) {
 
     // ADMIN NOTIFICATION EMAIL TEMPLATE
     const adminEmailData = {
-      from: "Harbr Pricing Quotes <onboarding@resend.dev>",
+      from: "Harbr Marina Software <no-reply@resend.dev>",
+      reply_to: "devharbr@gmail.com",
       to: [adminEmail],
-      subject: `🚢 New Pricing Quote Request from ${email}`,
+      subject: `New Quote Request: ${berthNumber} berths - ${email}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
-          <div style="background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <h2 style="color: #333; margin-bottom: 20px; font-size: 24px;">🚢 New Pricing Quote Request</h2>
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
+          <div style="background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-top: 4px solid #007bff;">
             
-            <div style="background-color: #E1EFFF; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h3 style="color: #333; margin: 0 0 15px 0; font-size: 18px;">Customer Details</h3>
-              <p style="margin: 8px 0; color: #555;"><strong>Email:</strong> ${email}</p>
-              <p style="margin: 8px 0; color: #555;"><strong>Number of Berths:</strong> ${berthNumber}</p>
-              <p style="margin: 8px 0; color: #555;"><strong>Estimated Pricing:</strong> ${estimatedPrice}</p>
-              <p style="margin: 8px 0; color: #555;"><strong>Request Source:</strong> ${source}</p>
-              <p style="margin: 8px 0; color: #555;"><strong>Page:</strong> ${
-                additionalData?.page || "Unknown"
-              }</p>
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 30px;">
+              <h1 style="color: #333; margin: 0; font-size: 28px; font-weight: 600;">New Quote Request</h1>
+              <p style="color: #666; margin: 10px 0 0 0; font-size: 16px;">Harbr Marina Management Software</p>
+            </div>
+            
+            <!-- Customer Details Card -->
+            <div style="background: linear-gradient(135deg, #E1EFFF 0%, #f8f9fa 100%); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 4px solid #007bff;">
+              <h2 style="color: #333; margin: 0 0 20px 0; font-size: 20px; font-weight: 600;">Customer Information</h2>
+              
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px 0; color: #555; font-weight: 600; width: 140px;">Email:</td>
+                  <td style="padding: 8px 0; color: #333;">
+                    <a href="mailto:${email}" style="color: #007bff; text-decoration: none;">${email}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #555; font-weight: 600;">Berth Count:</td>
+                  <td style="padding: 8px 0; color: #333; font-weight: 600; font-size: 18px;">${berthNumber} berths</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #555; font-weight: 600;">Est. Pricing:</td>
+                  <td style="padding: 8px 0; color: #28a745; font-weight: 600; font-size: 16px;">${estimatedPrice}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #555; font-weight: 600;">Source:</td>
+                  <td style="padding: 8px 0; color: #333;">${source}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #555; font-weight: 600;">Page:</td>
+                  <td style="padding: 8px 0; color: #333;">${
+                    additionalData?.page || "Unknown"
+                  }</td>
+                </tr>
+              </table>
             </div>
 
-            <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
-              <h3 style="color: #856404; margin: 0 0 10px 0; font-size: 16px;">⚡ Action Required</h3>
-              <p style="margin: 8px 0; color: #856404;">
-                <strong>Please send a personalized quote to the customer within 24 hours.</strong>
+            <!-- Action Required Section -->
+            <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #ffc107;">
+              <h3 style="color: #856404; margin: 0 0 15px 0; font-size: 18px; font-weight: 600;">⚡ Action Required</h3>
+              <p style="margin: 0 0 15px 0; color: #856404; font-size: 16px; line-height: 1.5;">
+                <strong>Please respond to this customer within 24 hours with a personalized quote.</strong>
               </p>
-              <p style="margin: 8px 0; color: #856404;">
-                Consider including:
-              </p>
-              <ul style="color: #856404; margin: 10px 0; padding-left: 20px;">
-                <li>Custom pricing based on ${berthNumber} berths</li>
-                <li>Implementation timeline</li>
-                <li>Available features for their marina size</li>
-                <li>Free trial offer (30 days)</li>
-                <li>Setup and training details</li>
-              </ul>
+              
+              <div style="background-color: white; padding: 15px; border-radius: 6px; margin: 15px 0;">
+                <h4 style="color: #856404; margin: 0 0 10px 0; font-size: 16px;">Recommended Quote Contents:</h4>
+                <ul style="color: #856404; margin: 10px 0; padding-left: 20px; line-height: 1.6;">
+                  <li>Custom pricing for ${berthNumber} berths</li>
+                  <li>Implementation timeline (typically 2-4 weeks)</li>
+                  <li>Available features for marina size</li>
+                  <li>30-day free trial offer</li>
+                  <li>Training and onboarding details</li>
+                  <li>Integration options</li>
+                </ul>
+              </div>
             </div>
 
-            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-              <p style="margin: 0; color: #666; font-size: 14px;">
-                <strong>Timestamp:</strong> ${new Date().toLocaleString()}<br>
-                <strong>Button Text:</strong> ${
-                  additionalData?.button_text || "Get Free Quote"
-                }
-              </p>
-            </div>
-
-            <div style="text-align: center; margin-top: 30px;">
-              <a href="mailto:${email}?subject=Your%20Harbr%20Marina%20Software%20Quote&body=Hi%20there,%0A%0AThank%20you%20for%20requesting%20a%20quote%20for%20Harbr%20Marina%20Management%20Software.%20Based%20on%20your%20${berthNumber}%20berths,%20here's%20your%20custom%20pricing..." 
-                 style="background-color: #000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
-                📧 Reply to Customer
+            <!-- Quick Action Buttons -->
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="mailto:${email}?subject=Your%20Harbr%20Marina%20Software%20Quote%20for%20${berthNumber}%20Berths&body=Dear%20Marina%20Manager,%0A%0AThank%20you%20for%20your%20interest%20in%20Harbr%20Marina%20Management%20Software.%20Based%20on%20your%20${berthNumber}%20berths,%20I'm%20pleased%20to%20provide%20you%20with%20a%20custom%20quote.%0A%0APricing:%20${estimatedPrice}%0A%0AThis%20includes:%0A-%20Complete%20marina%20management%20system%0A-%20Online%20booking%20platform%0A-%20Customer%20portal%0A-%20Financial%20reporting%0A-%2030-day%20free%20trial%0A-%20Full%20training%20and%20support%0A%0AWould%20you%20like%20to%20schedule%20a%2015-minute%20demo%20call%20to%20see%20the%20system%20in%20action?%0A%0ABest%20regards,%0AHarbr%20Team" 
+                 style="background-color: #007bff; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; display: inline-block; margin: 0 10px 10px 0;">
+                📧 Send Quote
+              </a>
+              
+              <a href="https://calendly.com/harbr-demo" target="_blank"
+                 style="background-color: #28a745; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; display: inline-block; margin: 0 10px 10px 0;">
+                📅 Schedule Demo
               </a>
             </div>
 
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
-              <p style="margin: 0; color: #999; font-size: 12px;">
-                This is an automated notification from your Harbr website pricing form.
+            <!-- Footer -->
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
+              <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.5;">
+                <strong>Request Details:</strong><br>
+                Timestamp: ${new Date().toLocaleString("en-AU", {
+                  timeZone: "Australia/Sydney",
+                })}<br>
+                Button Text: ${additionalData?.button_text || "Get Free Quote"}
+              </p>
+              <p style="margin: 15px 0 0 0; color: #999; font-size: 12px;">
+                This notification was sent from your Harbr website pricing form.<br>
+                Harbr Marina Management Software - helping marinas grow.
               </p>
             </div>
           </div>
         </div>
+      `,
+      // Add text version for better deliverability
+      text: `
+New Pricing Quote Request - Harbr Marina Software
+
+Customer Details:
+- Email: ${email}
+- Number of Berths: ${berthNumber}
+- Estimated Pricing: ${estimatedPrice}
+- Request Source: ${source}
+- Page: ${additionalData?.page || "Unknown"}
+
+Action Required:
+Please respond to this customer within 24 hours with a personalized quote.
+
+Recommended quote contents:
+- Custom pricing for ${berthNumber} berths
+- Implementation timeline (2-4 weeks)
+- Available features for marina size
+- 30-day free trial offer
+- Training and onboarding details
+- Integration options
+
+Quick Reply: mailto:${email}
+
+Request Timestamp: ${new Date().toLocaleString("en-AU", {
+        timeZone: "Australia/Sydney",
+      })}
+Button Text: ${additionalData?.button_text || "Get Free Quote"}
+
+This notification was sent from your Harbr website pricing form.
       `,
     };
 

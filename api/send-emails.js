@@ -176,10 +176,34 @@ export default async function handler(req, res) {
     // Send only admin notification email
     try {
       const { data, error } = await resend.emails.send({
-        from: "Harbr Notifications <onboarding@resend.dev>",
+        from: "Harbr Marina Software <no-reply@resend.dev>",
+        reply_to: "devharbr@gmail.com",
         to: [adminEmail],
-        subject: `🚢 New Harbr subscription from ${email}`,
+        subject: `New Subscription: ${email} - ${source}`,
         html: adminNotificationTemplate,
+        // Add text version for better deliverability
+        text: `
+New Email Subscription - Harbr Marina Software
+
+Subscriber Details:
+- Email: ${email}
+- Source: ${source}
+- Page: ${additionalData?.page || "Unknown"}
+- Button Text: ${additionalData?.button_text || "Get started for free"}
+
+Action Required:
+Please follow up with this subscriber manually to:
+- Welcome them to Harbr
+- Understand their marina management needs
+- Schedule a demo if appropriate
+- Provide personalized onboarding
+
+Timestamp: ${new Date().toLocaleString("en-AU", {
+          timeZone: "Australia/Sydney",
+        })}
+
+This notification was sent from your Harbr website email subscription form.
+        `,
       });
 
       if (error) {
