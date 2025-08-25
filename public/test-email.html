@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Welcome Email</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+      }
+      input,
+      button {
+        padding: 10px;
+        margin: 10px 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .result {
+        margin: 20px 0;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Test Welcome Email</h2>
+    <form id="testForm">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Send Test Welcome Email</button>
+    </form>
+    <div id="result" class="result" style="display: none"></div>
+
+    <script>
+      document
+        .getElementById("testForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const resultDiv = document.getElementById("result");
+
+          try {
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = "Sending...";
+
+            const response = await fetch("/api/test-welcome-email", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+              resultDiv.innerHTML = `✅ Success! Email sent to ${email}<br>Email ID: ${result.emailId}`;
+              resultDiv.style.background = "#d4edda";
+            } else {
+              resultDiv.innerHTML = `❌ Error: ${
+                result.error
+              }<br>Details: ${JSON.stringify(result.details, null, 2)}`;
+              resultDiv.style.background = "#f8d7da";
+            }
+          } catch (error) {
+            resultDiv.innerHTML = `❌ Network Error: ${error.message}`;
+            resultDiv.style.background = "#f8d7da";
+          }
+        });
+    </script>
+  </body>
+</html>

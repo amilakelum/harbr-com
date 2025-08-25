@@ -6,9 +6,9 @@ This guide will help you set up automatic email notifications when users submit 
 
 When someone submits the form on your website:
 
-1. **📩 You get notified** - A notification email is sent to `amilakelum44@gmail.com` with the subscriber details
-2. **🎉 User gets welcomed** - An automatic welcome email is sent to the subscriber with Harbr information
-3. **💾 Data is saved** - The email is stored in your Supabase database
+1. **📩 You get notified** - A notification email is sent to `devharbr@gmail.com` with the subscriber details
+2. **📝 Manual follow-up** - You handle welcome emails and follow-ups manually for personalized touch
+3. **💾 Data is tracked** - Analytics are tracked via PostHog for insights
 
 ## Setup Steps:
 
@@ -81,17 +81,16 @@ vercel --prod
 
 ### Admin Notification Email (to you):
 
-- **To**: `amilakelum44@gmail.com`
-- **From**: `Harbr Notifications <noreply@harbr.com>`
+- **To**: `devharbr@gmail.com`
+- **From**: `Harbr Notifications <onboarding@resend.dev>`
 - **Subject**: `🚢 New Harbr subscription from [email]`
-- **Content**: Subscriber details, source, timestamp
+- **Content**: Subscriber details, source, timestamp, manual follow-up reminder
 
-### User Welcome Email:
+### Manual Welcome Process:
 
-- **To**: `[subscriber email]`
-- **From**: `Amila from Harbr <amilakelum44@gmail.com>`
-- **Subject**: `Welcome to Harbr - Your Marina Management Journey Begins! 🚢`
-- **Content**: Welcome message, feature list, CTA buttons
+- **Welcome emails**: Handled manually for personalized touch
+- **Follow-up**: Personal outreach for demos and consultations
+- **Flexibility**: Customize message based on subscriber source and needs
 
 ## Customization:
 
