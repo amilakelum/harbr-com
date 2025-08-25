@@ -108,7 +108,10 @@ export default function Pricing() {
                     className="max-w-3xl mx-auto"
                     formClassName=""
                     onSuccess={(result) => {
-                      console.log("Quote request submitted successfully:", result);
+                      console.log(
+                        "Quote request submitted successfully:",
+                        result
+                      );
                     }}
                     onError={(error) => {
                       console.error("Quote request failed:", error);

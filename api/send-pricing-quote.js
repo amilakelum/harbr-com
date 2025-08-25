@@ -75,7 +75,9 @@ export default async function handler(req, res) {
               <p style="margin: 8px 0; color: #555;"><strong>Number of Berths:</strong> ${berthNumber}</p>
               <p style="margin: 8px 0; color: #555;"><strong>Estimated Pricing:</strong> ${estimatedPrice}</p>
               <p style="margin: 8px 0; color: #555;"><strong>Request Source:</strong> ${source}</p>
-              <p style="margin: 8px 0; color: #555;"><strong>Page:</strong> ${additionalData?.page || 'Unknown'}</p>
+              <p style="margin: 8px 0; color: #555;"><strong>Page:</strong> ${
+                additionalData?.page || "Unknown"
+              }</p>
             </div>
 
             <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
@@ -98,7 +100,9 @@ export default async function handler(req, res) {
             <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
               <p style="margin: 0; color: #666; font-size: 14px;">
                 <strong>Timestamp:</strong> ${new Date().toLocaleString()}<br>
-                <strong>Button Text:</strong> ${additionalData?.button_text || 'Get Free Quote'}
+                <strong>Button Text:</strong> ${
+                  additionalData?.button_text || "Get Free Quote"
+                }
               </p>
             </div>
 

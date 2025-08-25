@@ -103,9 +103,11 @@ export default function PricingQuoteForm({
       if (response.ok && result.success) {
         setSubmitMessage({
           type: "success",
-          text: result.message || "Thank you! We'll send you a custom quote within 24 hours.",
+          text:
+            result.message ||
+            "Thank you! We'll send you a custom quote within 24 hours.",
         });
-        
+
         // Clear form fields on success
         setEmail("");
         setBerthNumber("");
@@ -115,8 +117,9 @@ export default function PricingQuoteForm({
           onSuccess(result);
         }
       } else {
-        const errorMessage = result.error || "Something went wrong. Please try again.";
-        
+        const errorMessage =
+          result.error || "Something went wrong. Please try again.";
+
         setSubmitMessage({
           type: "error",
           text: errorMessage,
@@ -129,7 +132,7 @@ export default function PricingQuoteForm({
       }
     } catch (error) {
       console.error("Error submitting pricing quote request:", error);
-      
+
       // Check if we're in development mode and handle gracefully
       const isDevelopment = import.meta.env.DEV;
       if (isDevelopment) {
@@ -137,15 +140,15 @@ export default function PricingQuoteForm({
         console.log("📧 Email:", email);
         console.log("📧 Berth Number:", berthNumber);
         console.log("📧 Source:", source);
-        
+
         setSubmitMessage({
           type: "success",
           text: "Development mode: Quote request processed successfully! (Emails disabled in development)",
         });
-        
+
         setEmail("");
         setBerthNumber("");
-        
+
         if (onSuccess) {
           onSuccess({ success: true, development: true });
         }

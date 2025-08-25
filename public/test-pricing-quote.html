@@ -34,7 +34,13 @@
     <h2>Test Pricing Quote Email</h2>
     <form id="testForm">
       <input type="email" id="email" placeholder="Enter your email" required />
-      <input type="number" id="berthNumber" placeholder="Number of berths" min="1" required />
+      <input
+        type="number"
+        id="berthNumber"
+        placeholder="Number of berths"
+        min="1"
+        required
+      />
       <button type="submit">Send Test Pricing Quote</button>
     </form>
     <div id="result" class="result" style="display: none"></div>
@@ -56,14 +62,14 @@
             const response = await fetch("/api/send-pricing-quote", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ 
-                email, 
+              body: JSON.stringify({
+                email,
                 berthNumber,
                 source: "test_page",
                 additionalData: {
                   page: "/test-pricing-quote.html",
-                  button_text: "Send Test Pricing Quote"
-                }
+                  button_text: "Send Test Pricing Quote",
+                },
               }),
             });
 
