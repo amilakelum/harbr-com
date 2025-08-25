@@ -39,7 +39,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-zinc-100 to-zinc-200">
+    <div className=" bg-[#E1EFFF]">
       <div className="relative isolate px-6 py-24 lg:px-8">
         <div className="mx-auto max-w-5xl">
           {/* Header */}

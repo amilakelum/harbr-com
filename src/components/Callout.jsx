@@ -30,11 +30,11 @@ export default function Callout() {
         <div className="relative isolate px-6 py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
             {/* Header text */}
-            <Reveal delay={0.1}>
+            {/* <Reveal delay={0.1}>
               <p className="text-normal font-mono uppercase tracking-wide text-zinc-600 mb-20 text-center">
                 JOIN 10+ BUSINESSES USING HARBR
               </p>
-            </Reveal>
+            </Reveal> */}
 
             {/* Main Quote */}
             <div className="flex flex-col lg:flex-row justify-center items-center gap-x-24 gap-y-12 text-center">
@@ -58,11 +58,11 @@ export default function Callout() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     >
-                      <p className="font-mono text-[20px] tracking-[0.01em] font-medium text-zinc-600 uppercase">
+                      <p className=" text-[20px] tracking-[0.01em] font-medium text-zinc-600 uppercase">
                         ANDREW FIELDING
                       </p>
                       <div className="mt-4"></div>
-                      <p className="font-mono text-[20px] tracking-[0.01em] leading-tight font-medium text-zinc-600 uppercase text-center">
+                      <p className=" text-[20px] tracking-[0.01em] leading-tight font-medium text-zinc-600 uppercase text-center">
                         CEO of <br />
                         Boating Industry Australia
                       </p>

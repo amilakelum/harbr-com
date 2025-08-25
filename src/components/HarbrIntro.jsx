@@ -13,17 +13,25 @@ export default function HarbrIntro() {
               <h2 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal mb-8">
                 The world's first AI powered Marina Management Software
               </h2>
-              <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
-                Harbr is the future of Marina Management software that leverages
-                AI & smart insights to supercharge operations, deliver flawless
-                customer experience and maximise marina revenue.
-              </p>
-              <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-10">
-                Harbr is also the world's first platform that supports marinas &
-                berth owners with berth sharing & subleasing, seamlessly
-                connecting boat owners with marinas in one integrated system.
-              </p>
-
+              <Reveal delay={0.2}>
+                <motion.p
+                  className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 max-w-3xl mx-auto mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+                >
+                  <strong>
+                    Harbr is the future of Marina Management software that
+                    leverages AI & smart insights to supercharge operations,
+                    deliver flawless customer experience and maximise marina
+                    revenue.
+                  </strong>{" "}
+                  <br />
+                  Harbr is also the world's first platform that supports marinas
+                  & berth owners with berth sharing & subleasing, seamlessly
+                  connecting boat owners with marinas in one integrated system.
+                </motion.p>
+              </Reveal>
               <Link to="/features">
                 <motion.a
                   href="/features"

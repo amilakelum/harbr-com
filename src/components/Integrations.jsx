@@ -30,7 +30,7 @@ export default function Integrations() {
       name: "Integriti",
       description:
         "Secure access infrastructure integration for enhanced security.",
-      logo: "/Intigriti.svg", // Placeholder - replace with actual Integriti logo
+      logo: "/Intigriti.png", // Placeholder - replace with actual Integriti logo
     },
     {
       name: "Custom APIs",
@@ -40,7 +40,7 @@ export default function Integrations() {
   ];
 
   return (
-    <div className="relative isolate px-6 py-16 lg:px-8 bg-gradient-to-br from-white to-zinc-50">
+    <div className="relative isolate px-6 py-16 lg:px-8 bg-[#E1EFFF]">
       <div className="container mx-auto">
         <div className="mx-auto max-w-7xl">
           {/* Header Section */}

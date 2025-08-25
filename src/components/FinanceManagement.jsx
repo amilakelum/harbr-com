@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function FinanceManagement() {
   return (
-    <div className="relative isolate px-6 py-16 lg:px-8">
+    <div className="relative isolate px-6 py-16 lg:px-8 bg-gradient-to-br from-zinc-100 to-zinc-200">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:items-center">
           {/* Left side - Content */}

@@ -24,13 +24,24 @@ export default function Charity() {
               <h2 className="text-[46px] leading-[1.1] tracking-[-0.02em] font-normal mb-8">
                 1% of all Harbr's subscriptions are donated to charity.
               </h2>
-              <p className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 mb-8">
-                We believe its important to improve the world around us where
-                possible. By donating at least 1% of all subscriptions to
-                carefully selected charities, we ensure that by choosing Harbr
-                you’re also doing your bit. Together we can make a difference in
-                the environment that we as marine enthusiasts all enjoy.
-              </p>
+
+              <Reveal delay={0.2}>
+                <motion.p
+                  className="text-pretty text-zinc-600 text-base font-normal sm:text-lg/8 max-w-3xl mx-auto mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+                >
+                  <strong>
+                    We believe its important to improve the world around us
+                    where possible.
+                  </strong>{" "}
+                  By donating at least 1% of all subscriptions to carefully
+                  selected charities, we ensure that by choosing Harbr you’re
+                  also doing your bit. Together we can make a difference in the
+                  environment that we as marine enthusiasts all enjoy.
+                </motion.p>
+              </Reveal>
 
               {/* <Link to="/charity">
                 <motion.button
