@@ -105,7 +105,7 @@ export default function Pricing() {
                   <PricingQuoteForm
                     source="pricing_page"
                     buttonText="Get Free Quote"
-                    className="max-w-3xl mx-auto"
+                    className="max-w-6xl mx-auto"
                     formClassName=""
                     onSuccess={(result) => {
                       console.log(

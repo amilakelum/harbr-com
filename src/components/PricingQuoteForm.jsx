@@ -173,10 +173,10 @@ export default function PricingQuoteForm({
   };
 
   return (
-    <div className={className}>
+    <div className={`w-full ${className}`}>
       <form
         onSubmit={handleSubmit}
-        className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-x-4 bg-white p-2 rounded-2xl shadow-sm border border-zinc-200 ${formClassName}`}
+        className={`flex flex-col xl:flex-row items-center gap-6 xl:gap-x-6 bg-white p-2 rounded-2xl shadow-sm border border-zinc-200 w-full max-w-7xl mx-auto ${formClassName}`}
       >
         <input
           type="number"
@@ -185,7 +185,7 @@ export default function PricingQuoteForm({
           placeholder="Number of berths"
           required
           min="1"
-          className={`w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400 ${inputClassName}`}
+          className={`w-full xl:w-64 px-5 py-4 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400 ${inputClassName}`}
           disabled={submitting}
         />
         <input
@@ -194,14 +194,14 @@ export default function PricingQuoteForm({
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           required
-          className={`w-full flex-grow px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400 ${inputClassName}`}
+          className={`w-full xl:flex-1 px-5 py-3.5 text-base rounded-xl border-0 bg-white text-black focus:outline-none focus:ring-0 h-[52px] text-[16px] placeholder-zinc-400 ${inputClassName}`}
           disabled={submitting}
         />
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
-          className={`w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px] cursor-pointer ${buttonClassName}`}
+          className={`w-full xl:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px] cursor-pointer min-w-[180px] ${buttonClassName}`}
           disabled={submitting}
         >
           {submitting ? "Getting Quote..." : buttonText}

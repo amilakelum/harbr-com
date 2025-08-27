@@ -1,6 +1,6 @@
 import Reveal from "./animations/Reveal";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import EmailSubscriptionForm from "./EmailSubscriptionForm";
 
 export default function FreeTrial() {
   return (
@@ -34,15 +34,17 @@ export default function FreeTrial() {
             </Reveal>
 
             <Reveal delay={0.3}>
-              <Link to="/free-trial">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center rounded-xl bg-black px-8 py-4 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out cursor-pointer"
-                >
-                  Try Harbr for free
-                </motion.button>
-              </Link>
+              <div className="max-w-lg mx-auto">
+                <EmailSubscriptionForm
+                  source="free_trial_section"
+                  buttonText="Start your free trial"
+                  placeholder="Enter your business email"
+                  className=""
+                  formClassName="bg-zinc-50 border border-zinc-200"
+                  inputClassName="bg-white"
+                  buttonClassName=""
+                />
+              </div>
             </Reveal>
           </div>
         </div>
