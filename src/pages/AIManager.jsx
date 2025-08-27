@@ -96,7 +96,7 @@ export default function AIManager() {
         }
         includeEmailForm={true}
         source="ai_manager_hero_section"
-        buttonText="Try AI Manager"
+        buttonText="Get started for free"
         placeholder="Enter your business email"
       />
 

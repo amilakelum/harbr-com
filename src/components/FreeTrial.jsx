@@ -37,7 +37,7 @@ export default function FreeTrial() {
               <div className="max-w-lg mx-auto">
                 <EmailSubscriptionForm
                   source="free_trial_section"
-                  buttonText="Start your free trial"
+                  buttonText="Get started for free"
                   placeholder="Enter your business email"
                   className=""
                   formClassName="bg-zinc-50 border border-zinc-200"

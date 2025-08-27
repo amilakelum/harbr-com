@@ -76,7 +76,7 @@ export default function Implementation() {
         }
         includeEmailForm={true}
         source="implementation_hero_section"
-        buttonText="Start Implementation"
+        buttonText="Get started for free"
         placeholder="Enter your business email"
       />
 

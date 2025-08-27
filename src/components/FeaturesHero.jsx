@@ -17,7 +17,7 @@ export default function FeaturesHero({
   ),
   includeEmailForm = true,
   source = "features_hero_section",
-  buttonText = "Try Harbr for free",
+  buttonText = "Get started for free",
   placeholder = "Enter your business email",
 }) {
   return (

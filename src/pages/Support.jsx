@@ -52,7 +52,7 @@ export default function Support() {
         }
         includeEmailForm={true}
         source="support_hero_section"
-        buttonText="Get Support"
+        buttonText="Get started for free"
         placeholder="Enter your business email"
       />
 

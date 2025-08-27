@@ -24,7 +24,7 @@ export default function FeaturePageHero({
               <div className="max-w-lg">
                 <EmailSubscriptionForm
                   source={source}
-                  buttonText="Book a Demo"
+                  buttonText="Get started for free"
                   placeholder="Enter your business email"
                   className=""
                   formClassName="bg-zinc-50 border border-zinc-200"
