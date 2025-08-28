@@ -20,6 +20,10 @@ import AIManager from "./pages/AIManager";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import BoatTypesGuide from "./pages/BoatTypesGuide";
+import ModernTechnologyTransformingMarinas from "./pages/ModernTechnologyTransformingMarinas";
+import MarinamooringGuide from "./pages/MarinamooringGuide";
+import EssentialSailingKnots from "./pages/EssentialSailingKnots";
+import ArtificialIntelligenceDecoded from "./pages/ArtificialIntelligenceDecoded";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Callout from "./components/Callout";
@@ -111,6 +115,22 @@ function App() {
           <Route path="support" element={<Support />} />
           <Route path="ai-marina-manager" element={<AIManager />} />
           <Route path="blog" element={<Blog />} />
+          <Route
+            path="blog/complete-guide-mastering-marina-mooring"
+            element={<MarinamooringGuide />}
+          />
+          <Route
+            path="blog/essential-sailing-knots-every-boater-should-know"
+            element={<EssentialSailingKnots />}
+          />
+          <Route
+            path="blog/artificial-intelligence-decoded"
+            element={<ArtificialIntelligenceDecoded />}
+          />
+          <Route
+            path="blog/modern-technology-transforming-marina-operations"
+            element={<ModernTechnologyTransformingMarinas />}
+          />
           <Route
             path="blog/complete-guide-different-types-boats"
             element={<BoatTypesGuide />}

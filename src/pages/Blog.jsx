@@ -2,24 +2,66 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Reveal from "../components/animations/Reveal";
 import { Link } from "react-router-dom";
+import FreeTrial from "../components/FreeTrial";
 
 // Mock blog data - replace with your actual blog data source
 const blogPosts = [
   {
     id: 1,
-    title: "Essential Maritime Distress Signals",
+    title: "Artificial Intelligence: Decoded",
     excerpt:
-      "Learn the essential maritime distress signals that every marina manager and boat operator should know for emergency situations.",
+      "Demystifying AI technology and understanding how pattern recognition is revolutionizing everything from entertainment to marina management.",
     author: "Sarah Johnson",
     authorInitials: "SJ",
-    date: "January 15",
-    category: "SAFETY & REGULATIONS",
-    readTime: "8 min read",
-    image: "/blog-images/essential-maritime-distress-signals.png",
-    slug: "essential-maritime-distress-signals",
+    date: "January 30",
+    category: "TECHNOLOGY & INNOVATION",
+    readTime: "12 min read",
+    image: "/blog-images/artificial-intelligence-decoded.jpg",
+    slug: "artificial-intelligence-decoded",
   },
   {
     id: 2,
+    title: "Master These 3 Essential Sailing Knots Every Boater Must Know",
+    excerpt:
+      "Learn the bowline, clove hitch, and cleat hitch - three fundamental knots that form the cornerstone of essential seamanship skills.",
+    author: "Sarah Johnson",
+    authorInitials: "SJ",
+    date: "January 28",
+    category: "BOATING SKILLS & TECHNIQUES",
+    readTime: "10 min read",
+    image: "/blog-images/essential-sailing-knots.jpg",
+    slug: "essential-sailing-knots-every-boater-should-know",
+  },
+  {
+    id: 3,
+    title:
+      "Harbr's Complete Guide to Mastering Marina Mooring: Essential Tips for Confident Docking",
+    excerpt:
+      "Master the art of marina docking with expert techniques for preparation, approach, and securing your vessel like a professional mariner.",
+    author: "Michael Chen",
+    authorInitials: "MC",
+    date: "January 25",
+    category: "BOATING SKILLS & TECHNIQUES",
+    readTime: "14 min read",
+    image: "/blog-images/marina-mooring-guide.jpg",
+    slug: "complete-guide-mastering-marina-mooring",
+  },
+  {
+    id: 4,
+    title:
+      "New School: How Modern Technology is Transforming Marina Operations",
+    excerpt:
+      "Discover how AI, smart sensors, and integrated software are revolutionizing marina operations and creating exceptional customer experiences.",
+    author: "Sarah Johnson",
+    authorInitials: "SJ",
+    date: "January 22",
+    category: "TECHNOLOGY & INNOVATION",
+    readTime: "15 min read",
+    image: "/blog-images/modern-technology-marina.jpg",
+    slug: "modern-technology-transforming-marina-operations",
+  },
+  {
+    id: 5,
     title: "Complete Guide to Different Types of Boats",
     excerpt:
       "Discover the perfect vessel for your needs with our comprehensive guide to boat types, from recreational powerboats to luxury yachts.",
@@ -28,112 +70,21 @@ const blogPosts = [
     date: "January 20",
     category: "BOAT TYPES & BUYING GUIDE",
     readTime: "12 min read",
-    image: "/different-type-of-boat.png",
+    image: "/blog-images/different-type-of-boat.jpg",
     slug: "complete-guide-different-types-boats",
   },
   {
-    id: 3,
-    title: "The Complete Guide to Marina Revenue Optimization",
-    excerpt:
-      "Learn proven strategies to maximize your marina's revenue through dynamic pricing, capacity management, and customer experience enhancement.",
-    author: "Michael Chen",
-    authorInitials: "MC",
-    date: "January 12",
-    category: "BUSINESS STRATEGY",
-    readTime: "12 min read",
-    image: "/screenshot-1.png",
-    slug: "complete-guide-marina-revenue-optimization",
-  },
-  {
-    id: 3,
-    title: "5 Essential Features Every Modern Marina Software Should Have",
-    excerpt:
-      "Explore the must-have features that make marina management software effective, from real-time booking to integrated payment processing.",
-    author: "Emily Rodriguez",
-    authorInitials: "ER",
-    date: "January 10",
-    category: "SOFTWARE FEATURES",
-    readTime: "6 min read",
-    image: "/screenshot-2.webp",
-    slug: "essential-features-modern-marina-software",
-  },
-  {
-    id: 4,
-    title: "Customer Experience Trends in the Marina Industry",
-    excerpt:
-      "Stay ahead of the curve with the latest customer experience trends that are shaping the future of marina operations and customer satisfaction.",
-    author: "David Park",
-    authorInitials: "DP",
-    date: "January 8",
-    category: "CUSTOMER EXPERIENCE",
-    readTime: "10 min read",
-    image: "/Screenshot-23.png",
-    slug: "customer-experience-trends-marina-industry",
-  },
-  {
-    id: 5,
-    title: "Sustainable Marina Practices: A Guide for Modern Operators",
-    excerpt:
-      "Learn how to implement sustainable practices in your marina operations while maintaining profitability and customer satisfaction.",
-    author: "Lisa Thompson",
-    authorInitials: "LT",
-    date: "January 5",
-    category: "SUSTAINABILITY",
-    readTime: "9 min read",
-    image: "/Screenshot-24.png",
-    slug: "sustainable-marina-practices-guide",
-  },
-  {
     id: 6,
-    title: "Digital Transformation: From Traditional to Smart Marinas",
+    title: "Essential Maritime Distress Signals: Your Lifeline on the Water",
     excerpt:
-      "Discover the step-by-step process of transforming your traditional marina into a smart, digitally-enabled operation.",
-    author: "Robert Kim",
-    authorInitials: "RK",
-    date: "January 3",
-    category: "DIGITAL TRANSFORMATION",
-    readTime: "11 min read",
-    image: "/Screenshot-25.png",
-    slug: "digital-transformation-traditional-smart-marinas",
-  },
-  {
-    id: 7,
-    title: "Understanding Marina Management Analytics and KPIs",
-    excerpt:
-      "Master the key performance indicators and analytics that matter most for successful marina management and business growth.",
-    author: "Amanda Foster",
-    authorInitials: "AF",
-    date: "December 30",
-    category: "ANALYTICS",
-    readTime: "7 min read",
-    image: "/reservation1.png",
-    slug: "understanding-marina-management-analytics-kpis",
-  },
-  {
-    id: 8,
-    title: "How AI is Revolutionizing Marina Management in 2025",
-    excerpt:
-      "Discover how artificial intelligence is transforming the marina industry, from automated berth allocation to predictive maintenance and customer service optimization.",
+      "Learn the essential maritime distress signals that every marina manager and boat operator should know for emergency situations.",
     author: "Sarah Johnson",
     authorInitials: "SJ",
     date: "January 15",
-    category: "AI & TECHNOLOGY",
+    category: "SAFETY & REGULATIONS",
     readTime: "8 min read",
-    image: "/src/assets/AI-stack.png",
-    slug: "ai-revolutionizing-marina-management-2025",
-  },
-  {
-    id: 9,
-    title: "The Future of Contactless Marina Operations",
-    excerpt:
-      "Explore how contactless technologies are reshaping marina operations and improving both safety and customer convenience.",
-    author: "James Wilson",
-    authorInitials: "JW",
-    date: "December 28",
-    category: "TECHNOLOGY",
-    readTime: "8 min read",
-    image: "/src/assets/best_software.png",
-    slug: "future-contactless-marina-operations",
+    image: "/blog-images/essential-maritime-distress-signals.jpg",
+    slug: "essential-maritime-distress-signals",
   },
 ];
 
@@ -425,50 +376,8 @@ export default function Blog() {
         </div>
       </div>
 
-      {/* Newsletter Section */}
-      <div className="bg-zinc-50 py-12 lg:py-16 border-t border-zinc-200">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <Reveal delay={0.1}>
-            <h2 className="text-3xl lg:text-4xl font-semibold mb-4">
-              Stay Updated with Marina Industry Insights
-            </h2>
-            <p className="text-zinc-600 text-lg mb-8 max-w-2xl mx-auto">
-              Get the latest marina management tips, industry trends, and Harbr
-              updates delivered to your inbox.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-md border border-zinc-300 focus:outline-none focus:ring-2 focus:border-transparent"
-                style={{ "--tw-ring-color": "rgb(87, 116, 245)" }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "#f80";
-                  e.target.style.boxShadow = "0 0 0 2px rgba(255, 136, 0, 0.2)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "";
-                  e.target.style.boxShadow = "";
-                }}
-              />
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-6 py-3 text-white rounded-md font-medium transition-colors duration-200"
-                style={{ backgroundColor: "rgb(87, 116, 245)" }}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = "#e60";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = "rgb(87, 116, 245)";
-                }}
-              >
-                Subscribe
-              </motion.button>
-            </div>
-          </Reveal>
-        </div>
-      </div>
+      {/* Free Trial Section */}
+      <FreeTrial />
     </>
   );
 }

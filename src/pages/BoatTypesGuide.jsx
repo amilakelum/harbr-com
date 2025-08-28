@@ -64,68 +64,16 @@ export default function BoatTypesGuide() {
       id: "recreational-powerboats",
     },
     {
-      title: "  ↳ Bowriders",
-      id: "bowriders",
-    },
-    {
-      title: "  ↳ Center Console Boats",
-      id: "center-console",
-    },
-    {
-      title: "  ↳ Pontoon Boats",
-      id: "pontoon-boats",
-    },
-    {
-      title: "  ↳ Cuddy Cabin Boats",
-      id: "cuddy-cabin",
-    },
-    {
       title: "Sailboats: Harnessing Wind Power",
       id: "sailboats",
-    },
-    {
-      title: "  ↳ Day Sailers",
-      id: "day-sailers",
-    },
-    {
-      title: "  ↳ Cruising Sailboats",
-      id: "cruising-sailboats",
-    },
-    {
-      title: "  ↳ Racing Sailboats",
-      id: "racing-sailboats",
     },
     {
       title: "Luxury and Cruising Vessels",
       id: "luxury-cruising",
     },
     {
-      title: "  ↳ Motor Yachts",
-      id: "motor-yachts",
-    },
-    {
-      title: "  ↳ Trawlers",
-      id: "trawlers",
-    },
-    {
-      title: "  ↳ Express Cruisers",
-      id: "express-cruisers",
-    },
-    {
       title: "Specialized Watercraft",
       id: "specialized-watercraft",
-    },
-    {
-      title: "  ↳ Personal Watercraft (PWC)",
-      id: "personal-watercraft",
-    },
-    {
-      title: "  ↳ Wake/Surf Boats",
-      id: "wake-surf-boats",
-    },
-    {
-      title: "  ↳ Bass Boats",
-      id: "bass-boats",
     },
     {
       title: "Commercial and Working Vessels",
@@ -275,7 +223,7 @@ export default function BoatTypesGuide() {
               {/* Hero Image */}
               <div className="mb-8">
                 <img
-                  src="/different-type-of-boat.png"
+                  src="/blog-images/different-type-of-boat.jpg"
                   alt="Different types of boats - Complete guide to choosing your perfect vessel"
                   className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                 />
@@ -302,13 +250,13 @@ export default function BoatTypesGuide() {
                   Recreational Powerboats
                 </h2>
 
-                <h3
+                <h4
                   id="bowriders"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Bowriders
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   The Swiss Army knife of recreational boating, bowriders
                   feature open seating in the bow area and are perfect for
@@ -318,13 +266,13 @@ export default function BoatTypesGuide() {
                   balance of performance and comfort.
                 </p>
 
-                <h3
+                <h4
                   id="center-console"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Center Console Boats
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Favoured by fishing enthusiasts, these boats feature a central
                   helm station providing 360-degree access around the vessel.
@@ -334,13 +282,13 @@ export default function BoatTypesGuide() {
                   manoeuvrability.
                 </p>
 
-                <h3
+                <h4
                   id="pontoon-boats"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Pontoon Boats
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Built for relaxation and entertaining, pontoons feature flat
                   decks supported by two or three pontoons. They're incredibly
@@ -350,13 +298,13 @@ export default function BoatTypesGuide() {
                   and premium amenities.
                 </p>
 
-                <h3
+                <h4
                   id="cuddy-cabin"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Cuddy Cabin Boats
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Offering the best of both worlds, cuddies provide an enclosed
                   cabin space below deck while maintaining an open cockpit area.
@@ -376,13 +324,13 @@ export default function BoatTypesGuide() {
                   Sailboats: Harnessing Wind Power
                 </h2>
 
-                <h3
+                <h4
                   id="day-sailers"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Day Sailers
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Smaller sailboats (14-25 feet) designed for single-day
                   adventures. They're easy to handle, often trailerable, and
@@ -390,13 +338,13 @@ export default function BoatTypesGuide() {
                   lakes and protected waters.
                 </p>
 
-                <h3
+                <h4
                   id="cruising-sailboats"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Cruising Sailboats
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Built for comfort and extended voyages, these vessels (25-60+
                   feet) feature full living accommodations including galleys,
@@ -405,13 +353,13 @@ export default function BoatTypesGuide() {
                   seamanship.
                 </p>
 
-                <h3
+                <h4
                   id="racing-sailboats"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Racing Sailboats
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Purpose-built for speed and performance, racing boats
                   sacrifice comfort for competitive advantage. They feature
@@ -430,13 +378,13 @@ export default function BoatTypesGuide() {
                   Luxury and Cruising Vessels
                 </h2>
 
-                <h3
+                <h4
                   id="motor-yachts"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Motor Yachts
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   The ultimate in luxury boating, motor yachts typically exceed
                   35 feet and feature multiple staterooms, full galleys,
@@ -444,13 +392,13 @@ export default function BoatTypesGuide() {
                   They're designed for extended cruising in comfort and style.
                 </p>
 
-                <h3
+                <h4
                   id="trawlers"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Trawlers
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Built for fuel efficiency and long-range cruising, trawlers
                   feature displacement hulls that move through water rather than
@@ -459,13 +407,13 @@ export default function BoatTypesGuide() {
                   storage.
                 </p>
 
-                <h3
+                <h4
                   id="express-cruisers"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Express Cruisers
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Combining speed with overnight capabilities, express cruisers
                   feature sleek profiles with enclosed cabin space. They're
@@ -484,13 +432,13 @@ export default function BoatTypesGuide() {
                   Specialized Watercraft
                 </h2>
 
-                <h3
+                <h4
                   id="personal-watercraft"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Personal Watercraft (PWC)
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Jet-powered vessels designed for one to three riders, PWCs
                   offer thrilling performance and easy handling. Modern models
@@ -499,13 +447,13 @@ export default function BoatTypesGuide() {
                   increasingly being adopted by fishing enthusiasts.
                 </p>
 
-                <h3
+                <h4
                   id="wake-surf-boats"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Wake/Surf Boats
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Specifically designed for water sports, these boats create
                   large, clean wakes for wakeboarding and wake surfing. They
@@ -513,13 +461,13 @@ export default function BoatTypesGuide() {
                   sound systems, and specialised hull designs.
                 </p>
 
-                <h3
+                <h4
                   id="bass-boats"
-                  className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
-                  style={{ fontSize: "38px", lineHeight: "42px" }}
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
                 >
                   Bass Boats
-                </h3>
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Purpose-built for freshwater fishing, bass boats feature low
                   profiles, powerful outboard engines, and specialized fishing
@@ -538,23 +486,41 @@ export default function BoatTypesGuide() {
                 >
                   Commercial and Working Vessels
                 </h2>
+                <h4
+                  id="fishing-boats"
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
+                >
+                  Fishing Boats
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
-                  <span className="font-semibold">Fishing Boats:</span> From
-                  small aluminium skiffs to large offshore sportfishers, fishing
-                  boats are designed around their primary purpose. Features
-                  include fish boxes, outriggers, live wells, and specialised
-                  electronics for locating fish.
+                  From small aluminium skiffs to large offshore sportfishers,
+                  fishing boats are designed around their primary purpose.
+                  Features include fish boxes, outriggers, live wells, and
+                  specialised electronics for locating fish.
                 </p>
+
+                <h4
+                  id="tugboats"
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
+                >
+                  Tugboats
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
-                  <span className="font-semibold">Tugboats:</span> Powerful
-                  vessels designed for pushing or pulling other vessels and
-                  barges. Despite their size, they're incredibly powerful and
-                  manoeuvrable, essential for harbour operations worldwide.
+                  Powerful vessels designed for pushing or pulling other vessels
+                  and barges. Despite their size, they're incredibly powerful
+                  and manoeuvrable, essential for harbour operations worldwide.
                 </p>
+
+                <h4
+                  id="ferries-water-taxis"
+                  className="text-lg lg:text-xl font-semibold text-zinc-900 mt-6 mb-3 scroll-mt-24"
+                  style={{ fontSize: "24px", lineHeight: "28px" }}
+                >
+                  Ferries and Water Taxis
+                </h4>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
-                  <span className="font-semibold">
-                    Ferries and Water Taxis:
-                  </span>{" "}
                   Designed for passenger transport, these vessels prioritize
                   safety, capacity, and schedule reliability over recreational
                   features.
@@ -646,7 +612,7 @@ export default function BoatTypesGuide() {
                   about their experiences. The right boat will provide years of
                   memorable adventures on the water.
                 </p>
-                <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
+                {/* <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Ready to find the perfect marina for your new vessel?{" "}
                   <a
                     href="/"
@@ -656,7 +622,7 @@ export default function BoatTypesGuide() {
                   </a>{" "}
                   can help marina operators provide exceptional service for
                   every type of boat and boater.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

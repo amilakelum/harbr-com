@@ -270,7 +270,7 @@ export default function BlogPost() {
               {/* Hero Image */}
               <div className="mb-8">
                 <img
-                  src="/blog-images/essential-maritime-distress-signals.png"
+                  src="/blog-images/essential-maritime-distress-signals.jpg"
                   alt="Essential Maritime Distress Signals - Safety equipment and signaling devices for boaters"
                   className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                 />
@@ -401,6 +401,13 @@ export default function BlogPost() {
                   vessel, ensuring it's secured against wind but clearly visible
                   from above.
                 </p>
+                <div className="mb-8">
+                  <img
+                    src="/blog-images/v-sheet.png"
+                    alt="SOS Morse Code Signal - Three dots, three dashes, three dots"
+                    className="w-1/2 h-auto rounded-lg shadow-md mb-6 mx-auto"
+                  />
+                </div>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   <span className="font-bold">Arm signals</span> provide a
                   simple, equipment-free method of indicating distress. Slowly
@@ -409,6 +416,13 @@ export default function BlogPost() {
                   from normal waving. This signal works best when you can
                   position yourself in clear view of potential rescuers.
                 </p>
+                <div className="mb-8">
+                  <img
+                    src="/blog-images/arm-signals.png"
+                    alt="SOS Morse Code Signal - Three dots, three dashes, three dots"
+                    className="w-1/2 h-auto rounded-lg shadow-md mb-6 mx-auto"
+                  />
+                </div>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   <span className="font-bold">
                     International code flags N over C
@@ -419,6 +433,13 @@ export default function BlogPost() {
                   distinctive patterns and colours make them recognisable even
                   at significant distances.
                 </p>
+                <div className="mb-8">
+                  <img
+                    src="/blog-images/International-code-flags.png"
+                    alt="SOS Morse Code Signal - Three dots, three dashes, three dots"
+                    className="w-1/2 h-auto rounded-lg shadow-md mb-6 mx-auto"
+                  />
+                </div>
               </div>
 
               {/* Flares Section */}
@@ -508,6 +529,14 @@ export default function BlogPost() {
                   temperatures exceeding 1,000 degrees Celsius, so proper
                   handling is crucial for safety.
                 </p>
+
+                <div className="mb-8">
+                  <img
+                    src="/blog-images/red-hand-flares.png"
+                    alt="Red Hand Flares"
+                    className="w-1/2 h-auto rounded-lg shadow-md mb-6 mx-auto"
+                  />
+                </div>
                 <h3
                   id="flare-storage"
                   className="text-xl lg:text-2xl font-semibold text-zinc-900 mt-8 mb-4 scroll-mt-24"
@@ -573,6 +602,14 @@ export default function BlogPost() {
                 >
                   EPIRB Technology and Capabilities
                 </h3>
+
+                <div className="mb-8">
+                  <img
+                    src="/blog-images/EPIRB-Technology.png"
+                    alt="EPIRB Technology"
+                    className="w-1/2 h-auto rounded-lg shadow-md mb-6 mx-auto"
+                  />
+                </div>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Emergency Position Indicating Radio Beacons (EPIRBs) utilise
                   satellite networks to transmit distress signals and precise
@@ -719,7 +756,7 @@ export default function BlogPost() {
                   </a>{" "}
                   and{" "}
                   <a
-                    href="https://www.allstateboating.com.au/"
+                    href="https://boatlicensing.com.au/start/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-blue-600 hover:text-blue-600 hover:underline transition-colors duration-200"
@@ -859,7 +896,7 @@ export default function BlogPost() {
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
                   Keen to improve your boat docking skills? Read{" "}
                   <a
-                    href="/blog"
+                    href="/blog/complete-guide-mastering-marina-mooring"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-blue-600 hover:text-blue-800"
