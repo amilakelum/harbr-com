@@ -29,7 +29,7 @@ const blogPosts = [
     date: "January 28",
     category: "BOATING SKILLS & TECHNIQUES",
     readTime: "10 min read",
-    image: "/blog-images/essential-sailing-knots.jpg",
+    image: "/blog-images/modern-technology-marina.jpg",
     slug: "essential-sailing-knots-every-boater-should-know",
   },
   {
@@ -57,7 +57,7 @@ const blogPosts = [
     date: "January 22",
     category: "TECHNOLOGY & INNOVATION",
     readTime: "15 min read",
-    image: "/blog-images/modern-technology-marina.jpg",
+    image: "/blog-images/essential-sailing-knots.jpg",
     slug: "modern-technology-transforming-marina-operations",
   },
   {

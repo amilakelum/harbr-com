@@ -633,19 +633,19 @@ export default function BoatTypesGuide() {
               <Reveal delay={0.3}>
                 <div className="bg-white border border-zinc-200 rounded-lg p-6 mb-8">
                   <div className="text-center">
-                    <div
-                      className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4"
-                      style={{ backgroundColor: "rgb(87, 116, 245)" }}
-                    >
-                      MC
+                    <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden">
+                      <img
+                        src="/michael.png"
+                        alt="Michael Chen"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <h3 className="font-semibold text-zinc-900 text-lg mb-2">
                       Michael Chen
                     </h3>
                     <p className="text-zinc-600 text-sm leading-relaxed mb-4">
                       Marine industry specialist with 15+ years of experience in
-                      boat sales, marina operations, and vessel management
-                      systems.
+                      boat handling, marina operations, and seamanship training.
                     </p>
                     <div className="flex justify-center space-x-3">
                       <button

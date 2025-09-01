@@ -431,7 +431,7 @@ export default function ArtificialIntelligenceDecoded() {
                     }}
                   >
                     <a
-                      href="https://harbr.com"
+                      href="/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 underline font-medium"

@@ -223,8 +223,8 @@ export default function ModernTechnologyTransformingMarinas() {
               {/* Hero Image */}
               <div className="mb-8">
                 <img
-                  src="/blog-images/modern-technology-marina.jpg"
-                  alt="Modern technology transforming marina operations"
+                  src="/blog-images/essential-sailing-knots.jpg"
+                  alt="Essential sailing knots"
                   className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                 />
               </div>

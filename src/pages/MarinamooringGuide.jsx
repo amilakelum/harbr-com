@@ -304,13 +304,13 @@ export default function MarinamooringGuide() {
                   equipment.
                 </p>
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
                   <img
                     src="/blog-images/boat_warehouse.png"
                     alt="Complete guide to mastering marina mooring and docking techniques"
                     className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                   />
-                </div>
+                </div> */}
 
                 <h4
                   id="scout-berth-conditions"
@@ -410,13 +410,13 @@ export default function MarinamooringGuide() {
                   control.
                 </p>
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
                   <img
                     src="/blog-images/account_for_wind.png"
                     alt="The Boat Warehouse"
                     className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                   />
-                </div>
+                </div> */}
               </div>
 
               {/* Securing Your Boat Section */}
@@ -492,13 +492,13 @@ export default function MarinamooringGuide() {
                   </a>
                 </p>
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
                   <img
                     src="/blog-images/securing_your_boat.png"
                     alt="Account for Wind"
                     className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                   />
-                </div>
+                </div> */}
 
                 <h4
                   id="berth-types"
