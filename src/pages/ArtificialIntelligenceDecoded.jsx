@@ -467,32 +467,33 @@ export default function ArtificialIntelligenceDecoded() {
               <Reveal delay={0.3}>
                 <div className="bg-white border border-zinc-200 rounded-lg p-6 mb-8">
                   <div className="text-center">
-                    <div
-                      className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4"
-                      style={{ backgroundColor: "rgb(87, 116, 245)" }}
-                    >
-                      SJ
+                    <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
+                      <img
+                        src="/sara.jpg"
+                        alt="Sarah Johnson"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <h3 className="font-semibold text-zinc-900 text-lg mb-2">
                       Sarah Johnson
                     </h3>
                     <p className="text-zinc-600 text-sm leading-relaxed mb-4">
                       Technology & AI Specialist with expertise in marina
-                      management systems and digital transformation.
+                      management systems and digital transformation
                     </p>
                     <div className="flex justify-center space-x-3">
                       <button
                         type="button"
                         className="text-zinc-400 hover:text-zinc-600 transition-colors"
-                        aria-label="Twitter profile"
+                        aria-label="X profile"
                       >
                         <svg
                           className="w-5 h-5"
                           fill="currentColor"
-                          viewBox="0 0 20 20"
+                          viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+                          <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                         </svg>
                       </button>
                       <button

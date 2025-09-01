@@ -636,24 +636,25 @@ export default function ModernTechnologyTransformingMarinas() {
               <Reveal delay={0.3}>
                 <div className="bg-white border border-zinc-200 rounded-lg p-6 mb-8">
                   <div className="text-center">
-                    <div
-                      className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4"
-                      style={{ backgroundColor: "rgb(87, 116, 245)" }}
-                    >
-                      SJ
+                    <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
+                      <img
+                        src="/sara.jpg"
+                        alt="Sarah Johnson"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <h3 className="font-semibold text-zinc-900 text-lg mb-2">
                       Sarah Johnson
                     </h3>
                     <p className="text-zinc-600 text-sm leading-relaxed mb-4">
-                      Technology strategist with 12+ years of experience in
-                      marina digitalization and maritime software development.
+                      Technology & AI Specialist with expertise in marina
+                      management systems and digital transformation
                     </p>
                     <div className="flex justify-center space-x-3">
                       <button
                         type="button"
                         className="text-zinc-400 hover:text-zinc-600 transition-colors"
-                        aria-label="Twitter profile"
+                        aria-label="X profile"
                       >
                         <svg
                           className="w-5 h-5"
@@ -661,8 +662,8 @@ export default function ModernTechnologyTransformingMarinas() {
                           viewBox="0 0 24 24"
                           aria-hidden="true"
                         >
-                          <title>Twitter</title>
-                          <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
+                          <title>X</title>
+                          <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                         </svg>
                       </button>
                       <button
