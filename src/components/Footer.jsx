@@ -1,6 +1,7 @@
 import logo from "../assets/harbr-logo3.svg";
 import InstagramIcon from "./icons/Instagram";
 import LinkedInIcon from "./icons/LinkedIn";
+import XIcon from "./icons/X";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { trackEvent } from "../lib/analytics";
 
@@ -135,6 +136,15 @@ export default function Footer() {
                 className="text-zinc-500 hover:text-[#5371FF] transition-colors duration-200"
               >
                 <LinkedInIcon className="w-6 h-6 fill-current" />
+              </a>
+              <a
+                href="https://x.com/harbrapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Harbr on X"
+                className="text-zinc-500 hover:text-[#5371FF] transition-colors duration-200"
+              >
+                <XIcon className="w-6 h-6 fill-current" />
               </a>
             </div>
           </div>

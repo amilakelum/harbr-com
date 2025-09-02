@@ -65,7 +65,10 @@ export default function Pricing() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-5xl mx-auto">
               {/* Pricing Tier 1 */}
               <Reveal delay={0.3}>
-                <div className="bg-white rounded-2xl shadow-sm overflow-hidden h-full">
+                <div
+                  className="bg-white rounded-2xl overflow-hidden h-full shadow-lg"
+                  style={{ border: "2px solid #5371FF" }}
+                >
                   <div className="p-4 sm:p-6 h-full flex flex-col">
                     <div className="flex-grow">
                       <h3 className="text-[28px] sm:text-[32px] md:text-[38px] font-normal mb-2 text-center">
@@ -86,7 +89,10 @@ export default function Pricing() {
 
               {/* Pricing Tier 2 */}
               <Reveal delay={0.4}>
-                <div className="bg-white rounded-2xl shadow-sm overflow-hidden h-full">
+                <div
+                  className="bg-white rounded-2xl overflow-hidden h-full shadow-lg"
+                  style={{ border: "2px solid #5371FF" }}
+                >
                   <div className="p-4 sm:p-6 h-full flex flex-col">
                     <div className="flex-grow">
                       <h3 className="text-[28px] sm:text-[32px] md:text-[38px] font-normal mb-2 text-center">
@@ -107,7 +113,10 @@ export default function Pricing() {
 
               {/* Pricing Tier 3 */}
               <Reveal delay={0.5}>
-                <div className="bg-white rounded-2xl shadow-sm overflow-hidden h-full">
+                <div
+                  className="bg-white rounded-2xl overflow-hidden h-full shadow-lg"
+                  style={{ border: "2px solid #5371FF" }}
+                >
                   <div className="p-4 sm:p-6 h-full flex flex-col">
                     <div className="flex-grow">
                       <h3 className="text-[28px] sm:text-[32px] md:text-[38px] font-normal mb-2 text-center">

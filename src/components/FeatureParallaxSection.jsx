@@ -61,8 +61,24 @@ export default function FeatureParallaxSection({ features, images }) {
 
           {/* Right Side - Fixed/Sticky Images */}
           <div className="relative">
-            <div className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center p-6 lg:p-12">
-              <div className="relative w-full h-[600px] lg:h-[700px] overflow-hidden rounded-2xl">
+            <div
+              className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center p-6 lg:p-12 py-16 lg:py-20"
+              style={{
+                backgroundImage: "url('/tablet.png')",
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div
+                className="relative w-full h-[600px] lg:h-[700px] overflow-hidden rounded-2xl"
+                // style={{
+                //   backgroundImage: "url('/tablet.png')",
+                //   backgroundSize: "contain",
+                //   backgroundPosition: "center",
+                //   backgroundRepeat: "no-repeat",
+                // }}
+              >
                 {/* Background Image - Always visible */}
                 <div className="absolute inset-0 w-full h-full">
                   {/* Background can be added here if needed */}

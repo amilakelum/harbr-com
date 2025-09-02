@@ -140,13 +140,37 @@ export default function Blog() {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative isolate px-6 py-24 lg:py-32 lg:px-8 ">
-        <div className="mx-auto max-w-6xl text-center">
+      <div
+        className="relative isolate px-6 py-24 lg:py-32 lg:px-8 hero-section"
+        style={{
+          backgroundImage: "url('/bg2.jpg')",
+        }}
+      >
+        {/* Add custom CSS for responsive background sizing */}
+        <style jsx>{`
+          @media (min-width: 1024px) {
+            .hero-section {
+              background-size: cover !important;
+              background-repeat: no-repeat !important;
+              background-position: "20% center";
+            }
+          }
+        `}</style>
+        {/* Dark overlay for better text visibility */}
+        {/* <div
+          className="absolute inset-0 bg-black opacity-50"
+          style={{ zIndex: 1 }}
+        /> */}
+
+        <div
+          className="mx-auto max-w-6xl text-center relative"
+          style={{ zIndex: 2 }}
+        >
           <Reveal delay={0.1}>
-            <h1 className="text-[50px] sm:text-[48px] lg:text-[52px] leading-[1.1] tracking-[-0.02em] font-bold mb-4 ">
+            <h1 className="text-[50px] sm:text-[48px] lg:text-[52px] leading-[1.1] tracking-[-0.02em] font-bold mb-4 text-white">
               The Harbr Blog
             </h1>
-            <p className=" text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-lg mb-8 max-w-2xl mx-auto text-white">
               Expand your marina management knowledge with detailed insights,
               industry trends, and best practices for modern marina operations.
             </p>

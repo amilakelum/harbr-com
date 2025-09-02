@@ -71,7 +71,8 @@ export default function Pricing() {
                 {pricingTiers.map((tier) => (
                   <div
                     key={tier.range}
-                    className="bg-zinc-50 rounded-2xl shadow-sm overflow-hidden h-full"
+                    className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg"
+                    style={{ border: "2px solid #5371FF" }}
                   >
                     <div className="p-4 sm:p-6 h-full flex flex-col">
                       <div className="flex-grow">
