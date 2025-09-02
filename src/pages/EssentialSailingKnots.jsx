@@ -131,7 +131,7 @@ export default function EssentialSailingKnots() {
               </div>
               <div className="flex items-center justify-center mt-[16px]">
                 <span style={{ fontSize: "16px", lineHeight: "22px" }}>
-                  January 28, 2025
+                  August 30, 2025
                 </span>
                 <span
                   className="mx-2"

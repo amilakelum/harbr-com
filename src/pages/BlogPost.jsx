@@ -191,7 +191,7 @@ export default function BlogPost() {
               </div>
               <div className="flex items-center justify-center mt-[16px]">
                 <span style={{ fontSize: "16px", lineHeight: "22px" }}>
-                  January 15, 2025
+                  April 30, 2025
                 </span>
                 <span
                   className="mx-2"

@@ -144,7 +144,7 @@ export default function ModernTechnologyTransformingMarinas() {
               </div>
               <div className="flex items-center justify-center mt-[16px]">
                 <span style={{ fontSize: "16px", lineHeight: "22px" }}>
-                  January 22, 2025
+                  June 30, 2025
                 </span>
                 <span
                   className="mx-2"

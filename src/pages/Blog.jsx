@@ -13,7 +13,7 @@ const blogPosts = [
       "Demystifying AI technology and understanding how pattern recognition is revolutionizing everything from entertainment to marina management.",
     author: "Sarah Johnson",
     authorInitials: "SJ",
-    date: "January 30",
+    date: "September 30, 2025",
     category: "TECHNOLOGY & INNOVATION",
     readTime: "12 min read",
     image: "/blog-images/artificial-intelligence-decoded.jpg",
@@ -26,7 +26,7 @@ const blogPosts = [
       "Learn the bowline, clove hitch, and cleat hitch - three fundamental knots that form the cornerstone of essential seamanship skills.",
     author: "Sarah Johnson",
     authorInitials: "SJ",
-    date: "January 28",
+    date: "August 30, 2025",
     category: "BOATING SKILLS & TECHNIQUES",
     readTime: "10 min read",
     image: "/blog-images/modern-technology-marina.jpg",
@@ -40,7 +40,7 @@ const blogPosts = [
       "Master the art of marina docking with expert techniques for preparation, approach, and securing your vessel like a professional mariner.",
     author: "Michael Chen",
     authorInitials: "MC",
-    date: "January 25",
+    date: "July 30, 2025",
     category: "BOATING SKILLS & TECHNIQUES",
     readTime: "14 min read",
     image: "/blog-images/marina-mooring-guide.jpg",
@@ -54,7 +54,7 @@ const blogPosts = [
       "Discover how AI, smart sensors, and integrated software are revolutionizing marina operations and creating exceptional customer experiences.",
     author: "Sarah Johnson",
     authorInitials: "SJ",
-    date: "January 22",
+    date: "June 30, 2025",
     category: "TECHNOLOGY & INNOVATION",
     readTime: "15 min read",
     image: "/blog-images/essential-sailing-knots.jpg",
@@ -67,7 +67,7 @@ const blogPosts = [
       "Discover the perfect vessel for your needs with our comprehensive guide to boat types, from recreational powerboats to luxury yachts.",
     author: "Michael Chen",
     authorInitials: "MC",
-    date: "January 20",
+    date: "May 30, 2025",
     category: "BOAT TYPES & BUYING GUIDE",
     readTime: "12 min read",
     image: "/blog-images/different-type-of-boat.jpg",
@@ -80,7 +80,7 @@ const blogPosts = [
       "Learn the essential maritime distress signals that every marina manager and boat operator should know for emergency situations.",
     author: "Sarah Johnson",
     authorInitials: "SJ",
-    date: "January 15",
+    date: "April 30, 2025",
     category: "SAFETY & REGULATIONS",
     readTime: "8 min read",
     image: "/blog-images/essential-maritime-distress-signals.jpg",
@@ -280,11 +280,16 @@ export default function Blog() {
                     {/* Author and Date */}
                     <div className="flex items-center text-sm text-zinc-500">
                       <div className="flex items-center mr-6">
-                        <div
-                          className="w-7 h-7 text-white rounded-full flex items-center justify-center mr-2 text-xs font-medium"
-                          style={{ backgroundColor: "rgb(87, 116, 245)" }}
-                        >
-                          {post.authorInitials}
+                        <div className="w-7 h-7 rounded-full mr-2 overflow-hidden">
+                          <img
+                            src={
+                              post.author === "Michael Chen"
+                                ? "/michael.png"
+                                : "/sara.jpg"
+                            }
+                            alt={post.author}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <span className="font-medium text-zinc-700">
                           {post.author}

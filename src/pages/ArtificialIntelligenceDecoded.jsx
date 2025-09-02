@@ -138,7 +138,7 @@ export default function ArtificialIntelligenceDecoded() {
               </div>
               <div className="flex items-center justify-center mt-[16px]">
                 <span style={{ fontSize: "16px", lineHeight: "22px" }}>
-                  January 30, 2025
+                  September 30, 2025
                 </span>
                 <span
                   className="mx-2"
