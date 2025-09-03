@@ -39,7 +39,7 @@ export default function ReportingTracking() {
                 based on your needs.
               </p>
 
-              <Link to="/reporting-tracking">
+              {/* <Link to="/reporting-tracking">
                 <motion.a
                   href="/reporting-tracking"
                   whileHover={{ x: 4 }}
@@ -79,7 +79,7 @@ export default function ReportingTracking() {
                     />
                   </svg>
                 </motion.a>
-              </Link>
+              </Link> */}
             </div>
           </Reveal>
         </div>
