@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Reveal from "../components/animations/Reveal";
 
 export default function BlogPost() {
-  const { slug } = useParams();
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -934,10 +933,12 @@ export default function BlogPost() {
                       management systems and digital transformation
                     </p>
                     <div className="flex justify-center space-x-3">
-                      <button
-                        type="button"
+                      <a
+                        href="https://x.com/Harbr_AI"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-zinc-400 hover:text-zinc-600 transition-colors"
-                        aria-label="X profile"
+                        aria-label="Follow Harbr on X"
                       >
                         <svg
                           className="w-5 h-5"
@@ -945,10 +946,10 @@ export default function BlogPost() {
                           viewBox="0 0 24 24"
                           aria-hidden="true"
                         >
-                          <title>X</title>
+                          <title>Follow Harbr on X</title>
                           <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                         </svg>
-                      </button>
+                      </a>
                       <button
                         type="button"
                         className="text-zinc-400 hover:text-zinc-600 transition-colors"

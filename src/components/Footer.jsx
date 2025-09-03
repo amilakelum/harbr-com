@@ -138,7 +138,7 @@ export default function Footer() {
                 <LinkedInIcon className="w-6 h-6 fill-current" />
               </a>
               <a
-                href="https://x.com/harbrapp"
+                href="https://x.com/Harbr_AI"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow Harbr on X"
