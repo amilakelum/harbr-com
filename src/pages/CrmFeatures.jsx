@@ -62,7 +62,7 @@ export default function CrmFeatures() {
   return (
     <>
       <FeaturePageHero
-        title="CRM Features"
+        title="CRM"
         description="Experience unprecedented access to your customers, powered by Harbr's AI Marina Manager."
         imageSrc="/crm1.png"
         imageAlt="CRM Features"
