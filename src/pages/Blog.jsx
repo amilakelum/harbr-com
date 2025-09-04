@@ -247,10 +247,10 @@ export default function Blog() {
                     className="group border-b border-zinc-200 pb-6 last:border-b-0 cursor-pointer"
                     style={{
                       padding: "40px 50px 40px 40px",
-                      backgroundColor:
-                        index === currentPosts.length - 1
-                          ? "rgba(87,116,245,.1)"
-                          : "transparent",
+                      // backgroundColor:
+                      //   index === currentPosts.length - 1
+                      //     ? "rgba(87,116,245,.1)"
+                      //     : "transparent",
                     }}
                   >
                     {/* Image with Category Tag Overlay */}
