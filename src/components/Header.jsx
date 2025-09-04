@@ -24,7 +24,7 @@ const navigation = [
         name: "Online Bookings & Customer Portal",
         href: "/online-bookings-features",
       },
-      { name: "CRM Features", href: "/crm-features" },
+      { name: "CRM", href: "/crm-features" },
     ],
   },
   { name: "Pricing", href: "/pricing" },
@@ -183,7 +183,7 @@ export default function Header() {
                               >
                                 <Link
                                   to={dropdownItem.href}
-                                  className="block font-semibold text-zinc-900 px-3 py-2 w-full"
+                                  className="block text-sm/6 text-zinc-600 hover:text-zinc-950 px-3 py-2 w-full"
                                 >
                                   {dropdownItem.name}
                                 </Link>
