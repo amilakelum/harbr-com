@@ -24,6 +24,7 @@ import ModernTechnologyTransformingMarinas from "./pages/ModernTechnologyTransfo
 import MarinamooringGuide from "./pages/MarinamooringGuide";
 import EssentialSailingKnots from "./pages/EssentialSailingKnots";
 import ArtificialIntelligenceDecoded from "./pages/ArtificialIntelligenceDecoded";
+import MarinaAccreditationPrograms from "./pages/MarinaAccreditationPrograms";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Callout from "./components/Callout";
@@ -126,6 +127,10 @@ function App() {
           <Route
             path="blog/artificial-intelligence-decoded"
             element={<ArtificialIntelligenceDecoded />}
+          />
+          <Route
+            path="blog/marina-accreditation-programs-australia"
+            element={<MarinaAccreditationPrograms />}
           />
           <Route
             path="blog/modern-technology-transforming-marina-operations"

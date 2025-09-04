@@ -21,6 +21,19 @@ const blogPosts = [
   },
   {
     id: 2,
+    title: "The Top 4 Marina Accreditation Programs in Australia",
+    excerpt:
+      "Comprehensive guide to Australia's leading marina accreditation programs including Gold Anchor, Superyacht Ready, Clean Marina, and Fish Friendly certifications.",
+    author: "Chris Mihatov",
+    authorInitials: "CM",
+    date: "September 4, 2025",
+    category: "MARINA MANAGEMENT & COMPLIANCE",
+    readTime: "15 min read",
+    image: "/blog-images/marina-accreditation-programs.jpg",
+    slug: "marina-accreditation-programs-australia",
+  },
+  {
+    id: 3,
     title: "Master These 3 Essential Sailing Knots Every Boater Must Know",
     excerpt:
       "Learn the bowline, clove hitch, and cleat hitch - three fundamental knots that form the cornerstone of essential seamanship skills.",
@@ -33,7 +46,7 @@ const blogPosts = [
     slug: "essential-sailing-knots-every-boater-should-know",
   },
   {
-    id: 3,
+    id: 4,
     title:
       "Harbr's Complete Guide to Mastering Marina Mooring: Essential Tips for Confident Docking",
     excerpt:
@@ -47,7 +60,7 @@ const blogPosts = [
     slug: "complete-guide-mastering-marina-mooring",
   },
   {
-    id: 4,
+    id: 5,
     title:
       "New School: How Modern Technology is Transforming Marina Operations",
     excerpt:
@@ -61,7 +74,7 @@ const blogPosts = [
     slug: "modern-technology-transforming-marina-operations",
   },
   {
-    id: 5,
+    id: 6,
     title: "Complete Guide to Different Types of Boats",
     excerpt:
       "Discover the perfect vessel for your needs with our comprehensive guide to boat types, from recreational powerboats to luxury yachts.",
@@ -74,7 +87,7 @@ const blogPosts = [
     slug: "complete-guide-different-types-boats",
   },
   {
-    id: 6,
+    id: 7,
     title: "Essential Maritime Distress Signals: Your Lifeline on the Water",
     excerpt:
       "Learn the essential maritime distress signals that every marina manager and boat operator should know for emergency situations.",
@@ -285,6 +298,8 @@ export default function Blog() {
                             src={
                               post.author === "Michael Chen"
                                 ? "/michael.png"
+                                : post.author === "Chris Mihatov"
+                                ? "/chris.jpeg"
                                 : "/sara.jpg"
                             }
                             alt={post.author}

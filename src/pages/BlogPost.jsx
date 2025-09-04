@@ -63,64 +63,16 @@ export default function BlogPost() {
       id: "understanding-signals",
     },
     {
-      title: "  ↳ Radio Communications: Your Voice in the Darkness",
-      id: "radio-communications",
-    },
-    {
-      title: "  ↳ Visual Distress Signals: Cutting Through the Confusion",
-      id: "visual-signals",
-    },
-    {
       title: "Flares: Illuminating Your Emergency",
       id: "flares",
-    },
-    {
-      title: "  ↳ Legal Requirements and Compliance",
-      id: "legal-requirements",
-    },
-    {
-      title: "  ↳ Flare Types and Tactical Usage",
-      id: "flare-types",
-    },
-    {
-      title: "  ↳ Flare Storage and Maintenance",
-      id: "flare-storage",
-    },
-    {
-      title: "  ↳ Disposal Responsibilities",
-      id: "disposal-responsibilities",
     },
     {
       title: "Emergency Beacons: Technology That Saves Lives",
       id: "emergency-beacons",
     },
     {
-      title: "  ↳ EPIRB Technology and Capabilities",
-      id: "epirb-technology",
-    },
-    {
-      title: "  ↳ PLB Advantages for Smaller Craft",
-      id: "plb-advantages",
-    },
-    {
-      title: "  ↳ Registration and Maintenance Requirements",
-      id: "plb-registration",
-    },
-    {
       title: "Advanced Safety Considerations",
       id: "advanced-safety-considerations",
-    },
-    {
-      title: "  ↳ Integration with Other Safety Equipment",
-      id: "interaction-with-other-equipment",
-    },
-    {
-      title: "  ↳ Training and Preparedness",
-      id: "training-and-preparedness",
-    },
-    {
-      title: "  ↳ Weather and Environmental Factors",
-      id: "weather-factors",
     },
     {
       title: "Legal Responsibilities and Consequences",
@@ -247,7 +199,7 @@ export default function BlogPost() {
                               }}
                               onMouseLeave={(e) => {
                                 if (!isActive) {
-                                  e.target.style.color = "";
+                                  e.target.style.color = "#71717a";
                                 }
                               }}
                             >

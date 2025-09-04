@@ -188,7 +188,7 @@ export default function EssentialSailingKnots() {
                               }}
                               onMouseLeave={(e) => {
                                 if (!isActive) {
-                                  e.target.style.color = "";
+                                  e.target.style.color = "#71717a";
                                 }
                               }}
                             >
