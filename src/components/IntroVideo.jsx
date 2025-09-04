@@ -130,13 +130,17 @@ export default function IntroVideo() {
 
               <div className="mt-6 hidden sm:block">
                 <Reveal delay={0.25} className="mt-10">
-                  <EmailSubscriptionForm
-                    source="intro_video_section"
-                    buttonText="Get started for free"
-                    placeholder="Enter your business email"
-                    className="max-w-lg"
-                    feedbackClassName="bg-opacity-90 backdrop-blur-sm max-w-lg"
-                  />
+                  <div className="max-w-lg">
+                    <EmailSubscriptionForm
+                      source="intro_video_section"
+                      buttonText="Get started for free"
+                      placeholder="Enter your business email"
+                      className=""
+                      formClassName="bg-zinc-50 border border-zinc-200"
+                      inputClassName="bg-white"
+                      buttonClassName=""
+                    />
+                  </div>
                 </Reveal>
               </div>
             </div>
@@ -146,13 +150,17 @@ export default function IntroVideo() {
         {/* Mobile form outside image */}
         <div className="sm:hidden mt-6 bg-zinc-50 p-6 rounded-2xl shadow-sm border border-zinc-100 ">
           <Reveal delay={0.25} className="mt-10">
-            <EmailSubscriptionForm
-              source="intro_video_section"
-              buttonText="Get started for free"
-              placeholder="Enter your business email"
-              className="max-w-sm mx-auto"
-              feedbackClassName="max-w-sm"
-            />
+            <div className="max-w-sm mx-auto">
+              <EmailSubscriptionForm
+                source="intro_video_section"
+                buttonText="Get started for free"
+                placeholder="Enter your business email"
+                className=""
+                formClassName="bg-zinc-50 border border-zinc-200"
+                inputClassName="bg-white"
+                buttonClassName=""
+              />
+            </div>
           </Reveal>
         </div>
       </div>

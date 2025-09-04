@@ -404,7 +404,7 @@ export default function BlogPost() {
                   <img
                     src="/blog-images/v-sheet.png"
                     alt="SOS Morse Code Signal - Three dots, three dashes, three dots"
-                    className="w-1/2 h-auto rounded-lg shadow-md mb-6 mx-auto"
+                    className="w-1/4 h-auto rounded-lg shadow-md mb-6 mx-auto"
                   />
                 </div>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">
@@ -419,7 +419,7 @@ export default function BlogPost() {
                   <img
                     src="/blog-images/arm-signals.png"
                     alt="SOS Morse Code Signal - Three dots, three dashes, three dots"
-                    className="w-1/2 h-auto rounded-lg shadow-md mb-6 mx-auto"
+                    className="w-1/4 h-auto rounded-lg shadow-md mb-6 mx-auto"
                   />
                 </div>
                 <p className="text-zinc-700 leading-relaxed mb-6 text-base lg:text-lg">

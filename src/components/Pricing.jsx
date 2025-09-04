@@ -6,15 +6,15 @@ export default function Pricing() {
   const pricingTiers = [
     {
       range: "Up to 20",
-      price: "AUD 99 /mo",
+      price: "$ 99 /mo",
     },
     {
       range: "21 to 100",
-      price: "AUD 299 /mo",
+      price: "$ 299 /mo",
     },
     {
       range: "100+",
-      price: "AUD 499 /mo onwards",
+      price: "$ 499 /mo onwards",
     },
   ];
 
@@ -72,7 +72,7 @@ export default function Pricing() {
                   <div
                     key={tier.range}
                     className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg"
-                    style={{ border: "2px solid #5371FF" }}
+                    style={{ border: "1px solid #5371FF" }}
                   >
                     <div className="p-4 sm:p-6 h-full flex flex-col">
                       <div className="flex-grow">

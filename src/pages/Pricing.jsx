@@ -67,7 +67,7 @@ export default function Pricing() {
               <Reveal delay={0.3}>
                 <div
                   className="bg-white rounded-2xl overflow-hidden h-full shadow-lg"
-                  style={{ border: "2px solid #5371FF" }}
+                  style={{ border: "1px solid #5371FF" }}
                 >
                   <div className="p-4 sm:p-6 h-full flex flex-col">
                     <div className="flex-grow">
@@ -80,7 +80,7 @@ export default function Pricing() {
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
                       <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">
-                        AUD 99 /mo
+                        $ 99 /mo
                       </p>
                     </div>
                   </div>
@@ -91,7 +91,7 @@ export default function Pricing() {
               <Reveal delay={0.4}>
                 <div
                   className="bg-white rounded-2xl overflow-hidden h-full shadow-lg"
-                  style={{ border: "2px solid #5371FF" }}
+                  style={{ border: "1px solid #5371FF" }}
                 >
                   <div className="p-4 sm:p-6 h-full flex flex-col">
                     <div className="flex-grow">
@@ -104,7 +104,7 @@ export default function Pricing() {
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
                       <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">
-                        AUD 299 /mo
+                        $ 299 /mo
                       </p>
                     </div>
                   </div>
@@ -115,7 +115,7 @@ export default function Pricing() {
               <Reveal delay={0.5}>
                 <div
                   className="bg-white rounded-2xl overflow-hidden h-full shadow-lg"
-                  style={{ border: "2px solid #5371FF" }}
+                  style={{ border: "1px solid #5371FF" }}
                 >
                   <div className="p-4 sm:p-6 h-full flex flex-col">
                     <div className="flex-grow">
@@ -128,7 +128,7 @@ export default function Pricing() {
                     </div>
                     <div className="text-center bg-zinc-50 p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6">
                       <p className="text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.02em] text-black">
-                        AUD 499 /mo onwards
+                        $ 499 /mo onwards
                       </p>
                     </div>
                   </div>
