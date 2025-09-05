@@ -66,23 +66,18 @@ export default function Pricing() {
               {/* Pricing Tier 1 */}
               <Reveal delay={0.3}>
                 <div
-                  className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg"
+                  className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg flex flex-col"
                   style={{ border: "1px solid #5371FF" }}
                 >
-                  <div className="p-4 sm:p-6 h-full flex flex-col">
-                    <div className="flex flex-col justify-center h-1/2">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-medium mb-2 text-center text-zinc-600">
-                        Up to 20
-                      </h3>
-                      <p className="text-center text-zinc-500 text-sm sm:text-base">
-                        berths
-                      </p>
-                    </div>
-                    <div className="text-center bg-white p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 h-1/2 flex items-center justify-center">
-                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
-                        $ 99 /mo
-                      </p>
-                    </div>
+                  <div className="text-center bg-white h-1/2 flex items-center justify-center rounded-t-2xl px-6 py-6">
+                    <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
+                      $ 99 /mo
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-center h-1/2 px-6 py-6">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-medium mb-2 text-center text-zinc-600">
+                      Up to 20 berths
+                    </h3>
                   </div>
                 </div>
               </Reveal>
@@ -90,23 +85,18 @@ export default function Pricing() {
               {/* Pricing Tier 2 */}
               <Reveal delay={0.4}>
                 <div
-                  className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg"
+                  className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg flex flex-col"
                   style={{ border: "1px solid #5371FF" }}
                 >
-                  <div className="p-4 sm:p-6 h-full flex flex-col">
-                    <div className="flex flex-col justify-center h-1/2">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-medium mb-2 text-center text-zinc-600">
-                        21 to 100
-                      </h3>
-                      <p className="text-center text-zinc-500 text-sm sm:text-base">
-                        berths
-                      </p>
-                    </div>
-                    <div className="text-center bg-white p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 h-1/2 flex items-center justify-center">
-                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
-                        $ 299 /mo
-                      </p>
-                    </div>
+                  <div className="text-center bg-white h-1/2 flex items-center justify-center rounded-t-2xl px-6 py-6">
+                    <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
+                      $ 299 /mo
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-center h-1/2 px-6 py-6">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-medium mb-2 text-center text-zinc-600">
+                      21 to 100 berths
+                    </h3>
                   </div>
                 </div>
               </Reveal>
@@ -114,23 +104,18 @@ export default function Pricing() {
               {/* Pricing Tier 3 */}
               <Reveal delay={0.5}>
                 <div
-                  className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg"
+                  className="bg-zinc-50 rounded-2xl overflow-hidden h-full shadow-lg flex flex-col"
                   style={{ border: "1px solid #5371FF" }}
                 >
-                  <div className="p-4 sm:p-6 h-full flex flex-col">
-                    <div className="flex flex-col justify-center h-1/2">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-medium mb-2 text-center text-zinc-600">
-                        100+
-                      </h3>
-                      <p className="text-center text-zinc-500 text-sm sm:text-base">
-                        berths
-                      </p>
-                    </div>
-                    <div className="text-center bg-white p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 h-1/2 flex items-center justify-center">
-                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
-                        $ 499 /mo +
-                      </p>
-                    </div>
+                  <div className="text-center bg-white h-1/2 flex items-center justify-center rounded-t-2xl px-6 py-6">
+                    <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
+                      $ 499 /mo +
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-center h-1/2 px-6 py-6">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-medium mb-2 text-center text-zinc-600">
+                      100+ berths
+                    </h3>
                   </div>
                 </div>
               </Reveal>
