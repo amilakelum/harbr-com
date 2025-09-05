@@ -79,7 +79,7 @@ export default function Pricing() {
                       </p>
                     </div>
                     <div className="text-center bg-white p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 h-1/2 flex items-center justify-center">
-                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-bold tracking-[-0.02em] text-black">
+                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
                         $ 99 /mo
                       </p>
                     </div>
@@ -103,7 +103,7 @@ export default function Pricing() {
                       </p>
                     </div>
                     <div className="text-center bg-white p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 h-1/2 flex items-center justify-center">
-                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-bold tracking-[-0.02em] text-black">
+                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
                         $ 299 /mo
                       </p>
                     </div>
@@ -127,8 +127,8 @@ export default function Pricing() {
                       </p>
                     </div>
                     <div className="text-center bg-white p-3 sm:p-4 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 h-1/2 flex items-center justify-center">
-                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-bold tracking-[-0.02em] text-black">
-                        $ 499 /mo onwards
+                      <p className="text-[28px] sm:text-[32px] md:text-[38px] font-medium tracking-[-0.02em] text-black">
+                        $ 499 /mo +
                       </p>
                     </div>
                   </div>
