@@ -25,8 +25,8 @@ export default function Home() {
       <FreeTrial />
 
       {/* <Hero /> */}
-      <AiMeetings />
-      <CalloutTwo />
+      {/* <AiMeetings />
+      <CalloutTwo /> */}
     </>
   );
 }
