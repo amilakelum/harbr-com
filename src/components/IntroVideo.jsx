@@ -98,6 +98,9 @@ export default function IntroVideo() {
             src={screenshot}
             alt="Harbr Platform Screenshot"
             className="w-full h-[90vh] object-cover object-center rounded-2xl"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
 
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/10" />
