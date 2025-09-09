@@ -201,7 +201,7 @@ export default function PricingQuoteForm({
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
-          className={`w-full xl:w-auto inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px] cursor-pointer min-w-[180px] ${buttonClassName}`}
+          className={`w-full xl:w-auto inline-flex items-center justify-center rounded-xl bg-[#5371FF] px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5371FF] transition-all duration-200 ease-in-out whitespace-nowrap h-[52px] cursor-pointer min-w-[180px] ${buttonClassName}`}
           disabled={submitting}
         >
           {submitting ? "Getting Quote..." : buttonText}

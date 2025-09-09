@@ -29,7 +29,7 @@ export default function FeaturePageHero({
                   className=""
                   formClassName="bg-zinc-50 border border-zinc-200"
                   inputClassName="bg-white"
-                  buttonClassName=""
+                  buttonClassName="bg-black hover:bg-zinc-800 focus-visible:outline-black"
                 />
               </div>
             </div>

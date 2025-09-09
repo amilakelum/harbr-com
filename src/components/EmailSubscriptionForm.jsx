@@ -178,7 +178,7 @@ export default function EmailSubscriptionForm({
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
-          className={`w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-[#5371FF] px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px] ${buttonClassName}`}
+          className={`w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-[#5371FF] px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-[#4460E6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-all duration-200 ease-in-out whitespace-nowrap h-[52px] ${buttonClassName}`}
           disabled={submitting}
         >
           {submitting ? "Submitting..." : buttonText}
