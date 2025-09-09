@@ -166,7 +166,7 @@ export default function Header() {
                   >
                     <Link
                       to="/features"
-                      className="flex items-center gap-x-1 text-sm/6 text-zinc-600 hover:text-zinc-950"
+                      className="flex items-center gap-x-1 text-sm/6 text-black hover:text-[#5371FF] transition-colors duration-200"
                     >
                       {item.name}
                       <ChevronDown className="h-3 w-3" aria-hidden="true" />
@@ -174,7 +174,7 @@ export default function Header() {
 
                     {hoveredDropdown === item.name && (
                       <div className="absolute left-1/2 z-10 -mt-1 flex w-80 -translate-x-1/2 pt-3">
-                        <div className="w-full flex-auto overflow-hidden rounded-2xl bg-white text-sm/6 shadow-lg ring-1 ring-zinc-900/5">
+                        <div className="w-full flex-auto overflow-hidden rounded-2xl bg-white text-sm/6 ring-1 ring-zinc-900/5">
                           <div className="p-3">
                             {item.dropdown.map((dropdownItem) => (
                               <div
@@ -183,7 +183,7 @@ export default function Header() {
                               >
                                 <Link
                                   to={dropdownItem.href}
-                                  className="block text-sm/6 text-zinc-600 hover:text-zinc-950 px-3 py-2 w-full"
+                                  className="block text-sm/6 text-black hover:text-[#5371FF] px-3 py-2 w-full transition-colors duration-200"
                                 >
                                   {dropdownItem.name}
                                 </Link>
@@ -199,7 +199,7 @@ export default function Header() {
                     key={item.name}
                     to={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-sm/6 text-zinc-600 hover:text-zinc-950"
+                    className="text-sm/6 text-black hover:text-[#5371FF] transition-colors duration-200"
                   >
                     {item.name}
                   </Link>
@@ -272,7 +272,7 @@ export default function Header() {
                             {navigation.map((item) =>
                               item.dropdown ? (
                                 <div key={item.name}>
-                                  <div className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-zinc-900">
+                                  <div className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-black">
                                     {item.name}
                                   </div>
                                   <div className="ml-4 space-y-1">
@@ -283,7 +283,7 @@ export default function Header() {
                                         onClick={(e) =>
                                           handleNavClick(e, dropdownItem.href)
                                         }
-                                        className="-mx-3 block rounded-lg px-3 py-1.5 text-sm/6 text-zinc-600 hover:bg-zinc-50"
+                                        className="-mx-3 block rounded-lg px-3 py-1.5 text-sm/6 text-black hover:text-[#5371FF] hover:bg-zinc-50 transition-colors duration-200"
                                       >
                                         {dropdownItem.name}
                                       </Link>
@@ -295,7 +295,7 @@ export default function Header() {
                                   key={item.name}
                                   to={item.href}
                                   onClick={(e) => handleNavClick(e, item.href)}
-                                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-zinc-900 hover:bg-zinc-50"
+                                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-black hover:text-[#5371FF] hover:bg-zinc-50 transition-colors duration-200"
                                 >
                                   {item.name}
                                 </Link>
