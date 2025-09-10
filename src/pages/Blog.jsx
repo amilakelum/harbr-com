@@ -29,7 +29,7 @@ const blogPosts = [
     date: "September 4, 2025",
     category: "MARINA MANAGEMENT & COMPLIANCE",
     readTime: "15 min read",
-    image: "/blog-images/marina-accreditation-programs.jpg",
+    image: "/blog-images/marina-accreditation-programs.webp",
     slug: "marina-accreditation-programs-australia",
   },
   {
@@ -42,7 +42,7 @@ const blogPosts = [
     date: "August 30, 2025",
     category: "BOATING SKILLS & TECHNIQUES",
     readTime: "10 min read",
-    image: "/blog-images/modern-technology-marina.jpg",
+    image: "/blog-images/modern-technology-marina.webp",
     slug: "essential-sailing-knots-every-boater-should-know",
   },
   {
@@ -113,7 +113,7 @@ export default function Blog() {
 
     // Preload the hero background image for better LCP
     const heroImage = new Image();
-    heroImage.src = "/bg2.jpg";
+    heroImage.src = "/bg2.webp";
   }, []);
 
   // Get unique categories
@@ -160,7 +160,7 @@ export default function Blog() {
       <div
         className="relative isolate px-6 py-24 lg:py-32 lg:px-8"
         style={{
-          backgroundImage: "url('/bg2.jpg')",
+          backgroundImage: "url('/bg2.webp')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "20% center",

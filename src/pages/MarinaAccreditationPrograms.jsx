@@ -209,7 +209,7 @@ export default function MarinaAccreditationPrograms() {
             <Reveal delay={0.3}>
               <div className="mb-12">
                 <img
-                  src="/blog-images/marina-accreditation-programs.jpg"
+                  src="/blog-images/marina-accreditation-programs.webp"
                   alt="Marina accreditation programs in Australia showcasing quality standards"
                   className="w-full h-64 object-cover rounded-lg mb-8"
                 />

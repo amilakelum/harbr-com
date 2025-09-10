@@ -210,7 +210,7 @@ export default function EssentialSailingKnots() {
               {/* Hero Image */}
               <div className="mb-8">
                 <img
-                  src="/blog-images/modern-technology-marina.jpg"
+                  src="/blog-images/modern-technology-marina.webp"
                   alt="Master these 3 essential sailing knots every boater must know"
                   className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                 />
