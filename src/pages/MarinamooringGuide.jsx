@@ -222,7 +222,7 @@ export default function MarinamooringGuide() {
               {/* Hero Image */}
               <div className="mb-8">
                 <img
-                  src="/blog-images/marina-mooring-guide.jpg"
+                  src="/blog-images/marina-mooring-guide.webp"
                   alt="Complete guide to mastering marina mooring and docking techniques"
                   className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                 />
@@ -743,7 +743,7 @@ export default function MarinamooringGuide() {
                   <div className="text-center">
                     <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden">
                       <img
-                        src="/michael.png"
+                        src="/michael.webp"
                         alt="Michael Chen"
                         className="w-full h-full object-cover"
                       />

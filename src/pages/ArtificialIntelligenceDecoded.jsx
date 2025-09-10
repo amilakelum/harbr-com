@@ -216,7 +216,7 @@ export default function ArtificialIntelligenceDecoded() {
             <Reveal delay={0.3}>
               <div className="mb-12">
                 <img
-                  src="/blog-images/artificial-intelligence-decoded.jpg"
+                  src="/blog-images/artificial-intelligence-decoded.webp"
                   alt="Artificial Intelligence concept with neural networks and data patterns"
                   className="w-full h-64 object-cover rounded-lg mb-8"
                 />
@@ -469,7 +469,7 @@ export default function ArtificialIntelligenceDecoded() {
                   <div className="text-center">
                     <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
                       <img
-                        src="/sara.jpg"
+                        src="/sara.webp"
                         alt="Sarah Johnson"
                         className="w-full h-full object-cover"
                       />

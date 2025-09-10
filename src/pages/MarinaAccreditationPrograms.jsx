@@ -1294,7 +1294,7 @@ export default function MarinaAccreditationPrograms() {
                   <div className="text-center">
                     <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
                       <img
-                        src="/chris.jpeg"
+                        src="/chris.webp"
                         alt="Chris Mihatov"
                         className="w-full h-full object-cover"
                       />

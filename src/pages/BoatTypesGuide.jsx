@@ -222,7 +222,7 @@ export default function BoatTypesGuide() {
               {/* Hero Image */}
               <div className="mb-8">
                 <img
-                  src="/blog-images/different-type-of-boat.jpg"
+                  src="/blog-images/different-type-of-boat.webp"
                   alt="Different types of boats - Complete guide to choosing your perfect vessel"
                   className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                 />
@@ -634,7 +634,7 @@ export default function BoatTypesGuide() {
                   <div className="text-center">
                     <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden">
                       <img
-                        src="/michael.png"
+                        src="/michael.webp"
                         alt="Michael Chen"
                         className="w-full h-full object-cover"
                       />

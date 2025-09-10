@@ -223,7 +223,7 @@ export default function ModernTechnologyTransformingMarinas() {
               {/* Hero Image */}
               <div className="mb-8">
                 <img
-                  src="/blog-images/essential-sailing-knots.jpg"
+                  src="/blog-images/essential-sailing-knots.webp"
                   alt="Essential sailing knots"
                   className="w-3/4 h-auto rounded-lg shadow-lg mb-8 mx-auto"
                 />
@@ -638,7 +638,7 @@ export default function ModernTechnologyTransformingMarinas() {
                   <div className="text-center">
                     <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
                       <img
-                        src="/sara.jpg"
+                        src="/sara.webp"
                         alt="Sarah Johnson"
                         className="w-full h-full object-cover"
                       />

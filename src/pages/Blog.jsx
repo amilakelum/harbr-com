@@ -16,7 +16,7 @@ const blogPosts = [
     date: "September 30, 2025",
     category: "TECHNOLOGY & INNOVATION",
     readTime: "12 min read",
-    image: "/blog-images/artificial-intelligence-decoded.jpg",
+    image: "/blog-images/artificial-intelligence-decoded.webp",
     slug: "artificial-intelligence-decoded",
   },
   {
@@ -56,7 +56,7 @@ const blogPosts = [
     date: "July 30, 2025",
     category: "BOATING SKILLS & TECHNIQUES",
     readTime: "14 min read",
-    image: "/blog-images/marina-mooring-guide.jpg",
+    image: "/blog-images/marina-mooring-guide.webp",
     slug: "complete-guide-mastering-marina-mooring",
   },
   {
@@ -70,7 +70,7 @@ const blogPosts = [
     date: "June 30, 2025",
     category: "TECHNOLOGY & INNOVATION",
     readTime: "15 min read",
-    image: "/blog-images/essential-sailing-knots.jpg",
+    image: "/blog-images/essential-sailing-knots.webp",
     slug: "modern-technology-transforming-marina-operations",
   },
   {
@@ -83,7 +83,7 @@ const blogPosts = [
     date: "May 30, 2025",
     category: "BOAT TYPES & BUYING GUIDE",
     readTime: "12 min read",
-    image: "/blog-images/different-type-of-boat.jpg",
+    image: "/blog-images/different-type-of-boat.webp",
     slug: "complete-guide-different-types-boats",
   },
   {
@@ -294,10 +294,10 @@ export default function Blog() {
                           <img
                             src={
                               post.author === "Michael Chen"
-                                ? "/michael.png"
+                                ? "/michael.webp"
                                 : post.author === "Chris Mihatov"
-                                ? "/chris.jpeg"
-                                : "/sara.jpg"
+                                ? "/chris.webp"
+                                : "/sara.webp"
                             }
                             alt={post.author}
                             className="w-full h-full object-cover"
