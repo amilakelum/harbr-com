@@ -110,6 +110,10 @@ export default function Blog() {
 
   useEffect(() => {
     document.title = "Blog | Harbr";
+
+    // Preload the hero background image for better LCP
+    const heroImage = new Image();
+    heroImage.src = "/bg2.jpg";
   }, []);
 
   // Get unique categories
@@ -154,21 +158,14 @@ export default function Blog() {
     <>
       {/* Hero Section */}
       <div
-        className="relative isolate px-6 py-24 lg:py-32 lg:px-8 hero-section"
+        className="relative isolate px-6 py-24 lg:py-32 lg:px-8"
         style={{
           backgroundImage: "url('/bg2.jpg')",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "20% center",
         }}
       >
-        {/* Add custom CSS for responsive background sizing */}
-        <style jsx>{`
-          @media (min-width: 1024px) {
-            .hero-section {
-              background-size: cover !important;
-              background-repeat: no-repeat !important;
-              background-position: "20% center";
-            }
-          }
-        `}</style>
         {/* Dark overlay for better text visibility */}
         {/* <div
           className="absolute inset-0 bg-black opacity-50"
