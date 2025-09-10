@@ -1,7 +1,7 @@
 import screenshot from "../assets/hero6.png";
 import Reveal from "./animations/Reveal";
 import { motion } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import EmailSubscriptionForm from "./EmailSubscriptionForm";
 
 // Add custom cursor blink animation
@@ -33,47 +33,79 @@ export default function IntroVideo() {
   );
 
   useEffect(() => {
-    let timer;
+    // Reduce animation frequency to improve performance
+    if (typeof requestIdleCallback !== "undefined") {
+      requestIdleCallback(() => {
+        let timer;
 
-    if (isPaused) {
-      timer = setTimeout(() => {
-        setIsPaused(false);
-        setIsDeleting(true);
-      }, 3000);
+        if (isPaused) {
+          timer = setTimeout(() => {
+            setIsPaused(false);
+            setIsDeleting(true);
+          }, 3000);
+        } else {
+          timer = setTimeout(() => {
+            // Handle the typing and deleting logic
+            if (!isDeleting) {
+              // Typing mode
+              const currentPhrase = phrases[currentPhraseIndex];
+              setCurrentText(
+                currentPhrase.substring(0, currentText.length + 1)
+              );
+
+              // If we've completed typing this phrase
+              if (currentText === currentPhrase) {
+                setIsPaused(true);
+              } else {
+                // Normal typing speed (slightly random for natural effect)
+                setTypingSpeed(120 + Math.random() * 60); // Slower for better performance
+              }
+            } else {
+              // Deleting mode
+              setCurrentText(currentText.substring(0, currentText.length - 1));
+              // Faster when deleting
+              setTypingSpeed(50 + Math.random() * 30); // Slightly slower for performance
+
+              // If we've deleted the entire phrase
+              if (currentText === "") {
+                setIsDeleting(false);
+                // Move to the next phrase (cycling if needed)
+                setCurrentPhraseIndex(
+                  (currentPhraseIndex + 1) % phrases.length
+                );
+                // Small pause before starting next phrase
+                setTypingSpeed(1000); // Longer pause for better performance
+              }
+            }
+          }, typingSpeed);
+        }
+
+        return () => clearTimeout(timer);
+      });
     } else {
-      timer = setTimeout(() => {
-        // Handle the typing and deleting logic
+      // Fallback for browsers without requestIdleCallback
+      const timer = setTimeout(() => {
         if (!isDeleting) {
-          // Typing mode
           const currentPhrase = phrases[currentPhraseIndex];
           setCurrentText(currentPhrase.substring(0, currentText.length + 1));
-
-          // If we've completed typing this phrase
           if (currentText === currentPhrase) {
             setIsPaused(true);
           } else {
-            // Normal typing speed (slightly random for natural effect)
-            setTypingSpeed(80 + Math.random() * 40);
+            setTypingSpeed(120 + Math.random() * 60);
           }
         } else {
-          // Deleting mode
           setCurrentText(currentText.substring(0, currentText.length - 1));
-          // Faster when deleting
-          setTypingSpeed(30 + Math.random() * 20);
-
-          // If we've deleted the entire phrase
+          setTypingSpeed(50 + Math.random() * 30);
           if (currentText === "") {
             setIsDeleting(false);
-            // Move to the next phrase (cycling if needed)
             setCurrentPhraseIndex((currentPhraseIndex + 1) % phrases.length);
-            // Small pause before starting next phrase
-            setTypingSpeed(700);
+            setTypingSpeed(1000);
           }
         }
       }, typingSpeed);
-    }
 
-    return () => clearTimeout(timer);
+      return () => clearTimeout(timer);
+    }
   }, [
     currentText,
     isDeleting,
@@ -85,23 +117,33 @@ export default function IntroVideo() {
 
   return (
     <Reveal
-      delay={0.4}
+      delay={0.1}
       className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      <div className="relative">
+      <div className="relative hero-container">
         <motion.div
-          whileHover={{ scale: 1.01 }}
-          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.005 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
           className="relative w-full h-full rounded-2xl overflow-hidden"
         >
-          <img
-            src={screenshot}
-            alt="Harbr Platform Screenshot"
-            className="w-full h-[90vh] object-cover object-center rounded-2xl"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
+          <picture>
+            <source srcSet={screenshot} media="(min-width: 768px)" />
+            <img
+              src={screenshot}
+              alt="Harbr Platform Screenshot"
+              className="hero-image w-full h-[90vh] object-cover object-center rounded-2xl"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+              width="1920"
+              height="1080"
+              style={{
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                minHeight: "90vh",
+                willChange: "transform",
+              }}
+            />
+          </picture>
 
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/10" />
 
